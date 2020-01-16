@@ -1,0 +1,73 @@
+{
+  "acmNames": [
+    {
+      "id": "1",
+      "name": "Aditya Birla Sun Life Mutual Fund"
+    },
+    {
+      "id": "2",
+      "name": "Axis Mutual Fund"
+    },
+    {
+      "id": "3",
+      "name": "DSP BlackRock Mutual Fund"
+    },
+    {
+      "id": "4",
+      "name": "ICICI Prudential Mutual Fund"
+    },
+    {
+      "id": "5",
+      "name": "SBI Mutual Fund"
+    },
+    {
+      "id": "6",
+      "name": "Tata Mutual Fund"
+    },
+    {
+      "id": "7",
+      "name": "Kotak Mahindra Mutual Fund"
+    },
+    {
+      "id": "8",
+      "name": "L&T Mutual Fund"
+    },
+    {
+      "id": "9",
+      "name": "UTI Mutual Fund"
+    },
+    {
+      "id": "10",
+      "name": "Mahindra Mutual Fund"
+    },
+    {
+      "id": "11",
+      "name": "Franklin Templeton Mutual Fund"
+    },
+    {
+      "id": "12",
+      "name": "Invesco Mutual Fund"
+    },
+    {
+      "id": "13",
+      "name": "Motilal Oswal Mutual Fund"
+    },
+    {
+      "id": "14",
+      "name": "PRINCIPAL Mutual Fund"
+    },
+    {
+      "id": "15",
+      "name": "Canara Robeco Mutual Fund"
+    },
+    {
+      "id": "16",
+      "name": "IDFC Mutual Fund"
+    },
+    {
+      "id": "17",
+      "name": "Sundaram Mutual Fund"
+    }
+
+  ]
+}

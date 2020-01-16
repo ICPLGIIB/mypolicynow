@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SplashActivity"
+    android:background="@color/white"
+
+    android:layout_gravity="center"
+    android:gravity="center"
+    >
+
+
+    <!--<ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/splash_new"
+        android:scaleType="center"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:visibility="visible"
+        android:layout_gravity="center"
+        />
+-->
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/white"
+
+    android:layout_marginBottom="70sp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="150sp"
+            android:layout_height="100sp"
+            android:visibility="visible"
+            android:src="@drawable/hib_logo"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="10sp"
+            android:layout_gravity="center"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryBlue"
+            android:text="@string/app_name"
+            android:textSize="28sp"
+            android:layout_marginTop="20sp"
+            android:layout_weight="2"
+            android:visibility="gone"
+            android:lineSpacingMultiplier="1.5"
+            android:layout_gravity="center"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/tag_line"
+            android:textSize="14sp"
+            android:layout_margin="5dp"
+            android:layout_weight="2"
+            android:visibility="visible"
+            android:lineSpacingMultiplier="1.5"
+            android:layout_gravity="center"
+            android:gravity="center"
+            />
+
+
+
+    </LinearLayout>
+</ScrollView>
+  <!--  <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+        <include android:id="@+id/footer"
+            layout="@layout/footer"/>
+
+    </LinearLayout>-->
+
+</RelativeLayout>

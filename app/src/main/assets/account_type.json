@@ -1,0 +1,28 @@
+{
+  "accountTypeList":[
+    {
+
+      "AccountCode": "SB",
+      "AccountType": "Saving Bank"
+
+    },
+    {
+
+      "AccountCode": "CB",
+      "AccountType": "Current Bank"
+
+    },
+    {
+
+      "AccountCode": "NE",
+      "AccountType": "NRE Account"
+
+    },
+    {
+
+      "AccountCode": "NO",
+      "AccountType": "NRO Account"
+
+    }
+  ]
+}

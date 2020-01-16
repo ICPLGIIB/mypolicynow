@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt">
+    <item android:state_checked="true">
+        <layer-list>
+            <item>
+                <shape android:shape="oval">
+                    <corners android:radius="1dp"/>
+                    <stroke android:width="1dp"
+                        android:color="@color/colorPrimary"/>
+                    <gradient android:startColor="@color/colorPrimary"
+                        android:endColor="@color/colorPrimary"
+                        android:angle="270"
+                        android:centerColor="@color/colorPrimary"/>
+                    <size android:height="20dp"
+                        android:width="20dp"/>
+                </shape>
+            </item>
+            <item android:height="1dp"
+                android:width="4dp"
+                android:left="5dp"
+                android:top="11dp">
+                <rotate android:fromDegrees="45">
+                    <shape android:shape="rectangle">
+                        <solid android:color="#fff"/>
+                    </shape>
+                </rotate>
+            </item>
+            <item android:height="1dp"
+                android:width="10dp"
+                android:left="7dp"
+                android:top="10dp">
+                <rotate android:fromDegrees="-45">
+                    <shape android:shape="rectangle">
+                        <solid android:color="#fff"/>
+                    </shape>
+                </rotate>
+            </item>
+        </layer-list>
+    </item>
+</selector>

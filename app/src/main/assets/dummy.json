@@ -1,0 +1,27 @@
+{
+  "new": [
+    {
+      "id": "1",
+      "schemeName": "Afghanistan"
+    },
+    {
+      "id": "2",
+      "schemeName": "Albania"
+    },
+    {
+      "id": "3",
+      "schemeName": "Algeria"
+    }
+   ],
+
+  "remain": [
+    {
+      "id": "244",
+      "schemeName": "Yugoslavia"
+    },
+    {
+      "id": "246",
+      "schemeName": "Zimbabwe"
+    }
+  ]
+}

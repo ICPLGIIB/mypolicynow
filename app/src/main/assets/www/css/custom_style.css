@@ -1,0 +1,174 @@
+
+/* run check stepper style */
+
+.stepperRun .step { 
+	position: relative; 
+	min-height: 32px; 
+	padding: 10px 10px;
+}
+/*.stepperRun .step:hover {
+	background: #F6F6F6;
+}*/
+.stepperRun .step > div:first-child { 
+	position: static; height: 0; 
+}
+.stepperRun .step > div:last-child { 
+	margin-left: 32px; 
+	padding-left: 16px; 
+	min-height: 24px;
+}
+.stepperRun .circle { 
+	background: #00A762; 
+	width: 32px; 
+	height: 32px; 
+	line-height: 32px; 
+	border-radius: 16px; 
+	position: relative; 
+	color: white; 
+	text-align: center; 
+}
+.stepperRun .line { 
+	position: absolute;
+    border-left: 1px solid #b5aaaa;
+    min-height: 17px;
+    left: 38px;
+    top: 43px;
+    /*border-left: 1px solid grey;*/
+    /*left: 40px;
+    bottom: -12px;
+    top: 68px;*/
+    /*min-height: 50px;*/
+    z-index: 1;
+}
+.stepperRun .step:last-child .line { 
+	display: none !important; 
+}
+.stepperRun .title { 
+	line-height: 32px; 
+	font-weight: 500; 
+}
+.stepperRun .body {    
+	padding-bottom: 28px;
+    padding-top: 8px;
+}
+.stepperRun .description {
+	line-height: 0.1;
+    font-size: 1em;
+    padding-bottom: 24px;
+    color: #989898;
+}
+/** Horizontal **/
+.stepperRun.horizontal {
+	line-height: 72px;
+	position: relative;
+}
+.stepperRun.horizontal .step {
+	display: inline-block;
+}
+.stepperRun.horizontal .step .line, .stepper.horizontal .step .circle, .stepper.horizontal .step .title {
+	display: inline-block;
+}
+.stepperRun.horizontal .step .line {
+	border-left: 0px;
+	position: inherit;
+	border-top: 1px solid gainsboro;
+    width: 100px;
+    margin-bottom: 5px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+.stepperRun.horizontal .step .title {
+	margin-left: 8px;
+}
+.stepperRun.horizontal .step .body {
+	line-height: initial;
+}
+.stepperRun.horizontal .step > div:last-child {
+	position: absolute;
+    width: 90vw;
+    top: 93px;
+    margin-left: 0px;
+    padding-left: 0px;
+    margin: auto;
+}
+.stepperRun .step.inactive .title{
+	color: #C9C9C9;
+	font-weight: 400;
+}
+.stepperRun .step.inactive .body{
+    display: none;
+}
+.stepperRun .step.inactive .circle{
+    background-color: #9e9e9e;
+}
+
+
+.runningLoadingCheckCard{
+    background-color: #e6e6e6;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.MdIconStyle{
+    min-width: 20px;
+    min-height: 20px;
+    position: absolute;
+    left: 27px;
+    top: 13px;
+}
+
+.mdCirclurLoading{
+    position: absolute;
+    left: 25px;
+}
+
+.blueLoadingTextColor{
+    color: #034F84;
+}
+
+.greenRoundedButtonWithTwoText.md-raised:not([disabled]){
+    background-color: #00A762; 
+    color: #fff;
+    /*border: 2px solid #034F84;*/
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    line-height: 15px;
+    padding: 10px;
+}
+
+.greenRoundedButtonWithTwoText.md-raised:not([disabled]):hover{
+    background-color: #00A762;
+    color: #fff;
+    /*border: 2px solid #FAE03C;*/
+    text-decoration: none;
+    line-height: 15px;
+    padding: 10px;
+}
+
+.greenRoundedButtonWithTwoText.md-raised:not([disabled]).md-focused{
+    background-color: #00A762;
+    color: #fff;
+    /*border: 2px solid #FAE03C;*/
+    text-decoration: none;
+    line-height: 15px;
+    padding: 10px;
+}
+
+.greenRoundedButtonWithTwoText.md-raised[disabled]{
+    background-color: #E0E0E0; 
+    color: black;
+    /*border: 2px solid #BDBDBD;*/
+    border-radius: 50px;
+    text-decoration: none;
+    line-height: 15px;
+    padding: 10px;
+}
+
+.imgIcon{
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        left: 29px;
+        top: 16px;
+}

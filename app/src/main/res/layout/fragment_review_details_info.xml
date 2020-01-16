@@ -1,0 +1,1084 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/form_background_color"
+    >
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="beforeDescendants"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/cw_button_shadow"
+                android:minHeight="200sp">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/cw_shadow_bg"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5sp"
+                    android:layout_marginBottom="5dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+
+                        <ImageView
+                            android:id="@+id/iv_Ic"
+                            android:layout_width="120sp"
+                            android:layout_height="120sp"
+                            android:layout_gravity="center"
+                            android:scaleType="fitCenter"/>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/orange"
+                            android:layout_margin="5dp"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            >
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_margin="5dp"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                >
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:layout_marginTop="5dp"
+                                    >
+
+                                    <TextView
+                                        android:id="@+id/tv_IC_Name"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:textSize="14sp"
+                                        android:layout_marginBottom="5dp"
+                                        android:fontFamily="@font/calibri_regular"
+                                        android:textColor="@color/orange"/>
+
+
+
+
+
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:weightSum="10">
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+
+                                        android:layout_weight="5">
+
+
+
+                                        <TextView
+                                            android:id="@+id/tv_policy_start_date"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="12sp"
+                                            android:layout_gravity="center"
+                                            android:gravity="center"
+                                            android:minWidth="100sp"
+                                            android:textColor="@color/black"
+                                            android:fontFamily="@font/calibri_regular"
+                                            android:background="@color/quantum_yellow"
+                                            android:padding="3dp"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Policy Start Date"
+                                            android:textSize="10sp"
+                                            android:layout_gravity="center"
+                                            android:gravity="center"
+                                            android:fontFamily="@font/calibri_regular"
+
+                                            android:textColor="@color/gray"/>
+
+
+                                    </LinearLayout>
+                                    <View
+                                        android:layout_width="1dp"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/orange"
+                                        android:layout_margin="3dp"/>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:layout_weight="5">
+
+
+
+                                        <TextView
+                                            android:id="@+id/tv_policy_end_date"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="12sp"
+                                            android:layout_gravity="center"
+                                            android:gravity="center"
+                                            android:minWidth="100sp"
+                                            android:textColor="@color/black"
+                                            android:fontFamily="@font/calibri_regular"
+
+                                            android:background="@color/quantum_yellow"
+                                            android:padding="3dp"
+                                            />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:gravity="center"
+                                            android:textSize="10sp"
+                                            android:fontFamily="@font/calibri_regular"
+
+                                            android:text="Policy End Date"
+                                            android:textColor="@color/gray"/>
+
+                                    </LinearLayout>
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:layout_marginTop="5dp"
+                                    >
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="IDV (Cover Amount)"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:textSize="10sp"
+                                        android:layout_marginBottom="5dp"
+                                        android:fontFamily="@font/calibri_regular"
+                                        android:textColor="@color/black"/>
+
+                                    <TextView
+                                        android:id="@+id/tv_IDV_CoverAmt"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:textSize="12sp"
+                                        android:minWidth="120dp"
+                                        android:fontFamily="@font/calibri_regular"
+                                        android:inputType="textCapSentences"
+                                        android:textColor="@color/white"
+                                        android:background="@color/primary_green"
+                                        android:padding="3dp"
+                                        />
+
+
+
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/orange"
+                        android:layout_margin="3dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="vertical">
+
+                       <LinearLayout
+                           android:id="@+id/LayoutOwnerDetails"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:orientation="vertical">
+
+
+                           <TextView
+                               android:layout_width="match_parent"
+                               android:layout_height="wrap_content"
+                               android:text="OWNER DETAILS"
+                               android:textColor="@color/black"
+                               android:textStyle="bold"
+                               android:fontFamily="@font/calibri_regular"
+                               android:layout_margin="5dp"
+                               android:padding="5dp"/>
+                           <View
+                               android:layout_width="match_parent"
+                               android:layout_height="1dp"
+                               android:background="@color/orange"
+                               android:layout_margin="5dp"/>
+
+
+
+                               <LinearLayout
+                                   android:layout_width="match_parent"
+                                   android:layout_height="wrap_content"
+                                   android:orientation="horizontal"
+                                   android:layout_gravity="center|start"
+                                   android:gravity="center|start"
+                                   android:layout_marginStart="10sp"
+                                   android:layout_marginTop="5dp"
+                                   android:layout_marginBottom="5dp"
+                                   android:layout_marginEnd="10sp"
+                                   android:padding="5dp"
+
+                                   >
+
+                                   <TextView
+                                       android:layout_width="wrap_content"
+                                       android:layout_height="wrap_content"
+                                       android:layout_gravity="center|start"
+                                       android:gravity="center|start"
+                                       android:textSize="10sp"
+                                       android:text="Name :"
+                                       android:fontFamily="@font/calibri_regular"
+                                       android:textColor="@color/colorAccent"/>
+
+                                   <TextView
+                                       android:id="@+id/tv_OwnerName"
+                                       android:layout_width="wrap_content"
+                                       android:layout_height="wrap_content"
+                                       android:layout_gravity="center|start"
+                                       android:gravity="center|start"
+                                       android:fontFamily="@font/calibri_regular"
+                                       android:minWidth="80sp"
+                                       android:padding="3dp"
+                                       android:layout_marginStart="5dp"
+                                       android:textColor="@color/orange"
+                                       android:textSize="12sp" />
+
+
+                               </LinearLayout>
+
+                                <LinearLayout
+                                   android:layout_width="match_parent"
+                                   android:layout_height="wrap_content"
+                                   android:orientation="horizontal"
+                                   android:layout_gravity="center|start"
+                                   android:gravity="center|start"
+                                    android:layout_marginStart="10sp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:layout_marginEnd="10sp"
+                                    android:padding="5dp"
+                                    >
+
+                               <TextView
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:layout_gravity="center|start"
+                                   android:gravity="center|start"
+                                   android:textSize="10sp"
+                                   android:text="Email :"
+                                   android:fontFamily="@font/calibri_regular"
+                                   android:textColor="@color/colorAccent"/>
+
+                               <TextView
+                                   android:id="@+id/tv_OwnerEmail"
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:layout_gravity="center|start"
+                                   android:gravity="center|start"
+                                   android:fontFamily="@font/calibri_regular"
+                                   android:minWidth="80sp"
+                                   android:padding="3dp"
+                                   android:layout_marginStart="5dp"
+
+                                   android:textColor="@color/orange"
+                                   android:textSize="12sp" />
+
+
+                           </LinearLayout>
+
+                           <LinearLayout
+                               android:layout_width="match_parent"
+                               android:layout_height="wrap_content"
+                               android:orientation="horizontal"
+                               android:layout_gravity="center|start"
+                               android:gravity="center|start"
+                               android:layout_marginStart="10sp"
+                               android:layout_marginTop="5dp"
+                               android:layout_marginBottom="5dp"
+                               android:layout_marginEnd="10sp"
+                               android:padding="5dp"
+                               >
+
+                               <TextView
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:layout_gravity="center|start"
+                                   android:gravity="center|start"
+                                   android:textSize="10sp"
+                                   android:text="Phone :"
+                                   android:fontFamily="@font/calibri_regular"
+                                   android:textColor="@color/colorAccent"/>
+
+                               <TextView
+                                   android:id="@+id/tv_OwnerPhone"
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:layout_gravity="center|start"
+                                   android:gravity="center|start"
+                                   android:fontFamily="@font/calibri_regular"
+                                   android:minWidth="80sp"
+                                   android:layout_marginStart="5dp"
+                                   android:padding="3dp"
+                                   android:textColor="@color/orange"
+                                   android:textSize="12sp" />
+
+
+                           </LinearLayout>
+
+                       </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/LayoutNomineeDetails"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/orange"
+                                android:layout_margin="5dp"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="NOMINEE DETAILS"
+                                android:textColor="@color/black"
+                                android:textStyle="bold"
+                                android:fontFamily="@font/calibri_regular"
+                                android:layout_margin="5dp"
+                                android:padding="5dp"/>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/orange"
+                                android:layout_margin="5dp"/>
+
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_gravity="center|start"
+                                android:gravity="center|start"
+                                android:layout_marginStart="10sp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginEnd="10sp"
+                                android:padding="5dp"
+
+                                >
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:textSize="10sp"
+                                    android:text="Nominee Name :"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:textColor="@color/colorAccent"/>
+
+                                <TextView
+                                    android:id="@+id/tv_NomineeName"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:minWidth="80sp"
+                                    android:padding="3dp"
+                                    android:layout_marginStart="5dp"
+
+                                    android:textColor="@color/orange"
+                                    android:textSize="12sp" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_gravity="center|start"
+                                android:gravity="center|start"
+                                android:layout_marginStart="10sp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginEnd="10sp"
+                                android:padding="5dp"
+                                >
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:textSize="10sp"
+                                    android:text="Age :"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:textColor="@color/colorAccent"/>
+
+                                <TextView
+                                    android:id="@+id/tv_NomineeAge"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:minWidth="80sp"
+                                    android:padding="3dp"
+                                    android:layout_marginStart="5dp"
+
+                                    android:textColor="@color/orange"
+                                    android:textSize="12sp" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_gravity="center|start"
+                                android:gravity="center|start"
+                                android:layout_marginStart="10sp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginEnd="10sp"
+                                android:padding="5dp"
+                                >
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:textSize="10sp"
+                                    android:text="Relation :"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:textColor="@color/colorAccent"/>
+
+                                <TextView
+                                    android:id="@+id/tv_NomineeRelation"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:minWidth="80sp"
+                                    android:layout_marginStart="5dp"
+                                    android:padding="3dp"
+                                    android:textColor="@color/orange"
+                                    android:textSize="12sp" />
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+
+                        <LinearLayout
+                            android:id="@+id/LayoutAppointeeDetails"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            android:orientation="vertical">
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/orange"
+                                android:layout_margin="5dp"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="appointee DETAILS"
+                                android:textColor="@color/black"
+                                android:textStyle="bold"
+                                android:textAllCaps="true"
+                                android:fontFamily="@font/calibri_regular"
+                                android:layout_margin="5dp"
+                                android:padding="5dp"/>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/orange"
+                                android:layout_margin="5dp"/>
+
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_gravity="center|start"
+                                android:gravity="center|start"
+                                android:layout_marginStart="10sp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginEnd="10sp"
+                                android:padding="5dp"
+
+                                >
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:textSize="10sp"
+                                    android:text="Appointee Name :"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:textColor="@color/colorAccent"/>
+
+                                <TextView
+                                    android:id="@+id/tv_AppointeeName"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:minWidth="80sp"
+                                    android:padding="3dp"
+                                    android:layout_marginStart="5dp"
+
+                                    android:textColor="@color/orange"
+                                    android:textSize="12sp" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_gravity="center|start"
+                                android:gravity="center|start"
+                                android:layout_marginStart="10sp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginEnd="10sp"
+                                android:padding="5dp"
+                                >
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:textSize="10sp"
+                                    android:text="Age :"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:textColor="@color/colorAccent"/>
+
+                                <TextView
+                                    android:id="@+id/tv_AppointeeAge"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:minWidth="80sp"
+                                    android:padding="3dp"
+                                    android:layout_marginStart="5dp"
+
+                                    android:textColor="@color/orange"
+                                    android:textSize="12sp" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_gravity="center|start"
+                                android:gravity="center|start"
+                                android:layout_marginStart="10sp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginEnd="10sp"
+                                android:padding="5dp"
+                                >
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:textSize="10sp"
+                                    android:text="Relation :"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:textColor="@color/colorAccent"/>
+
+                                <TextView
+                                    android:id="@+id/tv_AppointeeRelation"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:minWidth="80sp"
+                                    android:layout_marginStart="5dp"
+                                    android:padding="3dp"
+                                    android:textColor="@color/orange"
+                                    android:textSize="12sp" />
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/LayoutVehicleDetails"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/orange"
+                                android:layout_margin="5dp"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Vehicle DETAILS"
+                                android:textColor="@color/black"
+                                android:textStyle="bold"
+                                android:textAllCaps="true"
+                                android:fontFamily="@font/calibri_regular"
+                                android:layout_margin="5dp"
+                                android:padding="5dp"/>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/orange"
+                                android:layout_margin="5dp"/>
+
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_gravity="center|start"
+                                android:gravity="center|start"
+                                android:layout_marginStart="10sp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginEnd="10sp"
+                                android:padding="5dp"
+
+                                >
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:textSize="10sp"
+                                    android:text="Registration Date :"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:textColor="@color/colorAccent"/>
+
+                                <TextView
+                                    android:id="@+id/tv_RegistrationDate"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:minWidth="80sp"
+                                    android:padding="3dp"
+                                    android:layout_marginStart="5dp"
+
+                                    android:textColor="@color/orange"
+                                    android:textSize="12sp" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_gravity="center|start"
+                                android:gravity="center|start"
+                                android:layout_marginStart="10sp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginEnd="10sp"
+                                android:padding="5dp"
+                                >
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:textSize="10sp"
+                                    android:text="Engine No. :"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:textColor="@color/colorAccent"/>
+
+                                <TextView
+                                    android:id="@+id/tv_EngineNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:minWidth="80sp"
+                                    android:padding="3dp"
+                                    android:layout_marginStart="5dp"
+
+                                    android:textColor="@color/orange"
+                                    android:textSize="12sp" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_gravity="center|start"
+                                android:gravity="center|start"
+                                android:layout_marginStart="10sp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginEnd="10sp"
+                                android:padding="5dp"
+                                >
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:textSize="10sp"
+                                    android:text="Chassis No. :"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:textColor="@color/colorAccent"/>
+
+                                <TextView
+                                    android:id="@+id/tv_ChassisNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:minWidth="80sp"
+                                    android:layout_marginStart="5dp"
+                                    android:padding="3dp"
+                                    android:textColor="@color/orange"
+                                    android:textSize="12sp" />
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/LayoutAddressDetails"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/orange"
+                                android:layout_margin="5dp"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Address DETAILS"
+                                android:textColor="@color/black"
+                                android:textStyle="bold"
+                                android:textAllCaps="true"
+                                android:fontFamily="@font/calibri_regular"
+                                android:layout_margin="5dp"
+                                android:padding="5dp"/>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/orange"
+                                android:layout_margin="5dp"/>
+
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_gravity="center|start"
+                                android:gravity="center|start"
+                                android:layout_marginStart="10sp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginEnd="10sp"
+                                android:padding="5dp"
+
+                                >
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:textSize="10sp"
+                                    android:text="Address-1 :"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:textColor="@color/colorAccent"/>
+
+                                <TextView
+                                    android:id="@+id/tv_Address1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:minWidth="80sp"
+                                    android:padding="3dp"
+                                    android:layout_marginStart="5dp"
+
+                                    android:textColor="@color/orange"
+                                    android:textSize="12sp" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_gravity="center|start"
+                                android:gravity="center|start"
+                                android:layout_marginStart="10sp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginEnd="10sp"
+                                android:padding="5dp"
+                                >
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:textSize="10sp"
+                                    android:text="Address-2 :"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:textColor="@color/colorAccent"/>
+
+                                <TextView
+                                    android:id="@+id/tv_Address2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:minWidth="80sp"
+                                    android:padding="3dp"
+                                    android:layout_marginStart="5dp"
+
+                                    android:textColor="@color/orange"
+                                    android:textSize="12sp" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_gravity="center|start"
+                                android:gravity="center|start"
+                                android:layout_marginStart="10sp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginEnd="10sp"
+                                android:padding="5dp"
+                                >
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:textSize="10sp"
+                                    android:text="City :"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:textColor="@color/colorAccent"/>
+
+                                <TextView
+                                    android:id="@+id/tv_City"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:minWidth="80sp"
+                                    android:layout_marginStart="5dp"
+                                    android:padding="3dp"
+                                    android:textColor="@color/orange"
+                                    android:textSize="12sp" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_gravity="center|start"
+                                android:gravity="center|start"
+                                android:layout_marginStart="10sp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginEnd="10sp"
+                                android:padding="5dp"
+                                >
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:textSize="10sp"
+                                    android:text="State :"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:textColor="@color/colorAccent"/>
+
+                                <TextView
+                                    android:id="@+id/tv_State"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:minWidth="80sp"
+                                    android:layout_marginStart="5dp"
+                                    android:padding="3dp"
+                                    android:textColor="@color/orange"
+                                    android:textSize="12sp" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_gravity="center|start"
+                                android:gravity="center|start"
+                                android:layout_marginStart="10sp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginEnd="10sp"
+                                android:padding="5dp"
+                                >
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:textSize="10sp"
+                                    android:text="Pincode :"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:textColor="@color/colorAccent"/>
+
+                                <TextView
+                                    android:id="@+id/tv_Pincode"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:fontFamily="@font/calibri_regular"
+                                    android:minWidth="80sp"
+                                    android:layout_marginStart="5dp"
+                                    android:padding="3dp"
+                                    android:textColor="@color/orange"
+                                    android:textSize="12sp" />
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

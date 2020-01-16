@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:bgcolor="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>OD Break up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+    <!-- Link Swiper's CSS
+	<link rel="stylesheet" href="css/swiper.min.css">-->
+
+
+    <!-- Demo styles -->
+    <style>
+    html, body {
+      position: relative;
+      height: 300px;
+    }
+    body {
+      background: white;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color:#000;
+      margin: 0;
+      padding: 0;
+    }
+  	.table {
+      width: 100%;
+      max-width: 100%;
+      margin-bottom: 1rem;
+    }
+
+    .table th,
+    .table td {
+      padding: 0.75rem;
+      vertical-align: top;
+      border-top: 1px solid #eceeef;
+    }
+
+    .table thead th, .table thead td {
+      vertical-align: bottom;
+      border-bottom: 2px solid #eceeef;
+      background-color: #f89820;
+      color: #fff;
+    }
+
+    .table tbody + tbody {
+      border-top: 2px solid #eceeef;
+    }
+
+    .table .table {
+      background-color: #fff;
+    }
+
+    .table-sm th,
+    .table-sm td {
+      padding: 0.3rem;
+    }
+
+    .table-bordered {
+      border: 1px solid #eceeef;
+    }
+
+    .table-bordered th,
+    .table-bordered td {
+      border: 1px solid #eceeef;
+    }
+
+    .table-bordered thead th,
+    .table-bordered thead td {
+      border-bottom-width: 2px;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .table-hover tbody tr:hover {
+      background-color: rgba(0, 0, 0, 0.075);
+    }
+
+    .table-active,
+    .table-active > th,
+    .table-active > td {
+      background-color: rgba(0, 0, 0, 0.075);
+    }
+
+    .table-hover .table-active:hover {
+      background-color: rgba(0, 0, 0, 0.075);
+    }
+
+    .table-hover .table-active:hover > td,
+    .table-hover .table-active:hover > th {
+      background-color: rgba(0, 0, 0, 0.075);
+    }
+
+    .table-success,
+    .table-success > th,
+    .table-success > td {
+      background-color: #dff0d8;
+    }
+
+    .table-hover .table-success:hover {
+      background-color: #d0e9c6;
+    }
+
+    .table-hover .table-success:hover > td,
+    .table-hover .table-success:hover > th {
+      background-color: #d0e9c6;
+    }
+
+    .table-info,
+    .table-info > th,
+    .table-info > td {
+      background-color: #d9edf7;
+    }
+
+    .table-hover .table-info:hover {
+      background-color: #c4e3f3;
+    }
+
+    .table-hover .table-info:hover > td,
+    .table-hover .table-info:hover > th {
+      background-color: #c4e3f3;
+    }
+
+    .table-warning,
+    .table-warning > th,
+    .table-warning > td {
+      background-color: #fcf8e3;
+    }
+
+    .table-hover .table-warning:hover {
+      background-color: #faf2cc;
+    }
+
+    .table-hover .table-warning:hover > td,
+    .table-hover .table-warning:hover > th {
+      background-color: #faf2cc;
+    }
+
+    .table-danger,
+    .table-danger > th,
+    .table-danger > td {
+      background-color: #f2dede;
+    }
+
+    .table-hover .table-danger:hover {
+      background-color: #ebcccc;
+    }
+
+    .table-hover .table-danger:hover > td,
+    .table-hover .table-danger:hover > th {
+      background-color: #ebcccc;
+    }
+
+    .thead-inverse th {
+      color: #fff;
+      background-color: #292b2c;
+    }
+
+    .thead-default th {
+      color: #464a4c;
+      background-color: #eceeef;
+    }
+
+    .table-inverse {
+      color: #fff;
+      background-color: #292b2c;
+    }
+
+    .table-inverse th,
+    .table-inverse td,
+    .table-inverse thead th {
+      border-color: #fff;
+    }
+
+    .table-inverse.table-bordered {
+      border: 0;
+    }
+
+    .table-responsive {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+	  font-size: 12px;
+      -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+
+    .table-responsive.table-bordered {
+      border: 0;
+    }
+
+  </style>
+</head>
+<body>
+
+<div id="sip_table" class="table-responsive">
+    <table class="table table-striped " id="appendHeader">
+        <thead>
+        <tr id="test_class" >
+            <td class="cfth" align="left">Basic OD</td>
+            <td class="cfth" align="left">Total</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr id="row_idv">
+            <th class="cftbody" align="left">Vehicle IDV</th>
+            <td class="cftbody" align="left">-</td>
+        </tr>
+        <tr id="row_start_date">
+            <th class="cftbody" align="left">Start Date</th>
+            <td class="cftbody" align="left">-</td>
+        </tr>
+        <tr id="row_end_year">
+            <th class="cftbody" align="left">End Date</th>
+            <td class="cftbody" align="left">-</td>
+        </tr>
+        <tr id="row_basic_od">
+            <th class="cftbody" align="left">Basic OD</th>
+            <td class="cftbody" align="left"><span id="total_basic_od"> </span></td>
+        </tr>
+        <tr id="row_electrical_accessory">
+            <th class="cftbody" align="left">Electrical Accessory Premium</th>
+            <td class="cftbody" align="left"><span id="total_electrical"> </span></td>
+        </tr>
+        <tr id="row_non_electrical_accessory">
+            <th class="cftbody" align="left">Non Electrical Accessory Premium</th>
+            <td class="cftbody" align="left"><span id="total_non_electrical"> </span></td>
+        </tr>
+        <tr id="row_geographical">
+            <th class="cftbody" align="left">Total Geographical Extension</th>
+            <td class="cftbody" align="left"><span id="total_geographical"> </span></td>
+        </tr>
+        <tr id="row_total_od_premium_yearly">
+            <th class="cftbody" align="left">Total OD Premium Yearly</th>
+            <td class="cftbody" align="left"><span id="total_premium1"> </span></td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="table">
+        <tfoot>
+        <tr>
+            <td style="text-align: right"><h4>TOTAL OD PREMIUM: <span id="total_premium"> </span></h4></td>
+        </tr>
+        </tfoot>
+    </table>
+
+    <!--    <table class="cftable" id="appendHeader">
+            <thead class="cfthead">
+            <tr>
+                <th class="cfth" align="left">Basic OD</th>
+                <th class="cfth" align="left">Total</th>
+            </tr>
+            </thead>
+            <tbody class="cftbody">
+            <tr id="appendRows">
+                <th class="cftb" align="left">Vehicle IDV</th>
+                <th class="cftbody" align="left"></th>
+            </tr>
+            </tbody>
+
+        </table>-->
+
+
+</div>
+
+
+
+
+
+<!-- Swiper JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['corechart']}]}"></script>
+
+<!-- Initialize Swiper -->
+<script type="text/javascript">
+
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawTable);
+
+
+        function drawTable() {
+
+        var vehicle_idv_yearObj = [];
+        var start_date_yearObj = [];
+        var end_date_yearObj = [];
+        var total_basic_od_yrObj = [];
+        var total_electrical_premiumObj = [];
+        var total_non_electrical_premiumObj = [];
+        var total_od_yr_wiseObj = [];
+        var total_geographical_value_odObj = [];
+        var year_wiseObj = [];
+
+        vehicle_idv_yearObj = JSON.parse(Android.get_vehicle_idv_yearObj());
+        start_date_yearObj = JSON.parse(Android.get_start_date_yearObj());
+        end_date_yearObj = JSON.parse(Android.get_end_date_yearObj());
+        total_basic_od_yrObj = JSON.parse(Android.get_total_basic_od_yrObj());
+        total_electrical_premiumObj = JSON.parse(Android.get_total_electrical_premiumObj());
+        total_non_electrical_premiumObj = JSON.parse(Android.get_total_non_electrical_premiumObj());
+        total_od_yr_wiseObj = JSON.parse(Android.get_total_od_yr_wiseObj());
+        total_geographical_value_odObj = JSON.parse(Android.get_total_geographical_value_odObj());
+        year_wiseObj= JSON.parse(Android.get_year_wiseObj());
+
+         /*var idv_data = '{"1":47747,"2":40208,"3":35182,"4":30156,"5":25130}'
+         vehicle_idv_yearObj = JSON.parse(idv_data);
+         console.log("webOutput--> "+vehicle_idv_yearObj["1"]);
+
+		 var start_data = '{"1":"02/01/2020","2":"02/01/2021","3":"02/01/2022","4":"02/01/2023","5":"02/01/2024"}'
+         start_date_yearObj = JSON.parse(start_data);
+
+		 var end_data = '{"1":"01/01/2021","2":"01/01/2022","3":"01/01/2023","4":"01/01/2024","5":"01/01/2025"}'
+         end_date_yearObj = JSON.parse(end_data);
+
+		 var basic_od_total = '{"1":366.98,"2":309.04,"3":360.55,"4":309.04,"5":257.53}'
+         total_basic_od_yrObj = JSON.parse(basic_od_total);
+
+		 var total_electrical_premium = '{"1":0,"2":0,"3":0,"4":0,"5":0}'
+         total_electrical_premiumObj = JSON.parse(total_electrical_premium);
+
+		 var total_non_electrical_premium = '{"1":0,"2":0,"3":0,"4":0,"5":0}'
+         total_non_electrical_premiumObj = JSON.parse(total_non_electrical_premium);
+
+		 var total_geographical_value_od = '{"1":0,"2":0,"3":0,"4":0,"5":0}'
+         total_geographical_value_odObj = JSON.parse(total_geographical_value_od);
+
+		 var total_od_yr_wise = '{"1":"366.98","2":"309.04","3":"360.55","4":"309.04","5":"257.53"}'
+         total_od_yr_wiseObj = JSON.parse(total_od_yr_wise);*/
+
+
+          $(document).ready(function(){
+
+
+            $.each( year_wiseObj, function( key, value ) {
+              document.getElementById("test_class").insertCell(key).innerHTML = value+' Year';
+            });
+
+            $.each( vehicle_idv_yearObj, function( key, value ) {
+              document.getElementById("row_idv").insertCell(key).innerHTML = value;
+            });
+
+             $.each( start_date_yearObj, function( key, value ) {
+              document.getElementById("row_start_date").insertCell(key).innerHTML = value;
+            });
+
+            $.each( end_date_yearObj, function( key, value ) {
+              document.getElementById("row_end_year").insertCell(key).innerHTML = value;
+            });
+
+            $.each( total_basic_od_yrObj, function( key, value ) {
+              document.getElementById("row_basic_od").insertCell(key).innerHTML = value;
+            });
+
+             $.each( total_electrical_premiumObj, function( key, value ) {
+              document.getElementById("row_electrical_accessory").insertCell(key).innerHTML = value;
+            });
+             $.each( total_non_electrical_premiumObj, function( key, value ) {
+              document.getElementById("row_non_electrical_accessory").insertCell(key).innerHTML = value;
+            });
+             $.each( total_geographical_value_odObj, function( key, value ) {
+              document.getElementById("row_geographical").insertCell(key).innerHTML = value;
+            });
+             $.each( total_od_yr_wiseObj, function( key, value ) {
+              document.getElementById("row_total_od_premium_yearly").insertCell(key).innerHTML = value;
+            });
+
+  });
+		  //var total_basic_od_amount_year = '1603.14';
+
+
+
+        var total_basic_od_year_amount = Android.get_total_basic_od_year_amount();
+        var total_electrical_year_amount = Android.get_total_electrical_year_amount();
+        var total_non_electrical_year_amount = Android.get_total_non_electrical_year_amount();
+        var total_geographical_year_amount = Android.get_total_geographical_year_amount();
+        var total_basic_od_premium = Android.get_total_basic_od_premium();
+
+        document.getElementById('total_basic_od').innerHTML = total_basic_od_year_amount;
+        document.getElementById('total_electrical').innerHTML = total_electrical_year_amount;
+        document.getElementById('total_non_electrical').innerHTML = total_non_electrical_year_amount;
+        document.getElementById('total_geographical').innerHTML = total_geographical_year_amount;
+        document.getElementById('total_premium').innerHTML = total_basic_od_premium;
+        document.getElementById('total_premium1').innerHTML = total_basic_od_premium;
+
+    }
+
+  </script>
+
+</body>
+</html>

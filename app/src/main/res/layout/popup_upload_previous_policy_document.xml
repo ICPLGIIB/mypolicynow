@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    android:background="@color/form_background_color">
+
+
+
+    <ImageView
+        android:id="@+id/btnClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:tint="@color/black"
+        android:background="@android:drawable/ic_menu_close_clear_cancel"
+        android:layout_gravity="end"/>
+
+    <TextView
+        android:id="@+id/txt_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please Wait"
+        android:textSize="16sp"
+        android:layout_alignParentEnd="true"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="5sp"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:text="Upload Previous Policy Copy"
+        android:visibility="visible"
+        android:layout_gravity="center"
+        android:gravity="center"
+        />
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="10">
+
+        <Button
+            android:id="@+id/upload_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:padding="5dp"
+            android:text="UPLOAD \nPOLICY IMAGE"
+            android:background="@color/primary_green"
+            android:textColor="@color/white"
+            android:layout_margin="10dp"
+            />
+
+        <Button
+            android:id="@+id/captureImage_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:padding="5dp"
+            android:text="CAPTURE IMAGE OF \nPOLICY"
+            android:background="@color/primary_green"
+            android:textColor="@color/white"
+            android:layout_margin="10dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You can upload a JPG, PNG &amp; PDF formats only."
+        android:layout_marginStart="20sp" />
+
+    <ImageView
+        android:id="@+id/Iv_UploadedImg"
+        android:layout_width="200dp"
+        android:layout_height="300dp"
+        android:layout_margin="10sp"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="25dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:minHeight="100sp"
+        android:layout_marginEnd="25dp"
+        android:weightSum="10">
+
+
+
+        <Button
+            android:id="@+id/btnUpload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="UPLOAD"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:minHeight="50dp"
+            android:layout_weight="5"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/cw_button_shadow_green"
+            android:layout_marginBottom="10dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
