@@ -1,149 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/tools"
+    xmlns:app1="http://schemas.android.com/apk/res-auto"
+    android:layout_marginLeft="5sp"
+    android:layout_marginRight="5sp"
     android:layout_gravity="center"
-    android:orientation="vertical"
-    android:layout_margin="10dp"
-    android:background="@color/form_background_color">
+    app:ignore="NamespaceTypo">
 
-
-
-    <ImageView
-        android:id="@+id/btnClose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:tint="@color/black"
-        android:background="@android:drawable/ic_menu_close_clear_cancel"
-        android:layout_gravity="end"/>
-
-    <TextView
-        android:id="@+id/txt_timer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Please Wait"
-        android:textSize="16sp"
-        android:layout_alignParentEnd="true"
-        android:textAllCaps="true"
-        android:textStyle="bold"
-        android:visibility="gone"
-        android:textColor="@color/black"
-        android:layout_gravity="center"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="5sp"/>
-
-
-    <TextView
-        android:id="@+id/til_customer_mobile_no"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="5dp"
-        android:textSize="14sp"
-        android:visibility="visible"
-        android:layout_gravity="center"
         android:gravity="center"
-        />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
 
+        <LinearLayout
+            android:id="@+id/layout_title"
+            android:layout_width="match_parent"
+            android:layout_height="40sp"
+            android:orientation="horizontal"
 
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:layout_marginTop="20sp"
-        android:layout_marginStart="20sp"
-        android:layout_marginEnd="10sp"
-        android:layout_gravity="center"
-        android:text="Please Enter OTP"/>
-
-
-
-        <EditText
-            android:id="@+id/edt_Check_Mobile_Otp"
+            android:background="@color/colorPrimaryBlue"
+            android:weightSum="10">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:editable="false"
+                android:cursorVisible="false"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                android:layout_weight="9"
+                android:textAllCaps="true"
+                android:id="@+id/title"
+                android:text="VERIFY CUSTOMER"/>
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="20sp"
+                android:layout_height="20sp"
+                android:layout_weight="1"
+                android:src="@drawable/cross_white"
+                android:tint="@color/white"
+                android:layout_gravity="center"
+                android:visibility="visible"
+                android:focusableInTouchMode="false"
+                />
+        </LinearLayout>
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:singleLine="true"
+            android:id="@+id/header1"
+            android:background="@color/form_background_color"
+            android:layout_below="@+id/layout_title"
+            android:orientation="vertical">
 
-            android:padding="10sp"
-            android:textColor="@color/black"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:textColorHint="@color/colorAccent"
-            android:inputType="number"
-            android:maxLength="4"
-            android:hint="ENTER OTP"
-            android:minHeight="50sp"
-            android:textSize="18sp"
-            android:layout_gravity="center"
-            android:gravity="center|start"
-            />
-
-    <TextView
-        android:id="@+id/txt_resend_mobile_otp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Resend Customer OTP"
-        android:textSize="16sp"
-        android:layout_alignParentEnd="true"
-        android:textAllCaps="true"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimaryBlue"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="20sp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginStart="25dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:minHeight="100sp"
-        android:layout_marginEnd="25dp"
-        android:weightSum="10">
-
-    <Button
-        android:id="@+id/btnAlreadyRegistered"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:text="ALREADY REGISTERED"
-        android:textColor="@color/white"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:padding="5dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_weight="5"
-        android:background="@drawable/cw_button_shadow_primary"
-        android:layout_marginBottom="10dp"/>
-
-    <Button
-        android:id="@+id/btnVerify"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="VERIFY"
-        android:textColor="@color/white"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:minHeight="50dp"
-        android:layout_weight="5"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:background="@drawable/cw_button_shadow_green"
-        android:layout_marginBottom="10dp"/>
-
-    </LinearLayout>
-
-</LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_detail_scheme_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
 
+                <TextView
+                    android:id="@+id/txt_timer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Please Wait"
+                    android:textSize="16sp"
+                    android:layout_alignParentEnd="true"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="5sp"/>
+
+
+                <TextView
+                    android:id="@+id/til_customer_mobile_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="14sp"
+                    android:visibility="visible"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    />
+
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginStart="20sp"
+                    android:layout_marginEnd="10sp"
+                    android:layout_gravity="center"
+                    android:text="Please Enter OTP"/>
+
+
+
+                <EditText
+                    android:id="@+id/edt_Check_Mobile_Otp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+
+                    android:padding="10sp"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:textColorHint="@color/colorAccent"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:hint="ENTER OTP"
+                    android:minHeight="50sp"
+                    android:textSize="18sp"
+                    android:layout_gravity="center"
+                    android:gravity="center|start"
+                    />
+
+                <TextView
+                    android:id="@+id/txt_resend_mobile_otp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Resend Customer OTP"
+                    android:textSize="16sp"
+                    android:layout_alignParentEnd="true"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryBlue"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="20sp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="25dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:minHeight="100sp"
+                    android:layout_marginEnd="25dp"
+                    android:weightSum="10">
+
+                    <Button
+                        android:id="@+id/btnAlreadyRegistered"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:text="ALREADY REGISTERED"
+                        android:textColor="@color/white"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="5"
+                        android:background="@drawable/cw_button_shadow_primary"
+                        android:layout_marginBottom="10dp"/>
+
+                    <Button
+                        android:id="@+id/btnVerify"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="VERIFY"
+                        android:textColor="@color/white"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:minHeight="50dp"
+                        android:layout_weight="5"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@drawable/cw_button_shadow_green"
+                        android:layout_marginBottom="10dp"/>
+
+                </LinearLayout>
+
+
+
+
+
+            </LinearLayout>
+
+
+
+        </ScrollView>
+
+
+    </RelativeLayout>
+</RelativeLayout>

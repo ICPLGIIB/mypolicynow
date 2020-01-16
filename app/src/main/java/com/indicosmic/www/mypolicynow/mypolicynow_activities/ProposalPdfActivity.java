@@ -293,7 +293,6 @@ public class ProposalPdfActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 menu.show();
-
             }
         });
     }
@@ -309,7 +308,7 @@ public class ProposalPdfActivity extends AppCompatActivity {
                 new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
 
-        ImageView btnClose = (ImageView) DialogVerifyPopup.findViewById(R.id.btnClose);
+        ImageView iv_close = (ImageView) DialogVerifyPopup.findViewById(R.id.iv_close);
         Button btnAlreadyRegistered = (Button) DialogVerifyPopup.findViewById(R.id.btnAlreadyRegistered);
         Button btnVerify = (Button) DialogVerifyPopup.findViewById(R.id.btnVerify);
 
@@ -344,7 +343,7 @@ public class ProposalPdfActivity extends AppCompatActivity {
             }
         });
 
-        btnClose.setOnClickListener(new View.OnClickListener() {
+        iv_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(DialogVerifyPopup!=null && DialogVerifyPopup.isShowing()) {
@@ -356,9 +355,6 @@ public class ProposalPdfActivity extends AppCompatActivity {
         txt_resend_mobile_otp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //resendMobilePin();
-                //starCountdown();
 
             }
         });
@@ -408,7 +404,7 @@ public class ProposalPdfActivity extends AppCompatActivity {
                 new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
 
-        ImageView btnClose = (ImageView) DialogUploadPolicy.findViewById(R.id.btnClose);
+        ImageView iv_close = (ImageView) DialogUploadPolicy.findViewById(R.id.iv_close);
         Button upload_button = (Button) DialogUploadPolicy.findViewById(R.id.upload_button);
         Button captureImage_button = (Button) DialogUploadPolicy.findViewById(R.id.captureImage_button);
 
@@ -440,7 +436,7 @@ public class ProposalPdfActivity extends AppCompatActivity {
             }
         });
 
-        btnClose.setOnClickListener(new View.OnClickListener() {
+        iv_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(DialogUploadPolicy!=null && DialogUploadPolicy.isShowing()) {
@@ -654,7 +650,7 @@ public class ProposalPdfActivity extends AppCompatActivity {
 
     private void API_Quote_Forward() {
         myDialog.show();
-        String URL = ROOT_URL2+"front/Proposal/quoteForward";
+        String URL = ROOT_URL2+"quoteForward";
         ConnectionDetector cd = new ConnectionDetector(getApplicationContext());
         boolean isInternetPresent = cd.isConnectingToInternet();
         if (isInternetPresent) {

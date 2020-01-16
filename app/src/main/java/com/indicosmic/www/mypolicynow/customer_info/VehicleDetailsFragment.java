@@ -786,18 +786,25 @@ public class VehicleDetailsFragment extends Fragment implements BlockingStep, Ad
                 break;
             case R.id.Spn_Agreement:
 
-                StrAgreement = Spn_Agreement.getSelectedItem().toString().trim();
-                if(StrAgreement.equalsIgnoreCase("hire purchase")){
-                   StrAgreement =  "hire_purchase";
-                }else if(StrAgreement.equalsIgnoreCase("Lease Agreement")){
-                    StrAgreement = "lease_agreement";
+                if(Spn_Agreement.getSelectedItemPosition()>0) {
+                    StrAgreement = Spn_Agreement.getSelectedItem().toString().trim();
+                    if (StrAgreement.equalsIgnoreCase("hire purchase")) {
+                        StrAgreement = "hire_purchase";
+                    } else if (StrAgreement.equalsIgnoreCase("Lease Agreement")) {
+                        StrAgreement = "lease_agreement";
+                    }
+                }else{
+                    StrAgreement = "";
                 }
 
                 break;
             case R.id.Spn_Bank:
 
-                StrBankName = Spn_Bank.getSelectedItem().toString().trim();
-
+                if(Spn_Bank.getSelectedItemPosition()>0) {
+                    StrBankName = Spn_Bank.getSelectedItem().toString().trim();
+                }else {
+                    StrBankName = "";
+                }
                 break;
         }
     }
