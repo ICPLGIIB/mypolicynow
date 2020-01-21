@@ -207,10 +207,10 @@
             <th class="cftbody" align="left">Anti-Theft Discount</th>
             <td class="cftbody" align="left"><span id="total_antitheft_value">  </span></td>
         </tr>
-        <tr id="row_automobile_association">
+        <!--<tr id="row_automobile_association">
             <th class="cftbody" align="left">Automobile Association</th>
             <td class="cftbody" align="left"><span id="total_automobile_association_value">  </span></td>
-        </tr>
+        </tr>-->
         <tr id="row_ncb">
             <th class="cftbody" align="left">No Claim Bonus (0)%</th>
             <td class="cftbody" align="left"><span id="total_ncb_value">  </span></td>
@@ -274,7 +274,6 @@
 
         deductibles_year_wiseObj= JSON.parse(Android.get_deductibles_year_wiseObj());
         antitheft_value_year_wiseObj = JSON.parse(Android.get_antitheft_value_year_wiseObj());
-        total_automobile_association_premium_year_wiseObj = JSON.parse(Android.get_total_automobile_association_premium_year_wiseObj());
         ncb_valueObj = JSON.parse(Android.get_ncb_valueObj());
         deductibles_total_year_wiseObj = JSON.parse(Android.get_deductibles_total_year_wiseObj());
 
@@ -293,9 +292,6 @@
               document.getElementById("row_anti_theft").insertCell(key).innerHTML = value;
             });
 
-             $.each( total_automobile_association_premium_year_wiseObj, function( key, value ) {
-              document.getElementById("row_automobile_association").insertCell(key).innerHTML = value;
-            });
 
             $.each( ncb_valueObj, function( key, value ) {
               document.getElementById("row_ncb").insertCell(key).innerHTML = value;
@@ -310,12 +306,10 @@
   });
 
         var total_antitheft_value = Android.get_total_antitheft_value();
-        var total_automobile_association_value = Android.get_total_automobile_association_value();
         var total_ncb_value = Android.get_total_ncb_value();
         var deductibles_total_year_value = Android.get_deductibles_total_year_value();
 
         document.getElementById('total_antitheft_value').innerHTML = total_antitheft_value;
-        document.getElementById('total_automobile_association_value').innerHTML = total_automobile_association_value;
         document.getElementById('total_ncb_value').innerHTML = total_ncb_value;
         document.getElementById('total_discount').innerHTML = deductibles_total_year_value;
         document.getElementById('total_discount1').innerHTML = deductibles_total_year_value;

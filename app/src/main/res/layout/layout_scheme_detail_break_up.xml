@@ -22,7 +22,7 @@
             android:layout_height="40sp"
             android:orientation="horizontal"
 
-            android:background="@color/colorPrimaryBlue"
+            android:background="@color/colorPrimary"
             android:weightSum="10">
             <TextView
                 android:layout_width="wrap_content"
@@ -954,6 +954,314 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/CardAddOnsBreakup"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app1:cardCornerRadius="10sp"
+                    android:layout_margin="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/cw_shadow_bg"
+                        android:orientation="vertical">
+
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:padding="5dp"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:text="ADDONS"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:textColor="@color/orange"/>
+
+
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@color/orange"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="5dp"/>
+
+
+
+                        <WebView
+                            android:id="@+id/Wb_AddOns_BreakUp"
+                            android:layout_width="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="5dp"
+                            android:visibility="gone"
+                            android:minHeight="200dp"/>
+
+                        <LinearLayout
+                            android:id="@+id/LayoutAddOns_Renew"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            android:orientation="vertical">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="6"
+                                android:padding="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_marginTop="3dp"
+                                android:background="@color/bg_grey_light">
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="5dp"
+                                    android:padding="5dp"
+                                    android:layout_weight="3">
+
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Selected Addons"
+                                        android:textColor="@color/black"
+                                        android:textStyle="bold"
+                                        android:layout_gravity="center|start"
+                                        android:gravity="center|start"
+                                        android:textSize="12sp"
+                                        />
+
+
+                                </LinearLayout>
+
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="5dp"
+                                    android:padding="5dp"
+                                    android:layout_weight="3">
+
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/black"
+                                        android:textStyle="bold"
+                                        android:text="Total Addons Value"
+                                        android:layout_gravity="center|end"
+                                        android:gravity="center|end"
+                                        android:textSize="14sp"
+                                        />
+
+                                </LinearLayout>
+
+
+
+
+
+
+                            </LinearLayout>
+                            <!--3 Month-->
+                            <LinearLayout
+                                android:id="@+id/LayoutDepCoverAddons"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="6"
+                                android:padding="2dp">
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="5dp"
+                                    android:padding="5dp"
+                                    android:layout_weight="3">
+
+
+                                    <TextView
+                                        android:id="@+id/til_addon_header_name"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/black"
+                                        android:layout_marginStart="3dp"
+
+                                        android:layout_gravity="center|start"
+                                        android:gravity="center|start"
+                                        android:textSize="12sp"
+                                        />
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="5dp"
+                                    android:padding="5dp"
+                                    android:layout_weight="3">
+
+
+                                    <TextView
+                                        android:id="@+id/tv_dep_cover_addon_value"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/black"
+                                        android:textStyle="bold"
+                                        android:layout_marginEnd="5dp"
+                                        android:layout_gravity="center|end"
+                                        android:gravity="center|end"
+                                        android:textSize="14sp"
+                                        />
+
+                                </LinearLayout>
+
+
+
+
+
+
+                            </LinearLayout>
+                            <!--6 Month-->
+                            <LinearLayout
+                                android:id="@+id/LayoutNilDeptAddon"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="6"
+                                android:visibility="gone"
+                                android:layout_marginEnd="5dp"
+                                android:background="@color/bg_grey_light"
+                                android:padding="5dp">
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="5dp"
+                                    android:padding="5dp"
+                                    android:layout_weight="2">
+
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Nil Dept"
+                                        android:textColor="@color/black"
+                                        android:layout_gravity="center|start"
+                                        android:gravity="center|start"
+                                        android:textSize="12sp"
+                                        />
+
+
+                                </LinearLayout>
+
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="5dp"
+                                    android:padding="5dp"
+                                    android:layout_weight="4">
+
+
+                                    <TextView
+                                        android:id="@+id/tv_nil_dept_addons"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/black"
+                                        android:textStyle="bold"
+                                        android:layout_gravity="center|end"
+                                        android:gravity="center|end"
+                                        android:textSize="14sp"
+                                        />
+
+                                </LinearLayout>
+
+
+
+
+
+                            </LinearLayout>
+
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:background="@color/orange"
+                                android:layout_marginEnd="5dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_gravity="center"
+                                android:layout_margin="5dp"
+                                android:padding="5dp"
+                                android:weightSum="10"
+                                >
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="(B) ADDON PREMIUM"
+                                    android:textColor="@color/black"
+                                    android:layout_gravity="center|start"
+                                    android:gravity="center|start"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_weight="4"/>
+
+                                <TextView
+                                    android:id="@+id/tv_total_net_addons_premium"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textStyle="bold"
+                                    android:layout_gravity="end"
+                                    android:gravity="end"
+                                    android:layout_marginEnd="5dp"
+                                    android:layout_weight="6"
+                                    android:textSize="16sp"
+                                    android:textColor="@color/green_card_color"/>
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
                     android:id="@+id/CardTPBreakup"
                     android:visibility="gone"
                     android:layout_width="match_parent"
@@ -1420,6 +1728,7 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
                                 android:weightSum="6"
+                                android:visibility="gone"
                                 android:padding="2dp">
 
 

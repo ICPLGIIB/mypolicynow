@@ -285,37 +285,15 @@ public class NomineeDetailsFragment extends Fragment implements BlockingStep,Ada
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
 
-
-        switch (adapterView.getId()) {
-            case R.id.Spn_NomineeSalutation :
-
-                Str_NomineeSalutation = Spn_NomineeSalutation.getSelectedItem().toString().trim();
-
-                 break;
-
-
-            case R.id.Spn_NomineeRelationship :
-
-                Str_NomineeRelationship = Spn_NomineeRelationship.getSelectedItem().toString().toLowerCase().trim();
-
-
-                break;
-
-            case R.id.Spn_AppointeeSalutation :
-
-                Str_AppointeeSalutation = Spn_AppointeeSalutation.getSelectedItem().toString().trim();
-
-
-                break;
-
-            case R.id.Spn_AppointeeRelationship :
-
-                Str_AppointeeRelationship = Spn_AppointeeRelationship.getSelectedItem().toString().toLowerCase().trim();
-
-
-                break;
-
-
+        int id = adapterView.getId();
+        if (id == R.id.Spn_NomineeSalutation) {
+            Str_NomineeSalutation = Spn_NomineeSalutation.getSelectedItem().toString().trim();
+        } else if (id == R.id.Spn_NomineeRelationship) {
+            Str_NomineeRelationship = Spn_NomineeRelationship.getSelectedItem().toString().toLowerCase().trim();
+        } else if (id == R.id.Spn_AppointeeSalutation) {
+            Str_AppointeeSalutation = Spn_AppointeeSalutation.getSelectedItem().toString().trim();
+        } else if (id == R.id.Spn_AppointeeRelationship) {
+            Str_AppointeeRelationship = Spn_AppointeeRelationship.getSelectedItem().toString().toLowerCase().trim();
         }
     }
 
@@ -472,7 +450,9 @@ public class NomineeDetailsFragment extends Fragment implements BlockingStep,Ada
             Log.d("AppointeeDetail",""+appointee_detailsObj.toString());
 
 
-            mCallback.goToNextStep();
+            if(mCallback!=null) {
+                mCallback.goToNextStep();
+            }
         }
 
     }
@@ -504,55 +484,5 @@ public class NomineeDetailsFragment extends Fragment implements BlockingStep,Ada
     public void onError(@NonNull VerificationError verificationError) {
 
     }
-
-
-
-
-
-
-    private void fetchEducationalFields() {
-
-        //Get state json value from assets folder
-        try {
-            JSONObject obj = new JSONObject(loadJSONFromAssetEducationalFields());
-            JSONArray m_jArry = obj.getJSONArray("educational_area");
-
-            for (int i = 0; i < m_jArry.length(); i++) {
-
-                JSONObject jo_inside = m_jArry.getJSONObject(i);
-
-                String code = jo_inside.getString("id");
-                String educationField = jo_inside.getString("display_value");
-
-                educationFieldNameList.add(educationField);
-                educationFieldCodeList.add(code);
-            }
-
-            ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, educationFieldNameList);
-            Spn_EducationField.setAdapter(countryAdapter);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    //Loading Income JSON
-    public String loadJSONFromAssetEducationalFields() {
-        String json = null;
-        try {
-            InputStream is = getActivity().getAssets().open("educational_area.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return json;
-    }
-
 
 }

@@ -38,6 +38,13 @@
                 android:enabled="false"
                 android:visibility="gone"/>
 
+            <TextView
+                android:id="@+id/row_ic_name"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:enabled="false"
+                android:visibility="gone"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -83,6 +90,16 @@
                             android:fontFamily="@font/calibri_regular"
                             android:gravity="center|start"
                             android:textColor="@color/black"/>
+
+                    <LinearLayout
+                        android:id="@+id/LayoutSelectedAddon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:orientation="vertical"/>
+
+
+
 
                 </LinearLayout>
                 <LinearLayout

@@ -14,97 +14,98 @@
 
 
 
-             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-
-                android:weightSum="10">
-
-
-
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="5">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5sp"
-                        android:padding="5dp"
-                        android:text="Eg- MH *"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                    <EditText
-                        android:id="@+id/Edt_RtoStateCode"
-                        android:layout_width="match_parent"
-                        android:layout_height="55dp"
-                        android:layout_margin="5dp"
-                        android:background="@drawable/btn_color_form_background"
-                        android:hint="Eg- MH *"
-                        android:imeOptions="actionNext"
-                        android:inputType="textCapWords"
-                        android:layout_weight="5"
-                        android:maxLength="2"
-                        android:padding="5dp"
-
-                        android:editable="false"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
-                        android:enabled="false"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="17sp" />
-
-                    </LinearLayout>
-                    <LinearLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="5">
+            android:orientation="horizontal"
 
-            <TextView
+            android:weightSum="10">
+
+
+
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:padding="5dp"
-                android:text="Eg - 01 *"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:orientation="vertical"
+                android:layout_weight="5">
 
-            <EditText
-                android:id="@+id/Edt_RtoCityCode"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:padding="5dp"
+                    android:text="Eg- MH *"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/Edt_RtoStateCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/btn_color_form_background"
+                    android:hint="Eg- MH *"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapWords"
+                    android:layout_weight="5"
+                    android:maxLength="2"
+                    android:padding="5dp"
+
+                    android:editable="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:enabled="false"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
+                    android:textSize="17sp" />
+
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_margin="5dp"
-                android:background="@drawable/btn_color_form_background"
-                android:hint="Eg - 01 *"
-                android:imeOptions="actionNext"
-                android:inputType="number"
-                android:layout_weight="5"
-                android:maxLength="2"
-                android:padding="5dp"
-                android:editable="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:enabled="false"
-                android:textColor="@color/black"
-                android:textColorHint="@color/grey"
-                android:textSize="17sp" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="5">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:padding="5dp"
+                    android:text="Eg - 01 *"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/Edt_RtoCityCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/btn_color_form_background"
+                    android:hint="Eg - 01 *"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:layout_weight="5"
+                    android:maxLength="2"
+                    android:padding="5dp"
+
+                    android:editable="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:enabled="false"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
+                    android:textSize="17sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
-
-             </LinearLayout>
-             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="10">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -176,57 +177,57 @@
 
 
 
-            <EditText
-                android:id="@+id/Edt_EngineNo"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/btn_color_form_background"
-                android:hint="Engine Number *"
-                android:imeOptions="actionNext"
-                android:inputType="textCapCharacters"
-                android:padding="5dp"
-                android:layout_weight="5"
-                android:maxLength="22"
-                android:textColor="@color/black"
-                android:textColorHint="@color/grey"
-                android:textSize="17sp" />
+        <EditText
+            android:id="@+id/Edt_EngineNo"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/btn_color_form_background"
+            android:hint="Engine Number *"
+            android:imeOptions="actionNext"
+            android:inputType="textCapCharacters"
+            android:padding="5dp"
+            android:layout_weight="5"
+            android:maxLength="22"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            android:textSize="17sp" />
 
 
-            <EditText
-                android:id="@+id/Edt_ChassisNo"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/btn_color_form_background"
-                android:hint="Chassis Number *"
-                android:imeOptions="actionNext"
-                android:inputType="textCapCharacters"
-                android:padding="5dp"
-                android:layout_weight="5"
-                android:maxLength="22"
-                android:textColor="@color/black"
-                android:textColorHint="@color/grey"
-                android:textSize="17sp" />
+        <EditText
+            android:id="@+id/Edt_ChassisNo"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/btn_color_form_background"
+            android:hint="Chassis Number *"
+            android:imeOptions="actionNext"
+            android:inputType="textCapCharacters"
+            android:padding="5dp"
+            android:layout_weight="5"
+            android:maxLength="22"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            android:textSize="17sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="10">
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="4">
+                android:orientation="vertical"
+                android:layout_weight="4">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -256,11 +257,11 @@
                 </RelativeLayout>
             </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_weight="6">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="6">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -271,62 +272,62 @@
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
-                    <TextView
-                        android:id="@+id/tv_registration_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5sp"
-                        android:padding="5dp"
-                        android:background="@drawable/cw_button_shadow_primary"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:editable="false"
-                        android:textColor="@color/white"
-                        android:textSize="14sp" />
-
-
-            </LinearLayout>
-
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="5">
-
                 <TextView
+                    android:id="@+id/tv_registration_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5sp"
                     android:padding="5dp"
-                    android:text="Select Agreement"
-                    android:textColor="@color/black"
+                    android:background="@drawable/cw_button_shadow_primary"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:editable="false"
+                    android:textColor="@color/white"
                     android:textSize="14sp" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:layout_marginStart="5sp"
-                    android:layout_marginEnd="5sp"
-                    android:layout_weight="5"
-                    android:background="@drawable/btn_color_form_background">
 
-                    <Spinner
-                        style="@style/Widget.AppCompat.DropDownItem.Spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
-                        android:id="@+id/Spn_Agreement"
-                        android:entries="@array/spin_item_agreement"
-
-                        android:padding="5dp"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentStart="true" />
-                </RelativeLayout>
             </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="5">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5sp"
+                android:padding="5dp"
+                android:text="Select Agreement"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginStart="5sp"
+                android:layout_marginEnd="5sp"
+                android:layout_weight="5"
+                android:background="@drawable/btn_color_form_background">
+
+                <Spinner
+                    style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:id="@+id/Spn_Agreement"
+                    android:entries="@array/spin_item_agreement"
+
+                    android:padding="5dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true" />
+            </RelativeLayout>
+        </LinearLayout>
 
 
         <LinearLayout

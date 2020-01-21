@@ -74,6 +74,7 @@ public class VehicleDetailsFragment extends Fragment implements BlockingStep, Ad
     EditText Edt_PreviousPolicyNo;
     Spinner Spn_Ic;
     Integer IsExistRTOCode_ChassisNo=0;
+    StepperLayout.OnNextClickedCallback mCallback;
 
     String StrPreviousPolicyNo,StrPreviousPolicyIC;
 
@@ -604,6 +605,7 @@ public class VehicleDetailsFragment extends Fragment implements BlockingStep, Ad
 
     @Override
     public void onNextClicked(StepperLayout.OnNextClickedCallback callback) {
+        mCallback = callback;
 
         if(IsExistRTOCode_ChassisNo==0) {
             if (IsValidFields()) {
@@ -669,7 +671,9 @@ public class VehicleDetailsFragment extends Fragment implements BlockingStep, Ad
                 Log.d("VehicleDetails",""+vehicle_detailObj.toString());
                 Log.d("PreviousPolicyDetails",""+previous_policyObj.toString());
 
-                callback.goToNextStep();
+                if(mCallback!=null) {
+                    mCallback.goToNextStep();
+                }
             }
         }else {
             CommonMethods.DisplayToastError(context,"Vehicle No. or Chassis No. Exist");
@@ -778,34 +782,26 @@ public class VehicleDetailsFragment extends Fragment implements BlockingStep, Ad
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        switch (adapterView.getId()) {
-            case R.id.Spn_VehicleColor:
-
-                StrVehicleColor = Spn_VehicleColor.getSelectedItem().toString().trim();
-
-                break;
-            case R.id.Spn_Agreement:
-
-                if(Spn_Agreement.getSelectedItemPosition()>0) {
-                    StrAgreement = Spn_Agreement.getSelectedItem().toString().trim();
-                    if (StrAgreement.equalsIgnoreCase("hire purchase")) {
-                        StrAgreement = "hire_purchase";
-                    } else if (StrAgreement.equalsIgnoreCase("Lease Agreement")) {
-                        StrAgreement = "lease_agreement";
-                    }
-                }else{
-                    StrAgreement = "";
+        int id = adapterView.getId();
+        if (id == R.id.Spn_VehicleColor) {
+            StrVehicleColor = Spn_VehicleColor.getSelectedItem().toString().trim();
+        } else if (id == R.id.Spn_Agreement) {
+            if (Spn_Agreement.getSelectedItemPosition() > 0) {
+                StrAgreement = Spn_Agreement.getSelectedItem().toString().trim();
+                if (StrAgreement.equalsIgnoreCase("hire purchase")) {
+                    StrAgreement = "hire_purchase";
+                } else if (StrAgreement.equalsIgnoreCase("Lease Agreement")) {
+                    StrAgreement = "lease_agreement";
                 }
-
-                break;
-            case R.id.Spn_Bank:
-
-                if(Spn_Bank.getSelectedItemPosition()>0) {
-                    StrBankName = Spn_Bank.getSelectedItem().toString().trim();
-                }else {
-                    StrBankName = "";
-                }
-                break;
+            } else {
+                StrAgreement = "";
+            }
+        } else if (id == R.id.Spn_Bank) {
+            if (Spn_Bank.getSelectedItemPosition() > 0) {
+                StrBankName = Spn_Bank.getSelectedItem().toString().trim();
+            } else {
+                StrBankName = "";
+            }
         }
     }
 

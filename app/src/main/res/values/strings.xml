@@ -290,8 +290,36 @@
         <item>45%</item>
         <item>50%</item>
     </string-array>
+
+    <string-array name="spin_item_geographical_extension_countries">
+
+        <item>Select Select Country</item>
+        <item>Bangladesh</item>
+        <item>Bhutan</item>
+        <item>Pakistan</item>
+        <item>Maldives</item>
+        <item>Nepal</item>
+        <item>Sri Lanka</item>
+
+    </string-array>
+
+    <string-array name="spin_item_pa_sum_assured">
+
+        <item>Select Sum Insured(Rs)</item>
+        <item>200000</item>
+        <item>100000</item>
+        <item>90000</item>
+        <item>80000</item>
+        <item>70000</item>
+        <item>60000</item>
+        <item>50000</item>
+        <item>40000</item>
+        <item>30000</item>
+        <item>20000</item>
+        <item>10000</item>
+    </string-array>
+
     <string-array name="spin_item_od_discount">
-        <item>Select OD Discount</item>
         <item>MAX DISCOUNT</item>
         <item>0%</item>
         <item>5%</item>

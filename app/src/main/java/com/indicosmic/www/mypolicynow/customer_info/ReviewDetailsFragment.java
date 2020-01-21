@@ -127,6 +127,12 @@ public class ReviewDetailsFragment extends Fragment implements BlockingStep {
          setDataToView();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        setDataToView();
+    }
+
     private void setDataToView() {
 
         JSONObject vehicle_ownerObj = new JSONObject();
@@ -135,11 +141,17 @@ public class ReviewDetailsFragment extends Fragment implements BlockingStep {
         JSONObject address_detailObj = new JSONObject();
         JSONObject vehicle_detailObj = new JSONObject();
         JSONObject previous_policyObj = new JSONObject();
-        StrMpnData = UtilitySharedPreferences.getPrefs(context,"MpnData");
-        StrUserActionData = UtilitySharedPreferences.getPrefs(context,"UserActionData");
-        SelectedIcId = UtilitySharedPreferences.getPrefs(context,"SelectedIcId");
 
         try{
+            StrMpnData = UtilitySharedPreferences.getPrefs(context,"MpnData");
+            StrUserActionData = UtilitySharedPreferences.getPrefs(context,"UserActionData");
+            SelectedIcId = UtilitySharedPreferences.getPrefs(context,"SelectedIcId");
+            String StrOwnerDetails = UtilitySharedPreferences.getPrefs(context,"vehicle_ownerObj");
+            String StrNomineeDetails = UtilitySharedPreferences.getPrefs(context,"nominee_detailsObj");
+            String StrAppointeeDetails = UtilitySharedPreferences.getPrefs(context,"appointee_detailsObj");
+            String StrAddressDetails = UtilitySharedPreferences.getPrefs(context,"address_detailObj");
+            String StrVehicleDetails = UtilitySharedPreferences.getPrefs(context,"vehicle_detailObj");
+            String StrPreviousPolicyDetails = UtilitySharedPreferences.getPrefs(context,"previous_policyObj");
 
             JSONObject mpnObj = new JSONObject(StrMpnData);
             JSONObject icQuoteObj = mpnObj.getJSONObject("ic_quote");
@@ -170,21 +182,6 @@ public class ReviewDetailsFragment extends Fragment implements BlockingStep {
             StrPolicyType = user_action_dataObj.getString("policy_type");
 
             tv_RegistrationDate.setText(StrRegistrationDate);
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-
-        String StrOwnerDetails = UtilitySharedPreferences.getPrefs(context,"vehicle_ownerObj");
-        String StrNomineeDetails = UtilitySharedPreferences.getPrefs(context,"nominee_detailsObj");
-        String StrAppointeeDetails = UtilitySharedPreferences.getPrefs(context,"appointee_detailsObj");
-        String StrAddressDetails = UtilitySharedPreferences.getPrefs(context,"address_detailObj");
-        String StrVehicleDetails = UtilitySharedPreferences.getPrefs(context,"vehicle_detailObj");
-        String StrPreviousPolicyDetails = UtilitySharedPreferences.getPrefs(context,"previous_policyObj");
-
-
-        try {
 
             vehicle_ownerObj = new JSONObject(StrOwnerDetails);
             nominee_detailsObj = new JSONObject(StrNomineeDetails);
@@ -233,9 +230,6 @@ public class ReviewDetailsFragment extends Fragment implements BlockingStep {
             Str_AppointeeRelationship = appointee_detailsObj.getString("appointee_relationship");
             Str_AppointeeAge = appointee_detailsObj.getString("appointee_age");
 
-
-
-
             String NomineeFullName = Str_NomineeSalutation + " " + Str_NomineeFirstName + " "+Str_NomineeMiddleName +" " +Str_NomineeLastName;
             tv_NomineeName.setText(NomineeFullName.toUpperCase());
             tv_NomineeRelation.setText(ucFirst(Str_NomineeRelationship));
@@ -263,8 +257,6 @@ public class ReviewDetailsFragment extends Fragment implements BlockingStep {
             Str_StateId = address_detailObj.getString("state_id");
             Str_CityId = address_detailObj.getString("city_id");
 
-
-
             tv_Address1.setText(Str_Address1);
             tv_Address2.setText(Str_Address2);
             tv_City.setText(Str_City);
@@ -285,7 +277,6 @@ public class ReviewDetailsFragment extends Fragment implements BlockingStep {
             StrPreviousPolicyIC = previous_policyObj.getString( "pre_insurance");
 
 
-
             if(StrEngineNo!=null && !StrEngineNo.equalsIgnoreCase("")){
                 tv_EngineNo.setText(StrEngineNo.toUpperCase());
             }
@@ -298,10 +289,6 @@ public class ReviewDetailsFragment extends Fragment implements BlockingStep {
         }catch (Exception e){
             e.printStackTrace();
         }
-
-
-
-
 
     }
 

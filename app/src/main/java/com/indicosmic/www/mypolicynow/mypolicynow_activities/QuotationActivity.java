@@ -126,7 +126,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
 
     ArrayList<String> ncbDisplayValue = new ArrayList<String>();
 
-    String StrPosToken="",StrAgentId="",ProductTypeId="2",StrPolicyHolder;
+    String StrPosToken="",StrAgentId="",ProductTypeId="2",StrPolicyHolder="";
     Button BtnGetQuote;
     String StrRegistrationDate="",StrRegistration_monthId="0";
 
@@ -1841,7 +1841,6 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
             manufacturing_date = "01/"+StrRegistration_monthId+"/"+StrManufacturingYear;
         }
 
-        if(Spn_ODDiscount.getSelectedItemPosition()>0){
             String ODDiscountPer = Spn_ODDiscount.getSelectedItem().toString();
             if(ODDiscountPer.equalsIgnoreCase("MAX DISCOUNT")){
                 selected_od_discount = "max";
@@ -1849,7 +1848,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
             }else {
                 selected_od_discount = ODDiscountPer.replace("%","");
             }
-        }
+
 
         StrInvoicePrice = EdtInvoicePrice.getText().toString();
 
@@ -2121,12 +2120,12 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
             CommonMethods.DisplayToastError(getApplicationContext(),"Select Policy Holder Type");
         }
 
-        if(LayoutODDisount.getVisibility()==View.VISIBLE) {
+       /* if(LayoutODDisount.getVisibility()==View.VISIBLE) {
             if (!MyValidator.isValidSpinner(Spn_ODDiscount)) {
                 result = false;
                 CommonMethods.DisplayToastError(getApplicationContext(), "Select Policy OD Discount");
             }
-        }
+        }*/
 
 
 
@@ -2300,9 +2299,10 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                 if (Spn_ManufacturingMonth.getSelectedItemPosition() > 0) {
                     int pos_month = Spn_ManufacturingMonth.getSelectedItemPosition();
 
-                    StrRegistration_monthId = manufacturingMonthValue.get(pos_month).toString();
-                    registration_month = Integer.valueOf(StrRegistration_monthId);
-
+                    if(manufacturingMonthValue.get(pos_month)!=null) {
+                        StrRegistration_monthId = manufacturingMonthValue.get(pos_month).toString();
+                        registration_month = Integer.valueOf(StrRegistration_monthId);
+                    }
                     if(StrPolicyType.equalsIgnoreCase("Renew")){
                         if(registration_year!=0 && registration_month!=0) {
                             setRegistrationDate(registration_year, registration_month, 1);

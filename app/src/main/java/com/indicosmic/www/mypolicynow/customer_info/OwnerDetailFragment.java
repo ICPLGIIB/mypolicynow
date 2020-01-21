@@ -242,22 +242,13 @@ public class OwnerDetailFragment extends Fragment implements BlockingStep, View.
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        switch (adapterView.getId()) {
-            case R.id.Spn_Salutation:
-
-                StrSelectedSalutation = Spn_Salutation.getSelectedItem().toString().trim();
-
-                break;
-            case R.id.Spn_Gender:
-
-                StrSelectedGender = Spn_Gender.getSelectedItem().toString().trim();
-
-                break;
-            case R.id.Spn_MaritalStatus:
-
-                StrSelectedMaritalStatus = Spn_MaritalStatus.getSelectedItem().toString().trim();
-
-                break;
+        int id = adapterView.getId();
+        if (id == R.id.Spn_Salutation) {
+            StrSelectedSalutation = Spn_Salutation.getSelectedItem().toString().trim();
+        } else if (id == R.id.Spn_Gender) {
+            StrSelectedGender = Spn_Gender.getSelectedItem().toString().trim();
+        } else if (id == R.id.Spn_MaritalStatus) {
+            StrSelectedMaritalStatus = Spn_MaritalStatus.getSelectedItem().toString().trim();
         }
     }
 

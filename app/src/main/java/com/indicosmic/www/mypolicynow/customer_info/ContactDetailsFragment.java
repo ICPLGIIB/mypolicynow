@@ -52,6 +52,7 @@ public class ContactDetailsFragment extends Fragment implements BlockingStep {
     EditText Edt_Address1,Edt_Address2,Edt_AddressPincode,Edt_State,Edt_City;
     String StrAgentId,Str_Address1,Str_Address2,Str_Pincode,Str_State,Str_City,Str_StateId,Str_CityId;
     JSONObject stateObj,cityObj;
+    StepperLayout.OnNextClickedCallback mCallback;
 
     public ContactDetailsFragment() {
         // Required empty public constructor
@@ -246,7 +247,7 @@ public class ContactDetailsFragment extends Fragment implements BlockingStep {
     @Override
     public void onNextClicked(StepperLayout.OnNextClickedCallback callback) {
 
-
+        mCallback = callback;
         if (validateFields()) {
             InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(Edt_City.getWindowToken(), 0);
@@ -286,8 +287,8 @@ public class ContactDetailsFragment extends Fragment implements BlockingStep {
             Log.d("AddressDetails",""+address_detailObj.toString());
 
 
-            if(callback!=null) {
-                callback.goToNextStep();
+            if(mCallback!=null) {
+                mCallback.goToNextStep();
             }
         }
 

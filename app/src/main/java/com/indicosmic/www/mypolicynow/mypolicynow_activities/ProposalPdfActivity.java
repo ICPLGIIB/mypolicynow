@@ -142,7 +142,7 @@ public class ProposalPdfActivity extends AppCompatActivity {
             QuoteLink = proposal_obj.getString("quote_link");
             quote_url = proposal_obj.getString("url");
             QuoteLink = QuoteLink.toUpperCase();
-           Toast.makeText(getApplicationContext(),"Customer Verification OTP :"+proposal_otp,Toast.LENGTH_LONG).show();
+           //Toast.makeText(getApplicationContext(),"Customer Verification OTP :"+proposal_otp,Toast.LENGTH_LONG).show();
 
 
 
@@ -445,6 +445,12 @@ public class ProposalPdfActivity extends AppCompatActivity {
             }
         });
 
+        btnUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
 
 
