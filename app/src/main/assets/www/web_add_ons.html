@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:bgcolor="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>OD Break up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+    <!-- Link Swiper's CSS
+	<link rel="stylesheet" href="css/swiper.min.css">-->
+
+
+    <!-- Demo styles -->
+    <style>
+    html, body {
+      position: relative;
+      height: 300px;
+    }
+    body {
+      background: white;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color:#000;
+      margin: 0;
+      padding: 0;
+    }
+  	.table {
+      width: 100%;
+      max-width: 100%;
+      margin-bottom: 1rem;
+    }
+
+    .table th,
+    .table td {
+      padding: 0.75rem;
+      vertical-align: top;
+      border-top: 1px solid #eceeef;
+    }
+
+    .table thead th, .table thead td {
+      vertical-align: bottom;
+      border-bottom: 2px solid #eceeef;
+      background-color: #f89820;
+      color: #fff;
+    }
+
+    .table tbody + tbody {
+      border-top: 2px solid #eceeef;
+    }
+
+    .table .table {
+      background-color: #fff;
+    }
+
+    .table-sm th,
+    .table-sm td {
+      padding: 0.3rem;
+    }
+
+    .table-bordered {
+      border: 1px solid #eceeef;
+    }
+
+    .table-bordered th,
+    .table-bordered td {
+      border: 1px solid #eceeef;
+    }
+
+    .table-bordered thead th,
+    .table-bordered thead td {
+      border-bottom-width: 2px;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .table-hover tbody tr:hover {
+      background-color: rgba(0, 0, 0, 0.075);
+    }
+
+    .table-active,
+    .table-active > th,
+    .table-active > td {
+      background-color: rgba(0, 0, 0, 0.075);
+    }
+
+    .table-hover .table-active:hover {
+      background-color: rgba(0, 0, 0, 0.075);
+    }
+
+    .table-hover .table-active:hover > td,
+    .table-hover .table-active:hover > th {
+      background-color: rgba(0, 0, 0, 0.075);
+    }
+
+    .table-success,
+    .table-success > th,
+    .table-success > td {
+      background-color: #dff0d8;
+    }
+
+    .table-hover .table-success:hover {
+      background-color: #d0e9c6;
+    }
+
+    .table-hover .table-success:hover > td,
+    .table-hover .table-success:hover > th {
+      background-color: #d0e9c6;
+    }
+
+    .table-info,
+    .table-info > th,
+    .table-info > td {
+      background-color: #d9edf7;
+    }
+
+    .table-hover .table-info:hover {
+      background-color: #c4e3f3;
+    }
+
+    .table-hover .table-info:hover > td,
+    .table-hover .table-info:hover > th {
+      background-color: #c4e3f3;
+    }
+
+    .table-warning,
+    .table-warning > th,
+    .table-warning > td {
+      background-color: #fcf8e3;
+    }
+
+    .table-hover .table-warning:hover {
+      background-color: #faf2cc;
+    }
+
+    .table-hover .table-warning:hover > td,
+    .table-hover .table-warning:hover > th {
+      background-color: #faf2cc;
+    }
+
+    .table-danger,
+    .table-danger > th,
+    .table-danger > td {
+      background-color: #f2dede;
+    }
+
+    .table-hover .table-danger:hover {
+      background-color: #ebcccc;
+    }
+
+    .table-hover .table-danger:hover > td,
+    .table-hover .table-danger:hover > th {
+      background-color: #ebcccc;
+    }
+
+    .thead-inverse th {
+      color: #fff;
+      background-color: #292b2c;
+    }
+
+    .thead-default th {
+      color: #464a4c;
+      background-color: #eceeef;
+    }
+
+    .table-inverse {
+      color: #fff;
+      background-color: #292b2c;
+    }
+
+    .table-inverse th,
+    .table-inverse td,
+    .table-inverse thead th {
+      border-color: #fff;
+    }
+
+    .table-inverse.table-bordered {
+      border: 0;
+    }
+
+    .table-responsive {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+	  font-size: 12px;
+      -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+
+    .table-responsive.table-bordered {
+      border: 0;
+    }
+
+  </style>
+</head>
+<body>
+
+<div id="sip_table" class="table-responsive">
+    <table class="table table-striped " id="appendHeader">
+        <thead>
+        <tr id="test_class" >
+            <th class="cfth" align="left">Selected Addons</th>
+            <!--<th class="cfth" align="left">Total Addons Value</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr id="row_dep_cover">
+            <th class="cftbody" align="left">Dep cover Rate</th>
+        </tr>
+        <tr id="row_total_addon_premium">
+            <th class="cftbody" align="left">(B) ADDON PREMIUM</th>
+        </tr>
+        </tbody>
+    </table>
+    <table class="table">
+        <tfoot>
+        <tr>
+            <td style="text-align: right"><h4>(B)NET ADDON PREMIUM: <span id="total_add_on_premium"> </span></h4></td>
+        </tr>
+        </tfoot>
+    </table>
+
+    <!--    <table class="cftable" id="appendHeader">
+            <thead class="cfthead">
+            <tr>
+                <th class="cfth" align="left">Basic OD</th>
+                <th class="cfth" align="left">Total</th>
+            </tr>
+            </thead>
+            <tbody class="cftbody">
+            <tr id="appendRows">
+                <th class="cftb" align="left">Vehicle IDV</th>
+                <th class="cftbody" align="left"></th>
+            </tr>
+            </tbody>
+
+        </table>-->
+
+
+</div>
+
+
+
+
+
+<!-- Swiper JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['corechart']}]}"></script>
+
+<!-- Initialize Swiper -->
+<script type="text/javascript">
+
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawTable);
+
+
+        function drawTable() {
+
+        var addons_headerObj = [];
+        var dept_cover_dataObj = [];
+        var total_add_ons_dataObj = [];
+
+
+        addons_headerObj = JSON.parse(Android.get_addon_headerObj());
+        dept_cover_dataObj = JSON.parse(Android.get_addon_valueObj());
+        total_add_ons_dataObj = JSON.parse(Android.get_addon_totalObj());
+
+        /*--------
+         var header_data = '{"1":"Addon 1 year","2":"Addon 2 year","3":"Addon 3 year","4":"Addon 4 year","5":"Addon 5 year","6":"Total Addons Value"}'
+         addons_headerObj = JSON.parse(header_data);
+
+		 var dept_cover_data = '{"1":"123","2":"323","3":"533","4":"744","5":"933","6":"1800"}'
+         dept_cover_dataObj = JSON.parse(dept_cover_data);
+
+		 var total_add_on_data = '{"1":"123","2":"323","3":"533","4":"744","5":"933","6":"1800"}'
+         total_add_ons_dataObj = JSON.parse(total_add_on_data);
+        ------------*/
+
+
+          $(document).ready(function(){
+
+
+            $.each( addons_headerObj, function( key, value ) {
+              document.getElementById("test_class").insertCell(key).innerHTML = value;
+            });
+
+            $.each( dept_cover_dataObj, function( key, value ) {
+              document.getElementById("row_dep_cover").insertCell(key).innerHTML = value;
+            });
+
+             $.each( total_add_ons_dataObj, function( key, value ) {
+              document.getElementById("row_total_addon_premium").insertCell(key).innerHTML = value;
+            });
+
+        });
+		    //var net_add_on_premium = '1603.14';
+
+            var net_add_on_premium = Android.get_net_add_on_premium();
+            document.getElementById('total_add_on_premium').innerHTML = net_add_on_premium;
+
+    }
+
+  </script>
+
+</body>
+</html>

@@ -221,16 +221,7 @@ public class ProposalPdfActivity extends AppCompatActivity {
 
 
         if(!isVerifiedCustomerMobile){
-            if(StrPolicyType!=null && !StrPolicyType.equalsIgnoreCase("")){
-                if(StrPolicyType.equalsIgnoreCase("new")){
-                    BtnVerify_Buy.setText("VERIFY");
-
-                }else if(StrPolicyType.equalsIgnoreCase("renew") && !isUploadedPolicyDocument){
-                    BtnVerify_Buy.setText("UPLOAD");
-                }else if(StrPolicyType.equalsIgnoreCase("renew") && isUploadedPolicyDocument){
-                    BtnVerify_Buy.setText("VERIFY");
-                }
-            }
+            BtnVerify_Buy.setText("VERIFY");
 
         }else {
             BtnVerify_Buy.setText("BUY NOW");
@@ -241,17 +232,10 @@ public class ProposalPdfActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(!isVerifiedCustomerMobile){
-                    if(StrPolicyType!=null && !StrPolicyType.equalsIgnoreCase("")){
-                        if(StrPolicyType.equalsIgnoreCase("new")){
-                            verifyCustomerPopup();
-                        }else if(StrPolicyType.equalsIgnoreCase("renew") && !isUploadedPolicyDocument){
-                            uploadPreviousPolicyDocumentPopup();
-                        }else if(StrPolicyType.equalsIgnoreCase("renew") && isUploadedPolicyDocument){
-                            verifyCustomerPopup();
-                        }
-                    }
+                    verifyCustomerPopup();
 
                 }else {
+                    BUY_POLICY();
                     //BtnVerify_Buy.setText("BUY NOW");
                 }
 
@@ -274,18 +258,18 @@ public class ProposalPdfActivity extends AppCompatActivity {
         menu.getMenu().add("QUOTE FORWARD");
         menu.getMenu().add("DOWNLOAD PDF");
         menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                                            public boolean onMenuItemClick(MenuItem item) {
-                                                // insert your code here
-                                                Log.d("menu title: ", item.getTitle().toString());
-                                                if(item.getTitle().toString().equalsIgnoreCase("QUOTE FORWARD")){
-                                                    API_Quote_Forward();
-                                                }else if(item.getTitle().toString().equalsIgnoreCase("DOWNLOAD PDF")){
-                                                    //new DownloadFile().execute(PDF_URL, QuoteLink+".pdf");
-                                                    new DownloadTask(ProposalPdfActivity.this, PDF_URL);
-                                                }
-                                                return true;
-                                            }
-                                        }
+                public boolean onMenuItemClick(MenuItem item) {
+                    // insert your code here
+                    Log.d("menu title: ", item.getTitle().toString());
+                    if(item.getTitle().toString().equalsIgnoreCase("QUOTE FORWARD")){
+                        API_Quote_Forward();
+                    }else if(item.getTitle().toString().equalsIgnoreCase("DOWNLOAD PDF")){
+                        //new DownloadFile().execute(PDF_URL, QuoteLink+".pdf");
+                        new DownloadTask(ProposalPdfActivity.this, PDF_URL);
+                    }
+                    return true;
+                }
+            }
         );
 
 
@@ -295,6 +279,13 @@ public class ProposalPdfActivity extends AppCompatActivity {
                 menu.show();
             }
         });
+    }
+
+    private void BUY_POLICY() {
+
+
+
+
     }
 
     private void verifyCustomerPopup() {
@@ -393,7 +384,7 @@ public class ProposalPdfActivity extends AppCompatActivity {
 
     }
 
-    private void uploadPreviousPolicyDocumentPopup() {
+    /*private void uploadPreviousPolicyDocumentPopup() {
 
         DialogUploadPolicy = new Dialog(ProposalPdfActivity.this);
         DialogUploadPolicy.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -600,7 +591,7 @@ public class ProposalPdfActivity extends AppCompatActivity {
         ProposalPdfActivity.this.sendBroadcast(mediaScanIntent);
     }
 
-
+*/
 
     private void VerifyOTP(String mobileOtp) {
 

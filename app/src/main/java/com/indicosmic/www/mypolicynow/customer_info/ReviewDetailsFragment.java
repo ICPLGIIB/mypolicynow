@@ -1,16 +1,33 @@
 package com.indicosmic.www.mypolicynow.customer_info;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -32,22 +49,37 @@ import com.indicosmic.www.mypolicynow.R;
 import com.indicosmic.www.mypolicynow.mypolicynow_activities.ProposalPdfActivity;
 import com.indicosmic.www.mypolicynow.utils.CommonMethods;
 import com.indicosmic.www.mypolicynow.utils.ConnectionDetector;
+import com.indicosmic.www.mypolicynow.utils.FilePath;
 import com.indicosmic.www.mypolicynow.utils.UtilitySharedPreferences;
 import com.indicosmic.www.mypolicynow.webservices.RestClient;
 import com.stepstone.stepper.BlockingStep;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 
+import net.gotev.uploadservice.MultipartUploadRequest;
+import net.gotev.uploadservice.ServerResponse;
+import net.gotev.uploadservice.UploadInfo;
+import net.gotev.uploadservice.UploadNotificationConfig;
+import net.gotev.uploadservice.UploadStatusDelegate;
+
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import static com.indicosmic.www.mypolicynow.utils.CommonMethods.ucFirst;
 import static com.indicosmic.www.mypolicynow.webservices.RestClient.ROOT_URL2;
 
 public class ReviewDetailsFragment extends Fragment implements BlockingStep {
 
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
 
     View rootView;
     Context context;
@@ -67,6 +99,23 @@ public class ReviewDetailsFragment extends Fragment implements BlockingStep {
             StrBankName,StrBankId;
     JSONObject mpn_dataObj = new JSONObject();
     ProgressDialog myDialog;
+    Dialog DialogUploadPolicy;
+    Uri fileUri;
+    File myFileToUpload = null;
+    String PreviousPolicyFileName;
+    byte[] bbytesFile;
+    String file_base;
+    String filePath,picturePath,b64,filename,file_extension;
+    String Quote_Link="";
+    EditText EdtChooseFile;
+    ImageView Iv_UploadedImg;
+    Uri outputFileUri;
+    boolean ServerStatus;
+    String Str_Base64Image;
+
+    private static final int SELECT_FILE = 2243;
+    private static final int REQUEST_CAMERA = 23424;
+
 
     public ReviewDetailsFragment() {
         // Required empty public constructor
@@ -411,6 +460,12 @@ public class ReviewDetailsFragment extends Fragment implements BlockingStep {
 
             mpn_dataObj = new JSONObject(StrMpnData);
             mpn_dataObj.put("customer_quote",customerObj);
+
+            JSONObject proposalObj = mpn_dataObj.getJSONObject("proposal_data");
+            Quote_Link = proposalObj.getString("quote_forward_link");
+
+            Log.d("Quote_Link",""+Quote_Link);
+
             //Log.d("customerObj",""+customerObj);
            UtilitySharedPreferences.setPrefs(context,"CustomerMobile",StrMobileNo);
 
@@ -422,9 +477,361 @@ public class ReviewDetailsFragment extends Fragment implements BlockingStep {
         StrMpnData = mpn_dataObj.toString();
 
         Log.d("customerObj",""+customerObj);
-        API_GET_PROPOSAL_PDF_API();
+
+        if(StrPolicyType!=null && !StrPolicyType.equalsIgnoreCase("null") && !StrPolicyType.equalsIgnoreCase("")){
+            if(StrPolicyType.equalsIgnoreCase("renew")) {
+                uploadPreviousPolicyDocumentPopup();
+            }else{
+                API_GET_PROPOSAL_PDF_API();
+            }
+        }
+
+
+
 
     }
+
+    private void uploadPreviousPolicyDocumentPopup() {
+
+        DialogUploadPolicy = new Dialog(context);
+        DialogUploadPolicy.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        DialogUploadPolicy.setCanceledOnTouchOutside(false);
+        DialogUploadPolicy.setCancelable(true);
+        DialogUploadPolicy.setContentView(R.layout.popup_upload_previous_policy_document);
+        DialogUploadPolicy.getWindow().setBackgroundDrawable(
+                new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+
+        ImageView iv_close = (ImageView) DialogUploadPolicy.findViewById(R.id.iv_close);
+        Button upload_button = (Button) DialogUploadPolicy.findViewById(R.id.upload_button);
+        Button captureImage_button = (Button) DialogUploadPolicy.findViewById(R.id.captureImage_button);
+
+        Iv_UploadedImg = (ImageView)DialogUploadPolicy.findViewById(R.id.Iv_UploadedImg);
+        Button btnUpload = (Button) DialogUploadPolicy.findViewById(R.id.btnUpload);
+
+
+
+        DialogUploadPolicy.show();
+
+        //starCountdown();
+
+        upload_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                galleryIntent();
+
+            }
+        });
+
+
+
+        captureImage_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                cameraIntent();
+
+            }
+        });
+
+        iv_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(DialogUploadPolicy!=null && DialogUploadPolicy.isShowing()) {
+                    DialogUploadPolicy.dismiss();
+                }
+            }
+        });
+
+        btnUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+
+
+
+
+    }
+
+    private void API_UPLOAD_PREVIOUS_YEAR_POLICY(){
+
+
+
+
+        String UPLOAD_URL =  ROOT_URL2 + "UploadDocumentProposal";
+        String path = FilePath.getPath(context, fileUri);
+        Log.d("Upload_URL",UPLOAD_URL);
+        Log.d("Path",path.toString());
+        if (path == null) {
+            Toast.makeText(context, "Please move your .pdf file to internal storage and retry", Toast.LENGTH_LONG).show();
+        } else {
+            //Uploading code
+
+            myDialog.show();
+
+            try {
+                String uploadId = UUID.randomUUID().toString();
+
+                //Creating a multi part request
+
+                new MultipartUploadRequest(context, uploadId, UPLOAD_URL +"updateClaimVideo")
+
+                        .addFileToUpload(path, "file") //Adding file
+                        .addParameter("name", PreviousPolicyFileName)
+                        .addParameter("quote",Quote_Link)
+                        .setNotificationConfig(new UploadNotificationConfig())
+                        .setMaxRetries(2)
+                        .setDelegate(new UploadStatusDelegate() {
+                            @Override
+                            public void onProgress(UploadInfo uploadInfo) {
+
+                            }
+
+                            @Override
+                            public void onError(UploadInfo uploadInfo, Exception e) {
+                                if (myDialog!=null && myDialog.isShowing()) {
+                                    myDialog.dismiss();
+                                }
+                                Toast.makeText(context,"Error Uploading Video. Please select it from gallery and upload it again.",Toast.LENGTH_LONG).show();
+
+                            }
+
+                            @Override
+                            public void onCompleted(UploadInfo uploadInfo, ServerResponse serverResponse) {
+
+                                if (myDialog!=null && myDialog.isShowing()) {
+                                    myDialog.dismiss();
+                                }
+
+                                Toast.makeText(context,"Policy Uploaded Successfully",Toast.LENGTH_LONG).show();
+                                API_GET_PROPOSAL_PDF_API();
+                            }
+
+                            @Override
+                            public void onCancelled(UploadInfo uploadInfo) {
+                                if (myDialog!=null && myDialog.isShowing()) {
+                                    myDialog.dismiss();
+                                }
+                                Toast.makeText(context,"Uploading Cancelled. Please select it from gallery and upload it again.",Toast.LENGTH_LONG).show();
+                            }
+                        })
+                        .startUpload();
+
+
+            } catch (Exception exc) {
+                Toast.makeText(context, exc.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+
+
+
+
+    }
+
+    private void cameraIntent()
+    {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, REQUEST_CAMERA);
+    }
+
+    private void galleryIntent()
+    {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);//
+        startActivityForResult(Intent.createChooser(intent, "Select File"),SELECT_FILE);
+
+
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == SELECT_FILE)
+                onSelectFromGalleryResult(data);
+            else if (requestCode == REQUEST_CAMERA)
+                onCaptureImageResult(data);
+        }
+
+        fileUri = data.getData();
+        String uriString = fileUri.toString();
+        myFileToUpload = new File(uriString);
+        filePath = myFileToUpload.getAbsolutePath();
+        PreviousPolicyFileName = null;
+
+
+
+        if (uriString.startsWith("content://")) {
+            Cursor cursor = null;
+            try {
+                cursor = context.getContentResolver().query(fileUri, null, null, null, null);
+                if (cursor != null && cursor.moveToFirst()) {
+                    PreviousPolicyFileName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+
+                    Log.d("PreviousPolicyFileName", PreviousPolicyFileName);
+                }
+            } finally {
+                cursor.close();
+            }
+        } else if (uriString.startsWith("file://")) {
+            PreviousPolicyFileName = myFileToUpload.getName();
+        }
+        //filePath = getPath(fileUri);
+
+        String parts[] = filePath.split("/");
+        int part_len = parts.length-1;
+        filename = parts[part_len];
+
+
+        file_extension =  filePath.substring(filePath.lastIndexOf(".") + 1);
+        Log.d("picUri", fileUri.toString());
+        Log.d("filePath",filePath);
+        Log.d("fileName", PreviousPolicyFileName);
+        file_extension =  PreviousPolicyFileName.substring(PreviousPolicyFileName.lastIndexOf(".") + 1);
+
+        //filePath = getPath(fileUri);
+        Log.d("filePath1",filePath);
+        //Log.d("fileName", filename);
+        Log.d("fileExtension", file_extension);
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        Bitmap bitmap = BitmapFactory.decodeFile(filePath, options);
+        if (options.outWidth != -1 && options.outHeight != -1) {
+
+            Iv_UploadedImg.setImageBitmap(bitmap);
+            Iv_UploadedImg.setVisibility(View.VISIBLE);
+
+            // This is an image file.
+        }
+        else {
+            CommonMethods.DisplayToast(context,"Unsupported format for NSDL file.");
+        }
+
+
+    }
+
+    @SuppressWarnings("deprecation")
+    private void onSelectFromGalleryResult(Intent data) {
+        Str_Base64Image = "";
+        Bitmap bm=null;
+        if (data != null) {
+            try {
+                bm = MediaStore.Images.Media.getBitmap(context.getContentResolver(), data.getData());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (bm != null) {
+            Iv_UploadedImg.setImageBitmap(bm);
+            Iv_UploadedImg.setVisibility(View.VISIBLE);
+            Str_Base64Image = CommonMethods.getEncoded64ImageStringFromBitmap(bm);
+        }else {
+            Iv_UploadedImg.setVisibility(View.GONE);
+        }
+
+    }
+
+    private void onCaptureImageResult(Intent data) {
+
+        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+
+        if (thumbnail != null) {
+            Iv_UploadedImg.setImageBitmap(thumbnail);
+            Iv_UploadedImg.setVisibility(View.VISIBLE);
+
+            Str_Base64Image = CommonMethods.getEncoded64ImageStringFromBitmap(thumbnail);
+        }else {
+            Iv_UploadedImg.setVisibility(View.GONE);
+        }
+
+
+
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+
+        File destination = new File(Environment.getExternalStorageDirectory(),
+                System.currentTimeMillis() + ".jpg");
+
+        FileOutputStream fo;
+        try {
+            destination.createNewFile();
+            fo = new FileOutputStream(destination);
+            fo.write(bytes.toByteArray());
+            fo.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_EXTERNAL_STORAGE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length <= 0 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(context, "Cannot write images to external storage", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+    public File getAlbumStorageDir(String albumName) {
+        // Get the directory for the user's public pictures directory.
+        File file = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), albumName);
+        if (!file.mkdirs()) {
+            Log.e("SignaturePad", "Directory not created");
+        }
+        return file;
+    }
+
+    public void saveBitmapToJPG(Bitmap bitmap, File photo) throws IOException {
+        Bitmap newBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(newBitmap);
+        canvas.drawColor(Color.WHITE);
+        canvas.drawBitmap(bitmap, 0, 0, null);
+        OutputStream stream = new FileOutputStream(photo);
+        newBitmap.compress(Bitmap.CompressFormat.JPEG, 80, stream);
+        stream.close();
+    }
+
+    public boolean addJpgSignatureToGallery(Bitmap signature) {
+        boolean result = false;
+        try {
+            File photo = new File(getAlbumStorageDir(".SignaturePad"), String.format("Signature_%d.jpg", System.currentTimeMillis()));
+            saveBitmapToJPG(signature, photo);
+
+            scanMediaFile(photo);
+            result = true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    private void scanMediaFile(File photo) {
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        Uri contentUri = Uri.fromFile(photo);
+        Iv_UploadedImg.setImageURI(contentUri);
+        Iv_UploadedImg.setVisibility(View.VISIBLE);
+        mediaScanIntent.setData(contentUri);
+        context.sendBroadcast(mediaScanIntent);
+    }
+
+
+
 
     private void API_GET_PROPOSAL_PDF_API() {
 
