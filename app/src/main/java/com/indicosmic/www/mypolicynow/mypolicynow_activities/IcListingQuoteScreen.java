@@ -77,17 +77,18 @@ public class IcListingQuoteScreen extends AppCompatActivity {
             tv_pa_cover_tenure;
     LinearLayout LinearPA_Cover,LinearIsClaimed,LinearPreviousPolicyData,LinearEdit;
 
-    String StrAgentId="",StrMpnData="",StrUserActionData="",StrImageUrl="",StrPlanTypeData="",selected_od_year,ProductTypeId="";
+    String StrAgentId="",StrMpnData="",StrUserActionData="",StrImageUrl="",StrPlanTypeData="",selected_od_year,ProductTypeId="",StrExShowRoomPrice="";
     String StrMake,StrModel,StrVariant,Str_vehicle_make_model_variant_name="",Str_vehicle_id="",Str_vehicle_make_id="",Str_vehicle_model_id="",Str_vehicle_variant_id="",
     Str_cc="",Str_fuel="",Str_rto="",Str_policy_package_type="",Str_policy_start_date="",Str_previous_ncb="",Str_policy_type="",Str_policy_end_date="",
     Str_current_ncb="",Str_policy_holder_type="",Str_claimed_in_past_year="",Str_plan_type="",Str_previous_policy_type="",Str_previous_policy_expiry_date="",
     Str_pa_cover_tenure="",Str_rto_id="",Str_have_pa_policy="",Str_product_type_id="",Str_vehicle_min_idv="",
             Str_vehicle_max_idv="",Str_total_vehicle_idv="";
+    boolean is_breakin;
     ProgressDialog myDialog;
     LinearLayout ll_parent_portfolio;
     Dialog DialogBreakUpDetail;
 
-    JSONObject  selected_addonObj=null;
+    //JSONObject  selected_addonObj=null;
     String error_message,vehicle_idv,available_od_discount,total_addon_premium,gross_premium,addon_button_html_message="";
     JSONObject vehicle_idv_yearObj,start_date_yearObj,end_date_yearObj,total_basic_od_yrObj,
             total_electrical_premiumObj,total_non_electrical_premiumObj,
@@ -105,7 +106,7 @@ public class IcListingQuoteScreen extends AppCompatActivity {
     public  String[] IcList;
 
     LinearLayout LayoutIDV,LayoutExtendIdv;
-    TextView Tv_ExShowroom,TV_MinIdv,TV_MaxIdv;
+    TextView BreakInTxt,Tv_ExShowroom,TV_MinIdv,TV_MaxIdv;
     ImageView iv_idv,iv_edit_idv;
     EditText EdtIdvValue;
     String StrIdvNewValue="";
@@ -146,6 +147,7 @@ public class IcListingQuoteScreen extends AppCompatActivity {
         StrUserActionData = UtilitySharedPreferences.getPrefs(getApplicationContext(),"UserActionData");
         String ic_list =  UtilitySharedPreferences.getPrefs(getApplicationContext(),"IcList");
         ProductTypeId = UtilitySharedPreferences.getPrefs(getApplicationContext(),"ProductTypeId");
+        StrExShowRoomPrice = UtilitySharedPreferences.getPrefs(getApplicationContext(),"ExShowroomPrice");
 
         IcList = ic_list.split("\\s*,\\s*");
 
@@ -177,7 +179,12 @@ public class IcListingQuoteScreen extends AppCompatActivity {
         tv_previous_policy_type = (TextView)findViewById(R.id.tv_previous_policy_type);
         tv_previous_policy_expiry_date = (TextView)findViewById(R.id.tv_previous_policy_expiry_date);
         tv_pa_cover_tenure = (TextView)findViewById(R.id.tv_pa_cover_tenure);
+        BreakInTxt =  (TextView)findViewById(R.id.BreakInTxt);
+        Tv_ExShowroom = (TextView)findViewById(R.id.Tv_ExShowroom);
 
+        if(StrExShowRoomPrice!=null && !StrExShowRoomPrice.equalsIgnoreCase("")){
+            Tv_ExShowroom.setText("Ex Showroom : \u20B9 "+StrExShowRoomPrice);
+        }
         LinearPA_Cover = (LinearLayout)findViewById(R.id.LinearPA_Cover);
         LinearIsClaimed = (LinearLayout)findViewById(R.id.LinearIsClaimed);
         LinearPreviousPolicyData= (LinearLayout)findViewById(R.id.LinearPreviousPolicyData);
@@ -291,10 +298,21 @@ public class IcListingQuoteScreen extends AppCompatActivity {
 
             Str_current_ncb = mpn_dataObj.getString("current_ncb");
 
-
+            is_breakin = mpn_dataObj.getBoolean("is_quote_breakin");
             Str_vehicle_min_idv = mpn_dataObj.getString("vehicle_min_idv");
             Str_vehicle_max_idv = mpn_dataObj.getString("vehicle_max_idv");
             Str_total_vehicle_idv = mpn_dataObj.getString("total_vehicle_idv");
+
+            if(Str_product_type_id.equalsIgnoreCase("2")){
+
+                BreakInTxt.setVisibility(View.GONE);
+            }else if(Str_product_type_id.equalsIgnoreCase("1")){
+                if(is_breakin){
+                    BreakInTxt.setVisibility(View.VISIBLE);
+                }else {
+                    BreakInTxt.setVisibility(View.GONE);
+                }
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -386,7 +404,6 @@ public class IcListingQuoteScreen extends AppCompatActivity {
         });
 
 
-        Tv_ExShowroom = (TextView)findViewById(R.id.Tv_ExShowroom);
         TV_MinIdv= (TextView) findViewById(R.id.TV_MinIdv);
         TV_MaxIdv= (TextView)findViewById(R.id.TV_MaxIdv);
         iv_edit_idv= (ImageView) findViewById(R.id.iv_edit_idv);
@@ -1168,7 +1185,9 @@ public class IcListingQuoteScreen extends AppCompatActivity {
 
     }
 
-    private void ShowPopUpAddOns(String ic_name,String ic_id) {
+    private void ShowPopUpAddOns(String strAddon_apiObject,String strSelectedAddOn_Obj, String ic_name,String ic_id) {
+
+        Log.d("selected_addonsObj",""+strSelectedAddOn_Obj);
 
         DialogAddOns = new Dialog(IcListingQuoteScreen.this);
         DialogAddOns.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -1192,72 +1211,102 @@ public class IcListingQuoteScreen extends AppCompatActivity {
 
         LinearLayout ll_parent_addons = (LinearLayout)DialogAddOns.findViewById(R.id.ll_parent_addons);
 
+        if(strAddon_apiObject!=null && !strAddon_apiObject.equalsIgnoreCase("")) {
+            try {
+                addon_apiObject = new JSONObject(strAddon_apiObject);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            if (addon_apiObject != null) {
+                Log.d("addon_apiObject", "" + addon_apiObject.toString());
 
+                Iterator keys = addon_apiObject.keys();
+                int k = 0;
+                while (keys.hasNext()) {
 
-        if(addon_apiObject!=null){
-            Log.d("addon_apiObject",""+addon_apiObject.toString());
+                    // Loop to get the dynamic key
+                    String currentDynamicKey = (String) keys.next();
 
-            Iterator keys = addon_apiObject.keys();
-            int k = 0;
-            while(keys.hasNext()) {
+                    Log.d("currentDynamicKey", "" + currentDynamicKey);
+                    // Get the value of the dynamic key
+                    try {
+                        JSONObject addObj = addon_apiObject.getJSONObject(String.valueOf(currentDynamicKey));
+                        String addon_id = addObj.getString("addon_id");
+                        String amount = addObj.getString("amount");
+                        String name = addObj.getString("name");
+                        String addon_description = addObj.getString("addon_description");
 
-                // Loop to get the dynamic key
-                String currentDynamicKey = (String) keys.next();
+                        CB_AddONs = new CheckBox(getApplicationContext());
+                        CB_AddONs.setText(addon_description);
+                        CB_AddONs.setHint(addObj.toString());
+                        CB_AddONs.setId(k);
 
-                Log.d("currentDynamicKey",""+currentDynamicKey);
-                // Get the value of the dynamic key
-                try {
-                    JSONObject addObj =  addon_apiObject.getJSONObject(String.valueOf(currentDynamicKey));
-                    String addon_id = addObj.getString("addon_id");
-                    String amount = addObj.getString("amount");
-                    String name = addObj.getString("name");
-                    String addon_description = addObj.getString("addon_description");
+                        try {
+                            selected_addonsObj = new JSONObject(strSelectedAddOn_Obj);
+                            Log.d("Selected AddoNs", "" + selected_addonsObj.toString());
 
-                    CB_AddONs = new CheckBox(getApplicationContext());
-                    CB_AddONs.setText(addon_description);
-                    CB_AddONs.setHint(addObj.toString());
-                    CB_AddONs.setId(k);
+                                Iterator keys1 = selected_addonsObj.keys();
+                                int m1 = 0;
+                                while (keys1.hasNext()) {
 
-                    try{
+                                    // Loop to get the dynamic key
+                                    String currentDynamicKey1 = (String) keys1.next();
 
-                        if(String.valueOf(selected_addonsObj).contains("addon_id")) {
-                            Log.d("Selected AddoNs",""+selected_addonsObj.toString());
+                                    Log.d("currentDynamicKey1", "" + currentDynamicKey1);
+                                    // Get the value of the dynamic key
 
-                            String selected_addon_id = selected_addonsObj.getString("addon_id");
-                            String selected_ic_id = selected_addonsObj.getString("ic_id");
-                            String selected_addon_description = selected_addonsObj.getString("addon_description");
+                                    if(currentDynamicKey1.equalsIgnoreCase("addons_sum") ||
+                                       currentDynamicKey1.equalsIgnoreCase("addons_sum_1year") ||
+                                       currentDynamicKey1.equalsIgnoreCase("addons_sum_2year") ||
+                                       currentDynamicKey1.equalsIgnoreCase("addons_sum_3year") ||
+                                       currentDynamicKey1.equalsIgnoreCase("addon_premium")) {
 
-                            if (selected_ic_id.equalsIgnoreCase(ic_id)) {
-                                Log.d("CB_AddONs.getText()", "" + CB_AddONs.getText().toString());
-                                if (CB_AddONs.getText().toString().equalsIgnoreCase(selected_addon_description)) {
-                                    CB_AddONs.setChecked(true);
+                                        m1++;
+                                    }else {
+                                        if(String.valueOf(selected_addonsObj).contains("addon_name")) {
+                                            JSONObject strselected_addonsObj = selected_addonsObj.getJSONObject(currentDynamicKey1);
+                                            String selected_addon_id = strselected_addonsObj.getString("addon_id");
+
+                                            String Cb_HintTxt = CB_AddONs.getHint().toString();
+
+                                            JSONObject hintObj = new JSONObject(Cb_HintTxt);
+                                            Log.d("hintObj", "" + hintObj);
+                                            if (hintObj.getString("addon_id").equalsIgnoreCase(selected_addon_id)) {
+                                                CB_AddONs.setChecked(true);
+                                            }
+                                            m1++;
+                                        }
+                                    }
                                 }
+                               /* //if (selected_addon_id.equalsIgnoreCase(addon_id)) {
+                                    Log.d("CB_AddONs.getText()", "" + CB_AddONs.getText().toString());
+                                    if (CB_AddONs.getText().toString().equalsIgnoreCase(selected_addon_description)) {
+                                        CB_AddONs.setChecked(true);
+                                    }
 
-                            }
+                                //}*/
 
-                        }else {
-                            CB_AddONs.setChecked(false);
+
+
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
 
 
-                    }catch (Exception e){
+                        ll_parent_addons.addView(CB_AddONs);
+
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
-
-                    ll_parent_addons.addView(CB_AddONs);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    k++;
                 }
 
-                k++;
+
             }
 
-
         }
-
-
        /* if(CB_AddONs!=null){
             CB_AddONs.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -1306,13 +1355,16 @@ public class IcListingQuoteScreen extends AppCompatActivity {
                             String AddOnData = Chk_AddOns.getHint().toString();
                             try {
                                 JSONObject addObj = new JSONObject(AddOnData);
-                                AddOnArray.put(addObj);
+
                                 selected_addonsObj = addObj;
+                                AddOnArray.put(selected_addonsObj);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
                         }
+
+                        Log.d("selectedAddons",""+selected_addonsObj);
 
                     }
                     API_UPDATE_QUOTE("addons",tv_ic_id.getText().toString());
@@ -1360,29 +1412,39 @@ public class IcListingQuoteScreen extends AppCompatActivity {
             if(AddOnArray!=null && AddOnArray.length()>0) {
                 try {
                     JSONObject mpnObj = new JSONObject(StrMpnData);
+                    JSONObject dep_obj = new JSONObject();
+                    dep_obj.put(Ic_Id, 1);
+                    Log.d("dep_obj",dep_obj.toString());
+                    JSONArray addonArray = new JSONArray();
+                    JSONArray addons_obj = new JSONArray();
+                    JSONObject list_obj = new JSONObject();
                     for (int k = 0; k < AddOnArray.length(); k++) {
 
                         JSONObject selected_addonObj = AddOnArray.getJSONObject(k);
                         String addon_id = selected_addonObj.getString("addon_id");
 
 
-                        JSONObject dep_obj = new JSONObject();
-                        dep_obj.put(Ic_Id, 1);
-                        Log.d("dep_obj",dep_obj.toString());
+                        //addons_obj = new JSONObject();
 
-
-                        JSONObject addons_obj = new JSONObject();
-                        JSONObject list_obj = new JSONObject();
+                        list_obj = new JSONObject();
                         list_obj.put(addon_id,selected_addonObj);
-                        addons_obj.put(Ic_Id, list_obj);
-                        Log.d("addons_obj",addons_obj.toString());
 
-                        mpnObj.put("dep",dep_obj);
-                        mpnObj.put("addons",addons_obj);
+                        addonArray.put(list_obj);
 
-                        StrMpnData = mpnObj.toString();
+                    }
 
-                        }
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put(Ic_Id, addonArray);
+
+                    addons_obj.put(jsonObject);
+                    Log.d("addons_obj",addons_obj.toString());
+
+                    //Log.d("addons",""+addonArray);
+                    mpnObj.put("dep",dep_obj);
+                    mpnObj.put("addons",addons_obj);
+
+                    StrMpnData = mpnObj.toString();
+
                     } catch(JSONException e){
                         e.printStackTrace();
                     }
@@ -1587,6 +1649,7 @@ public class IcListingQuoteScreen extends AppCompatActivity {
 
                                 addon_button_html_message = "ADDONS";
                             }else {
+                                addon_apiObject = null;
                                 addon_button_html_message = "NO ADDONS";
                             }
 
@@ -1609,6 +1672,14 @@ public class IcListingQuoteScreen extends AppCompatActivity {
                         row_ic_name.setText(ic_id_name);
 
                         TextView row_net_premium_amt = (TextView)rowView.findViewById(R.id.row_net_premium_amt);
+                        TextView row_addon_txt = (TextView)rowView.findViewById(R.id.row_addon_txt);
+                        if(addon_apiObject.toString()!=null && !addon_apiObject.toString().equalsIgnoreCase("")) {
+                            row_addon_txt.setText(addon_apiObject.toString());
+                        }else {
+                            row_addon_txt.setText("");
+                        }
+
+                        TextView row_selected_addon_txt = (TextView)rowView.findViewById(R.id.row_selected_addon_txt);
 
                         Button btn_add_on = (Button)rowView.findViewById(R.id.btn_add_on);
                         Button btn_breakup = (Button)rowView.findViewById(R.id.btn_breakup);
@@ -1643,10 +1714,11 @@ public class IcListingQuoteScreen extends AppCompatActivity {
                             row_addon_premium_amt.setText("\u20B9 "+total_addon_premium + " (excl. tax)");
                             if (selected_addon instanceof JSONObject) {
                                 // It's an array
-                                selected_addonObj = (JSONObject)selected_addon;
+                                selected_addonsObj = (JSONObject)selected_addon;
+                                row_selected_addon_txt.setText(selected_addonsObj.toString());
                                 LayoutSelectedAddon.setVisibility(View.VISIBLE);
-                                if(selected_addonObj!=null) {
-                                    Iterator keys = selected_addonObj.keys();
+                                if(selected_addonsObj!=null) {
+                                    Iterator keys = selected_addonsObj.keys();
                                     int k = 0;
                                     while (keys.hasNext()) {
 
@@ -1656,23 +1728,35 @@ public class IcListingQuoteScreen extends AppCompatActivity {
                                         Log.d("currentDynamicKey", "" + currentDynamicKey);
                                         // Get the value of the dynamic key
                                         try {
+                                                if(currentDynamicKey.equalsIgnoreCase("addons_sum") ||
+                                                    currentDynamicKey.equalsIgnoreCase("addons_sum_1year") ||
+                                                    currentDynamicKey.equalsIgnoreCase("addons_sum_2year") ||
+                                                    currentDynamicKey.equalsIgnoreCase("addons_sum_3year") ||
+                                                    currentDynamicKey.equalsIgnoreCase("addon_premium")) {
 
-                                            if(String.valueOf(selected_addonObj).contains("addon_name")) {
-                                                JSONObject selected_addonsObj = selected_addonObj.getJSONObject(String.valueOf(currentDynamicKey));
-                                                String addon_id = selected_addonsObj.getString("addon_id");
-                                                String name = selected_addonsObj.getString("addon_name");
-                                                LayoutInflater inflater1 = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                                                final View rowView1 = inflater1.inflate(R.layout.scheme_selected_addon_list, null);
-                                                rowView1.setPadding(10, 10, 10, 10);
+                                                    k++;
 
-                                                TextView tv_selected_add_on_name = (TextView) rowView1.findViewById(R.id.tv_selected_add_on_name);
-                                                tv_selected_add_on_name.setText(name);
+                                                }else {
+                                                    if(String.valueOf(selected_addonsObj).contains("addon_name")) {
+
+                                                        JSONObject strselected_addonsObj = selected_addonsObj.getJSONObject(currentDynamicKey);
+                                                        String addon_id = strselected_addonsObj.getString("addon_id");
+                                                        String name = strselected_addonsObj.getString("addon_name");
+                                                        LayoutInflater inflater1 = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                                        final View rowView1 = inflater1.inflate(R.layout.scheme_selected_addon_list, null);
+                                                        rowView1.setPadding(10, 10, 10, 10);
+
+                                                        TextView tv_selected_add_on_name = (TextView) rowView1.findViewById(R.id.tv_selected_add_on_name);
+                                                        tv_selected_add_on_name.setText(name);
 
 
-                                                LayoutSelectedAddon.addView(rowView1);
-                                            }else {
-                                                LayoutSelectedAddon.setVisibility(View.GONE);
-                                            }
+                                                        LayoutSelectedAddon.addView(rowView1);
+                                                    }else {
+                                                        LayoutSelectedAddon.setVisibility(View.GONE);
+                                                    }
+                                                    k++;
+                                                }
+
 
                                         } catch (Exception e) {
                                             e.printStackTrace();
@@ -1682,6 +1766,9 @@ public class IcListingQuoteScreen extends AppCompatActivity {
 
                             }else {
                                 LayoutSelectedAddon.setVisibility(View.GONE);
+                                selected_addonsObj = null;
+                                row_selected_addon_txt.setText("");
+
                             }
 
 
@@ -1693,7 +1780,7 @@ public class IcListingQuoteScreen extends AppCompatActivity {
                                         if (btn_add_on.getText().toString().equalsIgnoreCase("No Addons")) {
                                             CommonMethods.DisplayToastInfo(getApplicationContext(), "No AddOns Available");
                                         }else if (btn_add_on.getText().toString().equalsIgnoreCase("ADDONS")) {
-                                            ShowPopUpAddOns(row_ic_name.getText().toString(),row_ic_id.getText().toString());
+                                            ShowPopUpAddOns(row_addon_txt.getText().toString(),row_selected_addon_txt.getText().toString(),row_ic_name.getText().toString(),row_ic_id.getText().toString());
                                         }
                                     }
                                 }
@@ -2076,7 +2163,7 @@ public class IcListingQuoteScreen extends AppCompatActivity {
 
                     }else {
 
-                        if(selected_od_year!=null && !selected_od_year.equalsIgnoreCase("") && selected_od_year.equalsIgnoreCase("5")) {
+                        if(selected_od_year!=null && !selected_od_year.equalsIgnoreCase("") && (selected_od_year.equalsIgnoreCase("5")|| selected_od_year.equalsIgnoreCase("3"))) {
                             LayoutOd_Renew.setVisibility(View.GONE);
                             Wb_OD_BreakUp.setVisibility(View.VISIBLE);
                             vehicle_idv_yearObj = basic_od_htmlObj.getJSONObject("vehicle_idv_year");
@@ -2146,7 +2233,7 @@ public class IcListingQuoteScreen extends AppCompatActivity {
 
 
                     }else {
-                        if(selected_od_year!=null && !selected_od_year.equalsIgnoreCase("") && selected_od_year.equalsIgnoreCase("5")) {
+                        if(selected_od_year!=null && !selected_od_year.equalsIgnoreCase("") && (selected_od_year.equalsIgnoreCase("5")|| selected_od_year.equalsIgnoreCase("3"))) {
                             LayoutDeductibles_Renew.setVisibility(View.GONE);
                             Wb_Deductibles.setVisibility(View.VISIBLE);
                             deductibles_year_wiseObj = antitheft.getJSONObject("deductibles_year_wise");
@@ -2213,7 +2300,7 @@ public class IcListingQuoteScreen extends AppCompatActivity {
                                 tv_total_net_addons_premium.setText(net_addons_premium);
 
                             }else {
-                                if(selected_od_year!=null && !selected_od_year.equalsIgnoreCase("") && selected_od_year.equalsIgnoreCase("5")) {
+                                if(selected_od_year!=null && !selected_od_year.equalsIgnoreCase("") && (selected_od_year.equalsIgnoreCase("5")|| selected_od_year.equalsIgnoreCase("3"))) {
                                     LayoutAddOns_Renew.setVisibility(View.GONE);
                                     Wb_AddOns_BreakUp.setVisibility(View.VISIBLE);
                                     Addon_headerObj = addonObj.getJSONObject("Addon_header");

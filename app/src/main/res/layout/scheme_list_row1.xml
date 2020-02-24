@@ -47,7 +47,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_margin="2dp"
                 android:layout_gravity="center"
@@ -57,7 +57,7 @@
                 <LinearLayout
                     android:id="@+id/Linear_row_Premium"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_margin="5dp"
                     android:layout_gravity="center"
@@ -91,12 +91,45 @@
                             android:gravity="center|start"
                             android:textColor="@color/black"/>
 
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:id="@+id/row_addon_txt"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:textColorHint="@color/grey"
+                        android:enabled="false"
+                        android:visibility="gone"
+                        android:layout_gravity="center|start"
+                        android:fontFamily="@font/calibri_regular"
+                        android:gravity="center|start"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:id="@+id/row_selected_addon_txt"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:textColorHint="@color/grey"
+                        android:enabled="false"
+                        android:visibility="gone"
+                        android:layout_gravity="center|start"
+                        android:fontFamily="@font/calibri_regular"
+                        android:gravity="center|start"
+                        android:textColor="@color/black"/>
+
                     <LinearLayout
                         android:id="@+id/LayoutSelectedAddon"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:visibility="gone"
-                        android:orientation="vertical"/>
+                        android:orientation="vertical">
+
+
+
+
+                    </LinearLayout>
 
 
 

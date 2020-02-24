@@ -550,10 +550,6 @@ public class ReviewDetailsFragment extends Fragment implements BlockingStep {
             }
         });
 
-
-
-
-
     }
 
     private void API_UPLOAD_PREVIOUS_YEAR_POLICY(){

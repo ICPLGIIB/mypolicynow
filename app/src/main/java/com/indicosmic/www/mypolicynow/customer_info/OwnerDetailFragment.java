@@ -207,8 +207,6 @@ public class OwnerDetailFragment extends Fragment implements BlockingStep, View.
         }
     }
 
-
-
     private void setDateTimeField() {
 
         edt_Dob.setOnClickListener(this);
@@ -379,8 +377,6 @@ public class OwnerDetailFragment extends Fragment implements BlockingStep, View.
                     Edt_GstInNumber.requestFocus();
                     result = false;
                 }
-
-
 
             }
 

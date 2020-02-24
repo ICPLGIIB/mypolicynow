@@ -216,7 +216,7 @@ public class MyPolicyNowDashboard extends AppCompatActivity implements Navigatio
 
                 myDialog.show();
 
-                String URL = RestClient.ROOT_URL2+"GetPassword";
+                String URL = RestClient.ROOT_URL2+"getpassword";
                 ConnectionDetector cd = new ConnectionDetector(getApplicationContext());
                 boolean isInternetPresent = cd.isConnectingToInternet();
                 if (isInternetPresent) {

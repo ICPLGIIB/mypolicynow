@@ -31,23 +31,27 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:weightSum="10">
+                android:weightSum="15">
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:id="@+id/LayoutCar"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:layout_margin="5dp"
                     android:padding="5dp"
-                    android:visibility="gone"
+                    android:background="@drawable/form_bg_edittext_bg"
+
+                    android:layout_weight="5"
                     android:orientation="vertical">
                     <ImageView
                         android:id="@+id/iv_car"
                         android:layout_width="80sp"
                         android:layout_height="80sp"
-
+                        android:tint="@color/colorPrimary"
                         android:src="@drawable/car"/>
                     <TextView
+                        android:id="@+id/til_car_insurance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Car \nInsurance"
@@ -59,13 +63,15 @@
 
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:id="@+id/LayoutBike"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:layout_margin="5dp"
                     android:padding="5dp"
                     android:layout_weight="5"
+                    android:background="@drawable/form_bg_edittext_bg"
                     android:orientation="vertical">
 
                 <ImageView
@@ -73,9 +79,12 @@
                     android:layout_width="80sp"
                     android:layout_height="80sp"
                     android:layout_gravity="center"
+                    android:tint="@color/colorPrimary"
                     android:src="@drawable/bike"/>
 
                     <TextView
+                        android:id="@+id/til_bike_insurance"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Bike \nInsurance"
@@ -89,13 +98,15 @@
 
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:layout_margin="5dp"
-                    android:visibility="gone"
+                    android:visibility="invisible"
                     android:padding="5dp"
+                    android:layout_weight="5"
+                    android:background="@drawable/form_bg_edittext_bg"
                     android:orientation="vertical">
                 <ImageView
                     android:id="@+id/iv_commercial"
@@ -103,6 +114,8 @@
                     android:layout_height="80sp"
                     android:src="@drawable/commercial_new"/>
                     <TextView
+                        android:id="@+id/til_commercial_insurance"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Commercial \nInsurance"
@@ -970,6 +983,21 @@
                         android:buttonTint="@color/black"
                         style="@android:style/Widget.CompoundButton.CheckBox"
                         android:minHeight="30sp"
+                        android:layout_weight="5"/>
+
+                    <RadioButton
+                        android:id="@+id/Rb_3OD3TP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="3 Yrs OD &amp; 3 Yrs TP"
+                        android:textColor="@color/black"
+                        android:background="@drawable/form_bg_edittext_bg"
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:buttonTint="@color/black"
+                        style="@android:style/Widget.CompoundButton.CheckBox"
+                        android:minHeight="30sp"
+                        android:visibility="gone"
                         android:layout_weight="5"/>
 
                 </RadioGroup>

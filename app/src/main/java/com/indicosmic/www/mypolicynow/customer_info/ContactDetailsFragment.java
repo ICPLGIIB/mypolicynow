@@ -70,7 +70,6 @@ public class ContactDetailsFragment extends Fragment implements BlockingStep {
 
         init();
 
-
         return rootView;
 
     }
