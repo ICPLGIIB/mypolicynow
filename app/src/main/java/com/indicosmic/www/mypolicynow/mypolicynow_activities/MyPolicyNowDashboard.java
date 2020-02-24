@@ -68,7 +68,7 @@ public class MyPolicyNowDashboard extends AppCompatActivity implements Navigatio
         StrUserId = UtilitySharedPreferences.getPrefs(getApplicationContext(),"UserId");
         StrEmail = UtilitySharedPreferences.getPrefs(getApplicationContext(),"UserEmail");
         StrUniqueId = UtilitySharedPreferences.getPrefs(getApplicationContext(),"UniqueUserId");
-
+        StrMobile = "8169972611";
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -148,9 +148,6 @@ public class MyPolicyNowDashboard extends AppCompatActivity implements Navigatio
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
-
-
 
 
         myDialog = new ProgressDialog(MyPolicyNowDashboard.this);
