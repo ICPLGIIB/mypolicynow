@@ -71,11 +71,7 @@ public class LoginActivity extends AppCompatActivity {
     private void init() {
 
         iv_logo = (ImageView) findViewById(R.id.iv_logo);
-        //Glide.with(this).load(R.drawable.logo_spinner).asGif().into(iv_logo);
-        /*Glide.with(this)
-                .load("https://www.mypolicynow.com/assets/images/logo_spinner.gif")
-                .placeholder(R.drawable.logo_spinner)
-                .into(iv_logo);*/
+
 
         mTelephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
