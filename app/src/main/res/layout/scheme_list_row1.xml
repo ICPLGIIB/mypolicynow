@@ -43,6 +43,9 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:enabled="false"
+                android:layout_gravity="center"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
                 android:visibility="gone"/>
 
             <LinearLayout

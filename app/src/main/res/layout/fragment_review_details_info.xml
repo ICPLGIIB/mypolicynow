@@ -784,7 +784,7 @@
                                     android:textColor="@color/colorAccent"/>
 
                                 <TextView
-                                    android:id="@+id/tv_EngineNo"
+                                    android:id="@+id/tv_EngNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center|start"
@@ -793,7 +793,6 @@
                                     android:minWidth="80sp"
                                     android:padding="3dp"
                                     android:layout_marginStart="5dp"
-
                                     android:textColor="@color/orange"
                                     android:textSize="12sp" />
 
@@ -824,7 +823,7 @@
                                     android:textColor="@color/colorAccent"/>
 
                                 <TextView
-                                    android:id="@+id/tv_ChassisNo"
+                                    android:id="@+id/tv_ChasNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center|start"

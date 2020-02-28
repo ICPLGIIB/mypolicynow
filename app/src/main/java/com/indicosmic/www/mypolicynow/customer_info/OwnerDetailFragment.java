@@ -33,6 +33,7 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Objects;
 
 public class OwnerDetailFragment extends Fragment implements BlockingStep, View.OnClickListener, AdapterView.OnItemSelectedListener {
 
@@ -112,77 +113,77 @@ public class OwnerDetailFragment extends Fragment implements BlockingStep, View.
 
         try {
             JSONObject mpnObj = new JSONObject(StrMpnData);
-            JSONObject customer_quoteObj = mpnObj.getJSONObject("customer_quote");
-            if(customer_quoteObj!=null && !customer_quoteObj.toString().contains("vehicle_owner")){
+            if(StrMpnData.contains("customer_quote")) {
+                JSONObject customer_quoteObj = mpnObj.getJSONObject("customer_quote");
+                if (customer_quoteObj != null && !customer_quoteObj.toString().contains("vehicle_owner")) {
 
-                JSONObject vehicle_ownerObj = customer_quoteObj.getJSONObject("vehicle_owner");
-                StrEmailAddress  = vehicle_ownerObj.getString("email");
-                StrMobileNo = vehicle_ownerObj.getString("mobile_no");
-                StrSelectedSalutation = vehicle_ownerObj.getString("salutaion");
-                StrFirstName = vehicle_ownerObj.getString("first_name");
-                StrMiddleName = vehicle_ownerObj.getString("middle_name");
-                StrLastName = vehicle_ownerObj.getString("last_name");
-                Date_of_born = vehicle_ownerObj.getString("dob");
-                StrGstInNumber = vehicle_ownerObj.getString("individual_gst_no");
-                StrPan = vehicle_ownerObj.getString("pancard");
-                StrAadharCard = vehicle_ownerObj.getString("aadharcard");
-                StrSelectedMaritalStatus = vehicle_ownerObj.getString("marital_status");
-                StrSelectedGender=  vehicle_ownerObj.getString("gender");
-
-
-
-                if(StrFirstName!=null && !StrFirstName.equalsIgnoreCase("") && !StrFirstName.equalsIgnoreCase("null")) {
-                    edt_First_Name.setText(StrFirstName);
-                    if (StrEmailAddress != null && !StrEmailAddress.equalsIgnoreCase("") && !StrEmailAddress.equalsIgnoreCase("null")) {
-                        edt_Email_Addresss.setText(StrEmailAddress);
-                    }
-
-                    if (StrMobileNo != null && !StrMobileNo.equalsIgnoreCase("") && !StrMobileNo.equalsIgnoreCase("null")) {
-                        edt_Mobile_Number.setText(StrMobileNo);
-                    }
-
-                    if (StrSelectedSalutation != null && !StrSelectedSalutation.equalsIgnoreCase("") && !StrSelectedSalutation.equalsIgnoreCase("null")) {
-                        int i = getIndex(Spn_Salutation, StrSelectedSalutation);
-                        Spn_Salutation.setSelection(i);
-                    }
-
-                    if (StrMiddleName != null && !StrMiddleName.equalsIgnoreCase("") && !StrMiddleName.equalsIgnoreCase("null")) {
-                        edt_Middle_Name.setText(StrMiddleName);
-                    }
-
-                    if (StrLastName != null && !StrLastName.equalsIgnoreCase("") && !StrLastName.equalsIgnoreCase("null")) {
-                        edt_Last_Name.setText(StrLastName);
-                    }
-
-                    if (Date_of_born != null && !Date_of_born.equalsIgnoreCase("") && !Date_of_born.equalsIgnoreCase("null")) {
-                        edt_Dob.setText(Date_of_born);
-                    }
-
-                    if (StrSelectedGender != null && !StrSelectedGender.equalsIgnoreCase("") && !StrSelectedGender.equalsIgnoreCase("null")) {
-                        int i = getIndex(Spn_Gender, StrSelectedGender);
-                        Spn_Gender.setSelection(i);
-                    }
+                    JSONObject vehicle_ownerObj = customer_quoteObj.getJSONObject("vehicle_owner");
+                    StrEmailAddress = vehicle_ownerObj.getString("email");
+                    StrMobileNo = vehicle_ownerObj.getString("mobile_no");
+                    StrSelectedSalutation = vehicle_ownerObj.getString("salutaion");
+                    StrFirstName = vehicle_ownerObj.getString("first_name");
+                    StrMiddleName = vehicle_ownerObj.getString("middle_name");
+                    StrLastName = vehicle_ownerObj.getString("last_name");
+                    Date_of_born = vehicle_ownerObj.getString("dob");
+                    StrGstInNumber = vehicle_ownerObj.getString("individual_gst_no");
+                    StrPan = vehicle_ownerObj.getString("pancard");
+                    StrAadharCard = vehicle_ownerObj.getString("aadharcard");
+                    StrSelectedMaritalStatus = vehicle_ownerObj.getString("marital_status");
+                    StrSelectedGender = vehicle_ownerObj.getString("gender");
 
 
-                    if (StrSelectedMaritalStatus != null && !StrSelectedMaritalStatus.equalsIgnoreCase("") && !StrSelectedMaritalStatus.equalsIgnoreCase("null")) {
-                        int i = getIndex(Spn_MaritalStatus, StrSelectedMaritalStatus);
-                        Spn_MaritalStatus.setSelection(i);
-                    }
+                    if (StrFirstName != null && !StrFirstName.equalsIgnoreCase("") && !StrFirstName.equalsIgnoreCase("null")) {
+                        edt_First_Name.setText(StrFirstName);
+                        if (StrEmailAddress != null && !StrEmailAddress.equalsIgnoreCase("") && !StrEmailAddress.equalsIgnoreCase("null")) {
+                            edt_Email_Addresss.setText(StrEmailAddress);
+                        }
 
-                    if (StrPan != null && !StrPan.equalsIgnoreCase("") && !StrPan.equalsIgnoreCase("null")) {
-                        edt_Pan_Card.setText(StrPan);
-                    }
+                        if (StrMobileNo != null && !StrMobileNo.equalsIgnoreCase("") && !StrMobileNo.equalsIgnoreCase("null")) {
+                            edt_Mobile_Number.setText(StrMobileNo);
+                        }
 
-                    if (StrAadharCard != null && !StrAadharCard.equalsIgnoreCase("") && !StrAadharCard.equalsIgnoreCase("null")) {
-                        edt_Aadhar_Card.setText(StrAadharCard);
-                    }
+                        if (StrSelectedSalutation != null && !StrSelectedSalutation.equalsIgnoreCase("") && !StrSelectedSalutation.equalsIgnoreCase("null")) {
+                            int i = getIndex(Spn_Salutation, StrSelectedSalutation);
+                            Spn_Salutation.setSelection(i);
+                        }
 
-                    if (StrGstInNumber != null && !StrGstInNumber.equalsIgnoreCase("") && !StrGstInNumber.equalsIgnoreCase("null")) {
-                        Edt_GstInNumber.setText(StrGstInNumber);
+                        if (StrMiddleName != null && !StrMiddleName.equalsIgnoreCase("") && !StrMiddleName.equalsIgnoreCase("null")) {
+                            edt_Middle_Name.setText(StrMiddleName);
+                        }
+
+                        if (StrLastName != null && !StrLastName.equalsIgnoreCase("") && !StrLastName.equalsIgnoreCase("null")) {
+                            edt_Last_Name.setText(StrLastName);
+                        }
+
+                        if (Date_of_born != null && !Date_of_born.equalsIgnoreCase("") && !Date_of_born.equalsIgnoreCase("null")) {
+                            edt_Dob.setText(Date_of_born);
+                        }
+
+                        if (StrSelectedGender != null && !StrSelectedGender.equalsIgnoreCase("") && !StrSelectedGender.equalsIgnoreCase("null")) {
+                            int i = getIndex(Spn_Gender, StrSelectedGender);
+                            Spn_Gender.setSelection(i);
+                        }
+
+
+                        if (StrSelectedMaritalStatus != null && !StrSelectedMaritalStatus.equalsIgnoreCase("") && !StrSelectedMaritalStatus.equalsIgnoreCase("null")) {
+                            int i = getIndex(Spn_MaritalStatus, StrSelectedMaritalStatus);
+                            Spn_MaritalStatus.setSelection(i);
+                        }
+
+                        if (StrPan != null && !StrPan.equalsIgnoreCase("") && !StrPan.equalsIgnoreCase("null")) {
+                            edt_Pan_Card.setText(StrPan);
+                        }
+
+                        if (StrAadharCard != null && !StrAadharCard.equalsIgnoreCase("") && !StrAadharCard.equalsIgnoreCase("null")) {
+                            edt_Aadhar_Card.setText(StrAadharCard);
+                        }
+
+                        if (StrGstInNumber != null && !StrGstInNumber.equalsIgnoreCase("") && !StrGstInNumber.equalsIgnoreCase("null")) {
+                            Edt_GstInNumber.setText(StrGstInNumber);
+                        }
                     }
                 }
             }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -212,6 +213,8 @@ public class OwnerDetailFragment extends Fragment implements BlockingStep, View.
         edt_Dob.setOnClickListener(this);
 
         Calendar newCalendar = Calendar.getInstance();
+        newCalendar.add(Calendar.YEAR, -18);
+
 
         dobDatePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
 
@@ -259,8 +262,10 @@ public class OwnerDetailFragment extends Fragment implements BlockingStep, View.
     public void onNextClicked(StepperLayout.OnNextClickedCallback callback) {
         mCallback = callback;
         if (IsValidFields()) {
-            InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(Edt_GstInNumber.getWindowToken(), 0);
+            InputMethodManager imm = (InputMethodManager) Objects.requireNonNull(getContext()).getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(Edt_GstInNumber.getWindowToken(), 0);
+            }
 
             StrEmailAddress = edt_Email_Addresss.getText().toString();
             StrMobileNo = edt_Mobile_Number.getText().toString();

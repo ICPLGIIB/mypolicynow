@@ -37,6 +37,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 /**
@@ -124,8 +125,13 @@ public class NomineeDetailsFragment extends Fragment implements BlockingStep,Ada
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(charSequence.toString().length()==2){
-                    String nomineeAge = charSequence.toString();
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(editable.toString().length()>=1){
+                    String nomineeAge = editable.toString();
                     Integer nominee_age = Integer.valueOf(nomineeAge);
                     if(nominee_age < 18){
                         LayoutAppointeeDetails.setVisibility(View.VISIBLE);
@@ -133,14 +139,42 @@ public class NomineeDetailsFragment extends Fragment implements BlockingStep,Ada
                         LayoutAppointeeDetails.setVisibility(View.GONE);
                     }
 
+                }else if(editable.toString().length()==0) {
+                    LayoutAppointeeDetails.setVisibility(View.GONE);
                 }
+            }
+        });
+
+
+        edt_AppointeeAge.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
+                if(editable.toString().length()>=1){
+                    String appointeeAge = editable.toString();
+                    Integer appointee_age = Integer.valueOf(appointeeAge);
+                    if(appointee_age < 18){
+                        edt_AppointeeAge.setError("Appointee Age cannot be less than 18 years.");
+                    }else {
+                        edt_AppointeeAge.setError(null);
 
+                    }
+
+                }else if(editable.toString().length()==0) {
+                    edt_AppointeeAge.setError(null);
+                }
             }
         });
+
 
         Spn_NomineeSalutation.setOnItemSelectedListener(this);
         Spn_NomineeRelationship.setOnItemSelectedListener(this);
@@ -166,96 +200,96 @@ public class NomineeDetailsFragment extends Fragment implements BlockingStep,Ada
 
         try {
             JSONObject mpnObj = new JSONObject(StrMpnData);
-            JSONObject customer_quoteObj = mpnObj.getJSONObject("customer_quote");
-            if(customer_quoteObj!=null && !customer_quoteObj.toString().contains("nominee_details")){
+            if(StrMpnData.contains("customer_quote")) {
+                JSONObject customer_quoteObj = mpnObj.getJSONObject("customer_quote");
+                if (customer_quoteObj != null && !customer_quoteObj.toString().contains("nominee_details")) {
 
-                JSONObject nominee_detailsObj = customer_quoteObj.getJSONObject("nominee_details");
+                    JSONObject nominee_detailsObj = customer_quoteObj.getJSONObject("nominee_details");
 
-                Str_NomineeSalutation = nominee_detailsObj.getString("nominee_salutaion");
-                Str_NomineeFirstName = nominee_detailsObj.getString("nominee_first_name");
-                Str_NomineeMiddleName = nominee_detailsObj.getString("nominee_middle_name");
-                Str_NomineeLastName = nominee_detailsObj.getString("nominee_last_name");
-                Str_NomineeRelationship = nominee_detailsObj.getString("nominee_relationship");
-                Str_NomineeAge = nominee_detailsObj.getString("nominee_age");
-
-
-
-                if(customer_quoteObj!=null && !customer_quoteObj.toString().contains("appointee_details")) {
-                    LayoutAppointeeDetails.setVisibility(View.VISIBLE);
-                    JSONObject appointee_detailsObj = customer_quoteObj.getJSONObject("appointee_details");
-
-                    Str_AppointeeSalutation = appointee_detailsObj.getString("appointee_salutaion");
-                    Str_AppointeeFirstName = appointee_detailsObj.getString("appointee_first_name");
-                    Str_AppointeeMiddleName = appointee_detailsObj.getString("appointee_middle_name");
-                    Str_AppointeeLastName = appointee_detailsObj.getString("appointee_last_name");
-                    Str_AppointeeRelationship = appointee_detailsObj.getString("appointee_relationship");
-                    Str_AppointeeAge = appointee_detailsObj.getString("appointee_age");
+                    Str_NomineeSalutation = nominee_detailsObj.getString("nominee_salutaion");
+                    Str_NomineeFirstName = nominee_detailsObj.getString("nominee_first_name");
+                    Str_NomineeMiddleName = nominee_detailsObj.getString("nominee_middle_name");
+                    Str_NomineeLastName = nominee_detailsObj.getString("nominee_last_name");
+                    Str_NomineeRelationship = nominee_detailsObj.getString("nominee_relationship");
+                    Str_NomineeAge = nominee_detailsObj.getString("nominee_age");
 
 
-                }
-
-                if(Str_NomineeSalutation!=null && !Str_NomineeSalutation.equalsIgnoreCase("") && !Str_NomineeSalutation.equalsIgnoreCase("null")){
-                    int i = getIndex(Spn_NomineeSalutation,Str_NomineeSalutation);
-                    Spn_NomineeSalutation.setSelection(i);
-                }
-
-                if(Str_NomineeFirstName!=null && !Str_NomineeFirstName.equalsIgnoreCase("") && !Str_NomineeFirstName.equalsIgnoreCase("null")){
-                    edt_NomineeFirstName.setText(Str_NomineeFirstName);
-                }
-
-                if(Str_NomineeMiddleName!=null && !Str_NomineeMiddleName.equalsIgnoreCase("") && !Str_NomineeMiddleName.equalsIgnoreCase("null")){
-                    edt_NomineeMiddleName.setText(Str_NomineeMiddleName);
-                }
-
-                if(Str_NomineeLastName!=null && !Str_NomineeLastName.equalsIgnoreCase("") && !Str_NomineeLastName.equalsIgnoreCase("null")){
-                    edt_NomineeLastName.setText(Str_NomineeLastName);
-                }
-
-                if(Str_NomineeRelationship!=null && !Str_NomineeRelationship.equalsIgnoreCase("") && !Str_NomineeRelationship.equalsIgnoreCase("null")){
-                    int i = getIndex(Spn_NomineeRelationship,Str_NomineeRelationship);
-                    Spn_NomineeRelationship.setSelection(i);
-                }
-                if(Str_NomineeAge!=null && !Str_NomineeAge.equalsIgnoreCase("") && !Str_NomineeAge.equalsIgnoreCase("null")){
-                    edt_NomineeAge.setText(Str_NomineeAge);
-                    int nominee_age = Integer.valueOf(Str_NomineeAge);
-                    if(nominee_age<18){
+                    if (customer_quoteObj != null && !customer_quoteObj.toString().contains("appointee_details")) {
                         LayoutAppointeeDetails.setVisibility(View.VISIBLE);
-                    }else {
-                        LayoutAppointeeDetails.setVisibility(View.GONE);
-                    }
-                }
+                        JSONObject appointee_detailsObj = customer_quoteObj.getJSONObject("appointee_details");
 
-                if(LayoutAppointeeDetails.getVisibility()==View.VISIBLE){
+                        Str_AppointeeSalutation = appointee_detailsObj.getString("appointee_salutaion");
+                        Str_AppointeeFirstName = appointee_detailsObj.getString("appointee_first_name");
+                        Str_AppointeeMiddleName = appointee_detailsObj.getString("appointee_middle_name");
+                        Str_AppointeeLastName = appointee_detailsObj.getString("appointee_last_name");
+                        Str_AppointeeRelationship = appointee_detailsObj.getString("appointee_relationship");
+                        Str_AppointeeAge = appointee_detailsObj.getString("appointee_age");
 
-                    if(Str_AppointeeSalutation!=null && !Str_AppointeeSalutation.equalsIgnoreCase("") && !Str_AppointeeSalutation.equalsIgnoreCase("null")){
-                        int i = getIndex(Spn_AppointeeSalutation,Str_AppointeeSalutation);
-                        Spn_AppointeeSalutation.setSelection(i);
-                    }
-
-                    if(Str_AppointeeFirstName!=null && !Str_AppointeeFirstName.equalsIgnoreCase("") && !Str_AppointeeFirstName.equalsIgnoreCase("null")){
-                        edt_AppointeeFirstName.setText(Str_AppointeeFirstName);
-                    }
-
-                    if(Str_AppointeeMiddleName!=null && !Str_AppointeeMiddleName.equalsIgnoreCase("") && !Str_AppointeeMiddleName.equalsIgnoreCase("null")){
-                        edt_AppointeeMiddleName.setText(Str_AppointeeMiddleName);
-                    }
-
-                    if(Str_AppointeeLastName!=null && !Str_AppointeeLastName.equalsIgnoreCase("") && !Str_AppointeeLastName.equalsIgnoreCase("null")){
-                        edt_AppointeeLastName.setText(Str_AppointeeLastName);
-                    }
-
-                    if(Str_AppointeeRelationship!=null && !Str_AppointeeRelationship.equalsIgnoreCase("") && !Str_AppointeeRelationship.equalsIgnoreCase("null")){
-                        int i = getIndex(Spn_AppointeeRelationship,Str_AppointeeRelationship);
-                        Spn_AppointeeRelationship.setSelection(i);
-                    }
-                    if(Str_AppointeeAge!=null && !Str_AppointeeAge.equalsIgnoreCase("") && !Str_AppointeeAge.equalsIgnoreCase("null")){
-                        edt_AppointeeAge.setText(Str_AppointeeAge);
 
                     }
 
+                    if (Str_NomineeSalutation != null && !Str_NomineeSalutation.equalsIgnoreCase("") && !Str_NomineeSalutation.equalsIgnoreCase("null")) {
+                        int i = getIndex(Spn_NomineeSalutation, Str_NomineeSalutation);
+                        Spn_NomineeSalutation.setSelection(i);
+                    }
+
+                    if (Str_NomineeFirstName != null && !Str_NomineeFirstName.equalsIgnoreCase("") && !Str_NomineeFirstName.equalsIgnoreCase("null")) {
+                        edt_NomineeFirstName.setText(Str_NomineeFirstName);
+                    }
+
+                    if (Str_NomineeMiddleName != null && !Str_NomineeMiddleName.equalsIgnoreCase("") && !Str_NomineeMiddleName.equalsIgnoreCase("null")) {
+                        edt_NomineeMiddleName.setText(Str_NomineeMiddleName);
+                    }
+
+                    if (Str_NomineeLastName != null && !Str_NomineeLastName.equalsIgnoreCase("") && !Str_NomineeLastName.equalsIgnoreCase("null")) {
+                        edt_NomineeLastName.setText(Str_NomineeLastName);
+                    }
+
+                    if (Str_NomineeRelationship != null && !Str_NomineeRelationship.equalsIgnoreCase("") && !Str_NomineeRelationship.equalsIgnoreCase("null")) {
+                        int i = getIndex(Spn_NomineeRelationship, Str_NomineeRelationship);
+                        Spn_NomineeRelationship.setSelection(i);
+                    }
+                    if (Str_NomineeAge != null && !Str_NomineeAge.equalsIgnoreCase("") && !Str_NomineeAge.equalsIgnoreCase("null")) {
+                        edt_NomineeAge.setText(Str_NomineeAge);
+                        int nominee_age = Integer.valueOf(Str_NomineeAge);
+                        if (nominee_age < 18) {
+                            LayoutAppointeeDetails.setVisibility(View.VISIBLE);
+                        } else {
+                            LayoutAppointeeDetails.setVisibility(View.GONE);
+                        }
+                    }
+
+                    if (LayoutAppointeeDetails.getVisibility() == View.VISIBLE) {
+
+                        if (Str_AppointeeSalutation != null && !Str_AppointeeSalutation.equalsIgnoreCase("") && !Str_AppointeeSalutation.equalsIgnoreCase("null")) {
+                            int i = getIndex(Spn_AppointeeSalutation, Str_AppointeeSalutation);
+                            Spn_AppointeeSalutation.setSelection(i);
+                        }
+
+                        if (Str_AppointeeFirstName != null && !Str_AppointeeFirstName.equalsIgnoreCase("") && !Str_AppointeeFirstName.equalsIgnoreCase("null")) {
+                            edt_AppointeeFirstName.setText(Str_AppointeeFirstName);
+                        }
+
+                        if (Str_AppointeeMiddleName != null && !Str_AppointeeMiddleName.equalsIgnoreCase("") && !Str_AppointeeMiddleName.equalsIgnoreCase("null")) {
+                            edt_AppointeeMiddleName.setText(Str_AppointeeMiddleName);
+                        }
+
+                        if (Str_AppointeeLastName != null && !Str_AppointeeLastName.equalsIgnoreCase("") && !Str_AppointeeLastName.equalsIgnoreCase("null")) {
+                            edt_AppointeeLastName.setText(Str_AppointeeLastName);
+                        }
+
+                        if (Str_AppointeeRelationship != null && !Str_AppointeeRelationship.equalsIgnoreCase("") && !Str_AppointeeRelationship.equalsIgnoreCase("null")) {
+                            int i = getIndex(Spn_AppointeeRelationship, Str_AppointeeRelationship);
+                            Spn_AppointeeRelationship.setSelection(i);
+                        }
+                        if (Str_AppointeeAge != null && !Str_AppointeeAge.equalsIgnoreCase("") && !Str_AppointeeAge.equalsIgnoreCase("null")) {
+                            edt_AppointeeAge.setText(Str_AppointeeAge);
+
+                        }
+
+                    }
                 }
             }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -369,9 +403,9 @@ public class NomineeDetailsFragment extends Fragment implements BlockingStep,Ada
                 result = false;
             }
 
-            if (!MyValidator.isValidField(edt_AppointeeAge)) {
+            if (!MyValidator.isValidAdultAge(edt_AppointeeAge)) {
                 edt_AppointeeAge.requestFocus();
-                CommonMethods.DisplayToastWarning(getContext(),"Please Enter Appointee Age");
+                CommonMethods.DisplayToastWarning(getContext(),"Please Enter Valid Appointee Age");
                 result = false;
             }
 
@@ -394,8 +428,10 @@ public class NomineeDetailsFragment extends Fragment implements BlockingStep,Ada
 
         if(validateFields()) {
 
-            InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(edt_NomineeAge.getWindowToken(), 0);
+            InputMethodManager imm = (InputMethodManager) Objects.requireNonNull(getContext()).getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(edt_NomineeAge.getWindowToken(), 0);
+            }
 
             Str_NomineeSalutation = Spn_NomineeSalutation.getSelectedItem().toString();
             Str_NomineeFirstName = edt_NomineeFirstName.getText().toString();

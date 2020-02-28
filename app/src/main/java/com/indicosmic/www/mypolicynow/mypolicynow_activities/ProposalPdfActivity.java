@@ -1,6 +1,7 @@
 package com.indicosmic.www.mypolicynow.mypolicynow_activities;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
@@ -12,7 +13,10 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -22,10 +26,16 @@ import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
+import android.webkit.MimeTypeMap;
+import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -70,9 +80,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -103,10 +117,13 @@ public class ProposalPdfActivity extends AppCompatActivity {
     Uri outputFileUri;
     boolean ServerStatus;
     String Str_Base64Image;
-
+    String download_file_url;
+    String dest_file_path = "";
+    int downloadedSize = 0, totalsize;
+    float per = 0;
     private static final int SELECT_FILE = 2243;
     private static final int REQUEST_CAMERA = 23424;
-
+    TextView tv_loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,18 +141,21 @@ public class ProposalPdfActivity extends AppCompatActivity {
         StrUserActionData = UtilitySharedPreferences.getPrefs(getApplicationContext(),"UserActionData");
         String ProposalObjStr =  UtilitySharedPreferences.getPrefs(getApplicationContext(),"ProposalAry");
         StrCustomerMobile = UtilitySharedPreferences.getPrefs(getApplicationContext(),"CustomerMobile");
-        webViewProposalPdf = (WebView) findViewById(R.id.webViewProposalPdf);
-        progressBar = (ProgressBar)findViewById(R.id.progressbar);
-
-
+        webViewProposalPdf = findViewById(R.id.webViewProposalPdf);
+        progressBar = findViewById(R.id.progressbar);
+        myDialog = new ProgressDialog(ProposalPdfActivity.this);
+        myDialog.setMessage("Please wait...");
+        myDialog.setCancelable(false);
+        myDialog.setCanceledOnTouchOutside(false);
         try {
 
             JSONObject user_action_data = new JSONObject(StrUserActionData);
 
             StrPolicyType = user_action_data.getString("policy_type");
 
-
             JSONObject proposal_obj = new JSONObject(ProposalObjStr);
+
+            Log.d("proposalobj",""+proposal_obj);
             proposal_no = proposal_obj.getString("proposal_no");
             proposal_otp = proposal_obj.getString("otp");
             policy_no = proposal_obj.getString("policy_no");
@@ -144,7 +164,7 @@ public class ProposalPdfActivity extends AppCompatActivity {
             QuoteLink = QuoteLink.toUpperCase();
            //Toast.makeText(getApplicationContext(),"Customer Verification OTP :"+proposal_otp,Toast.LENGTH_LONG).show();
 
-
+            ResendVerifyLink();
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -152,72 +172,16 @@ public class ProposalPdfActivity extends AppCompatActivity {
 
         PDF_URL = ROOT_URL2+quote_url;
         Log.d("PDFURL",""+PDF_URL);
-
-        WebSettings ws = webViewProposalPdf.getSettings();
-        ws.setSupportZoom(true);
-        ws.setJavaScriptEnabled(true);
-        ws.setAllowFileAccess(true);
-        String google_pdf_url = "https://docs.google.com/gview?embedded=true&url="+PDF_URL;
-        webViewProposalPdf.loadUrl(google_pdf_url);
-
-        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.ECLAIR) {
-            try {
-                Log.d(TAG, "Enabling HTML5-Features");
-                Method m1 = WebSettings.class.getMethod("setDomStorageEnabled", new Class[]{Boolean.TYPE});
-                m1.invoke(ws, Boolean.TRUE);
-
-                Method m2 = WebSettings.class.getMethod("setDatabaseEnabled", new Class[]{Boolean.TYPE});
-                m2.invoke(ws, Boolean.TRUE);
-
-                Method m3 = WebSettings.class.getMethod("setDatabasePath", new Class[]{String.class});
-                m3.invoke(ws, "/data/data/" + getPackageName() + "/databases/");
-
-                Method m4 = WebSettings.class.getMethod("setAppCacheMaxSize", new Class[]{Long.TYPE});
-                m4.invoke(ws, 1024*1024*8);
-
-                Method m5 = WebSettings.class.getMethod("setAppCachePath", new Class[]{String.class});
-                m5.invoke(ws, "/data/data/" + getPackageName() + "/cache/");
-
-                Method m6 = WebSettings.class.getMethod("setAppCacheEnabled", new Class[]{Boolean.TYPE});
-                m6.invoke(ws, Boolean.TRUE);
-
-                Log.d(TAG, "Enabled HTML5-Features");
-            }
-            catch (NoSuchMethodException e) {
-                Log.e(TAG, "Reflection fail", e);
-            }
-            catch (InvocationTargetException e) {
-                Log.e(TAG, "Reflection fail", e);
-            }
-            catch (IllegalAccessException e) {
-                Log.e(TAG, "Reflection fail", e);
-            }
-        }
-
-        webViewProposalPdf.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                view.loadUrl(google_pdf_url);
-
-                return false;
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                progressBar.setVisibility(View.GONE);
-            }
-        });
+        download_file_url = PDF_URL;
+        dest_file_path = QuoteLink.toUpperCase()+".pdf";
+        LoadProposalPage();
 
 
 
-        myDialog = new ProgressDialog(ProposalPdfActivity.this);
-        myDialog.setMessage("Please wait...");
-        myDialog.setCancelable(false);
-        myDialog.setCanceledOnTouchOutside(false);
 
-        BtnShare= (Button)findViewById(R.id.BtnShare);
-        BtnEdit= (Button)findViewById(R.id.BtnEdit);
-        BtnVerify_Buy= (Button)findViewById(R.id.BtnVerify_Buy);
+        BtnShare= findViewById(R.id.BtnShare);
+        BtnEdit= findViewById(R.id.BtnEdit);
+        BtnVerify_Buy= findViewById(R.id.BtnVerify_Buy);
 
 
         if(!isVerifiedCustomerMobile){
@@ -264,8 +228,13 @@ public class ProposalPdfActivity extends AppCompatActivity {
                     if(item.getTitle().toString().equalsIgnoreCase("QUOTE FORWARD")){
                         API_Quote_Forward();
                     }else if(item.getTitle().toString().equalsIgnoreCase("DOWNLOAD PDF")){
-                        //new DownloadFile().execute(PDF_URL, QuoteLink+".pdf");
-                        new DownloadTask(ProposalPdfActivity.this, PDF_URL);
+                        tv_loading = new TextView(ProposalPdfActivity.this);
+                        tv_loading.setGravity(Gravity.CENTER);
+                        tv_loading.setTypeface(null, Typeface.BOLD);
+                        downloadAndOpenPDF();
+
+
+
                     }
                     return true;
                 }
@@ -281,7 +250,177 @@ public class ProposalPdfActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
+    private void LoadProposalPage() {
+        WebSettings ws = webViewProposalPdf.getSettings();
+        ws.setSupportZoom(true);
+        ws.setJavaScriptEnabled(true);
+        ws.setAllowFileAccess(true);
+
+        String google_pdf_url = "https://docs.google.com/gview?embedded=true&url="+PDF_URL;
+        webViewProposalPdf.loadUrl(google_pdf_url);
+
+        try {
+            Log.d(TAG, "Enabling HTML5-Features");
+            Method m1 = WebSettings.class.getMethod("setDomStorageEnabled", Boolean.TYPE);
+            m1.invoke(ws, Boolean.TRUE);
+
+            Method m2 = WebSettings.class.getMethod("setDatabaseEnabled", Boolean.TYPE);
+            m2.invoke(ws, Boolean.TRUE);
+
+            Method m3 = WebSettings.class.getMethod("setDatabasePath", String.class);
+            m3.invoke(ws, "/data/data/" + getPackageName() + "/databases/");
+
+            Method m4 = WebSettings.class.getMethod("setAppCacheMaxSize", Long.TYPE);
+            m4.invoke(ws, 1024*1024*8);
+
+            Method m5 = WebSettings.class.getMethod("setAppCachePath", String.class);
+            m5.invoke(ws, "/data/data/" + getPackageName() + "/cache/");
+
+            Method m6 = WebSettings.class.getMethod("setAppCacheEnabled", Boolean.TYPE);
+            m6.invoke(ws, Boolean.TRUE);
+
+            Log.d(TAG, "Enabled HTML5-Features");
+        }
+        catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            Log.e(TAG, "Reflection fail", e);
+        }
+
+        webViewProposalPdf.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                view.loadUrl(google_pdf_url);
+
+                return false;
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                progressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                super.onReceivedError(view, request, error);
+                LoadProposalPage();
+            }
+        });
+
+
+
+    }
+
+
+    private void downloadAndOpenPDF() {
+        myDialog.show();
+        new Thread(new Runnable() {
+            public void run() {
+                //Uri path = Uri.fromFile(downloadFile(download_file_url));
+               // if(path==null) {
+                  Uri  path = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".fileprovider", downloadFile(download_file_url));
+                //}
+                try {
+                    if(myDialog!=null && myDialog.isShowing()){
+                        myDialog.dismiss();
+                    }
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setDataAndType(path, "application/pdf");
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(Intent.createChooser(intent, "Open File Using..."));
+                } catch (ActivityNotFoundException e) {
+                    if(myDialog!=null && myDialog.isShowing()){
+                        myDialog.dismiss();
+                    }
+                    tv_loading.setError("PDF Reader application is not installed in your device");
+                }
+            }
+        }).start();
+    }
+
+
+    File downloadFile(String dwnload_file_path) {
+        File file = null;
+        try {
+
+            URL url = new URL(dwnload_file_path);
+            HttpURLConnection urlConnection = (HttpURLConnection) url
+                    .openConnection();
+
+            urlConnection.setRequestMethod("GET");
+            urlConnection.setDoOutput(true);
+
+            // connect
+            urlConnection.connect();
+
+            // set the path where we want to save the file
+            File SDCardRoot = Environment.getExternalStorageDirectory();
+            // create a new file, to save the downloaded file
+            file = new File(SDCardRoot, dest_file_path);
+
+            FileOutputStream fileOutput = new FileOutputStream(file);
+
+            // Stream used for reading the data from the internet
+            InputStream inputStream = urlConnection.getInputStream();
+
+            // this is the total size of the file which we are
+            // downloading
+            totalsize = urlConnection.getContentLength();
+            setText("Starting PDF download...");
+
+            // create a buffer...
+            byte[] buffer = new byte[1024 * 1024];
+            int bufferLength = 0;
+
+            while ((bufferLength = inputStream.read(buffer)) > 0) {
+                fileOutput.write(buffer, 0, bufferLength);
+                downloadedSize += bufferLength;
+                per = ((float) downloadedSize / totalsize) * 100;
+                setText("Total PDF File size  : "
+                        + (totalsize / 1024)
+                        + " KB\n\nDownloading PDF " + (int) per
+                        + "% complete");
+            }
+            // close the output stream when complete //
+            fileOutput.close();
+            setText("Download Complete. Open PDF Application installed in the device.");
+
+        } catch (final MalformedURLException e) {
+            setTextError("Some error occured. Press back and try again.",
+                    Color.RED);
+        } catch (final IOException e) {
+            setTextError("Some error occured. Press back and try again.",
+                    Color.RED);
+        } catch (final Exception e) {
+            setTextError(
+                    "Failed to download image. Please check your internet connection.",
+                    Color.RED);
+        }
+        return file;
+    }
+
+    void setTextError(final String message, final int color) {
+        runOnUiThread(new Runnable() {
+            public void run() {
+                tv_loading.setTextColor(color);
+                tv_loading.setText(message);
+            }
+        });
+
+    }
+
+    void setText(final String txt) {
+        runOnUiThread(new Runnable() {
+            public void run() {
+                tv_loading.setText(txt);
+            }
+        });
+
+    }
+
     private void BUY_POLICY() {
+
+        CommonMethods.DisplayToastInfo(getApplicationContext(),"Redirected to Payment Gateway.");
 
 
 
@@ -294,43 +433,39 @@ public class ProposalPdfActivity extends AppCompatActivity {
         DialogVerifyPopup.requestWindowFeature(Window.FEATURE_NO_TITLE);
         DialogVerifyPopup.setCanceledOnTouchOutside(false);
         DialogVerifyPopup.setCancelable(true);
-        DialogVerifyPopup.setContentView(R.layout.popup_upload_previous_policy_document);
+        DialogVerifyPopup.setContentView(R.layout.popup_verify_mobile_otp);
         DialogVerifyPopup.getWindow().setBackgroundDrawable(
                 new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
 
-        ImageView iv_close = (ImageView) DialogVerifyPopup.findViewById(R.id.iv_close);
-        Button btnAlreadyRegistered = (Button) DialogVerifyPopup.findViewById(R.id.btnAlreadyRegistered);
-        Button btnVerify = (Button) DialogVerifyPopup.findViewById(R.id.btnVerify);
+        ImageView iv_close = DialogVerifyPopup.findViewById(R.id.iv_close);
+        Button btnAlreadyVerified = DialogVerifyPopup.findViewById(R.id.btnAlreadyVerified);
+        Button btnResendVerifyLink = DialogVerifyPopup.findViewById(R.id.btnResendVerifyLink);
 
-        TextView til_customer_mobile_no  = (TextView) DialogVerifyPopup.findViewById(R.id.til_customer_mobile_no);
+        TextView til_customer_mobile_no  = DialogVerifyPopup.findViewById(R.id.til_customer_mobile_no);
 
 
-        EditText edt_Check_Mobile_Otp = (EditText) DialogVerifyPopup.findViewById(R.id.edt_Check_Mobile_Otp);
+        //EditText edt_Check_Mobile_Otp = (EditText) DialogVerifyPopup.findViewById(R.id.edt_Check_Mobile_Otp);
 
-        String tv_customer_no_text = "Click on 'Send Customer Signature and OTP'. Please enter OTP sent on following number to verify \n(Mobile Number: "+StrCustomerMobile+")";
+        String tv_customer_no_text = "Click on 'Send Customer Signature and OTP'. Please verify from link \n(Mobile Number: "+StrCustomerMobile+")";
         til_customer_mobile_no.setText(tv_customer_no_text);
-
-
-        TextView txt_resend_mobile_otp = (TextView) DialogVerifyPopup.findViewById(R.id.txt_resend_mobile_otp);
-
-
-
 
         DialogVerifyPopup.show();
 
         //starCountdown();
 
-        btnVerify.setOnClickListener(new View.OnClickListener() {
+        btnResendVerifyLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ResendVerifyLink();
 
-                String input_text = edt_Check_Mobile_Otp.getText().toString();
-                if (input_text.length() == 4) {
+            }
+        });
 
-                    String MobileOtp = edt_Check_Mobile_Otp.getText().toString().trim();
-                    VerifyOTP(MobileOtp);
-                }
+        btnAlreadyVerified.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CheckAlreadyVerified();
             }
         });
 
@@ -343,311 +478,159 @@ public class ProposalPdfActivity extends AppCompatActivity {
             }
         });
 
-        txt_resend_mobile_otp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
 
 
 
-        edt_Check_Mobile_Otp.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                String input_text = charSequence.toString();
-                if (input_text.length() == 4) {
-
-                    String MobileOtp = edt_Check_Mobile_Otp.getText().toString().trim();
-                    VerifyOTP(MobileOtp);
 
 
+    }
+
+    private void CheckAlreadyVerified() {
+        myDialog.show();
+        String URL = ROOT_URL2+"checkalreadyverify";
+        ConnectionDetector cd = new ConnectionDetector(getApplicationContext());
+        boolean isInternetPresent = cd.isConnectingToInternet();
+        if (isInternetPresent) {
+            Log.d("URL", "" + URL);
+            StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+
+                    if (myDialog != null && myDialog.isShowing()) {
+                        myDialog.dismiss();
+                    }
+                    try {
+
+                        Log.d("Response", "" + response);
+                        JSONObject jsonresponse = new JSONObject(response);
+
+                        boolean status = jsonresponse.getBoolean("status");
+
+                        if(status){
+                            CommonMethods.DisplayToastSuccess(getApplicationContext(),"Customer Already Verified");
+                            isVerifiedCustomerMobile = true;
+                            BtnVerify_Buy.setText("BUY NOW");
+                            if(DialogVerifyPopup!=null && DialogVerifyPopup.isShowing()){
+                                DialogVerifyPopup.dismiss();
+                            }
+                        }else {
+                            CommonMethods.DisplayToastInfo(getApplicationContext(),"Please verify first using the link sent on registered Mobile no.");
+
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
                 }
-            }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    if (myDialog != null && myDialog.isShowing()) {
+                        myDialog.dismiss();
+                    }
+                    CommonMethods.DisplayToastInfo(getApplicationContext(),"Something went wrong. Please try again later.");
 
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
-
-
-
-    }
-
-    /*private void uploadPreviousPolicyDocumentPopup() {
-
-        DialogUploadPolicy = new Dialog(ProposalPdfActivity.this);
-        DialogUploadPolicy.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        DialogUploadPolicy.setCanceledOnTouchOutside(false);
-        DialogUploadPolicy.setCancelable(true);
-        DialogUploadPolicy.setContentView(R.layout.popup_upload_previous_policy_document);
-        DialogUploadPolicy.getWindow().setBackgroundDrawable(
-                new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
-
-        ImageView iv_close = (ImageView) DialogUploadPolicy.findViewById(R.id.iv_close);
-        Button upload_button = (Button) DialogUploadPolicy.findViewById(R.id.upload_button);
-        Button captureImage_button = (Button) DialogUploadPolicy.findViewById(R.id.captureImage_button);
-
-        Iv_UploadedImg = (ImageView)DialogUploadPolicy.findViewById(R.id.Iv_UploadedImg);
-        Button btnUpload = (Button) DialogUploadPolicy.findViewById(R.id.btnUpload);
-
-
-
-        DialogUploadPolicy.show();
-
-        //starCountdown();
-
-        upload_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                galleryIntent();
-
-            }
-        });
-
-
-
-        captureImage_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                cameraIntent();
-
-            }
-        });
-
-        iv_close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(DialogUploadPolicy!=null && DialogUploadPolicy.isShowing()) {
-                    DialogUploadPolicy.dismiss();
                 }
-            }
-        });
+            }) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> map = new HashMap<String, String>();
+                    map.put("quote_link", QuoteLink.toUpperCase());
+                    map.put("agent_id", StrAgentId);
 
-        btnUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-
-
-
-
-    }
-
-    private void cameraIntent()
-    {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, REQUEST_CAMERA);
-    }
-
-    private void galleryIntent()
-    {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);//
-        startActivityForResult(Intent.createChooser(intent, "Select File"),SELECT_FILE);
+                    Log.d("Params",""+map);
+                    return map;
+                }
+            };
 
 
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == SELECT_FILE)
-                onSelectFromGalleryResult(data);
-            else if (requestCode == REQUEST_CAMERA)
-                onCaptureImageResult(data);
-        }
-    }
-
-    @SuppressWarnings("deprecation")
-    private void onSelectFromGalleryResult(Intent data) {
-        Str_Base64Image = "";
-        Bitmap bm=null;
-        if (data != null) {
-            try {
-                bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if (bm != null) {
-            Iv_UploadedImg.setImageBitmap(bm);
-            Iv_UploadedImg.setVisibility(View.VISIBLE);
-            Str_Base64Image = CommonMethods.getEncoded64ImageStringFromBitmap(bm);
+            int socketTimeout = 50000; //30 seconds - change to what you want
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            request.setRetryPolicy(policy);
+            // RequestQueue requestQueue = Volley.newRequestQueue(this, new HurlStack(null, getSocketFactory()));
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(request);
         }else {
-            Iv_UploadedImg.setVisibility(View.GONE);
+            CommonMethods.DisplayToast(getApplicationContext(),"Please check Internet Connection");
         }
-
     }
 
-    private void onCaptureImageResult(Intent data) {
+    private void ResendVerifyLink() {
+        myDialog.show();
+        String URL = ROOT_URL2+"resendverifylink";
+        ConnectionDetector cd = new ConnectionDetector(getApplicationContext());
+        boolean isInternetPresent = cd.isConnectingToInternet();
+        if (isInternetPresent) {
+            Log.d("URL", "" + URL);
+            StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
 
-        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+                    if (myDialog != null && myDialog.isShowing()) {
+                        myDialog.dismiss();
+                    }
+                    try {
 
-        if (thumbnail != null) {
-            Iv_UploadedImg.setImageBitmap(thumbnail);
-            Iv_UploadedImg.setVisibility(View.VISIBLE);
+                        Log.d("Response", "" + response);
+                        JSONObject jsonresponse = new JSONObject(response);
 
-            Str_Base64Image = CommonMethods.getEncoded64ImageStringFromBitmap(thumbnail);
+
+                        JSONObject msgObj = jsonresponse.getJSONObject("message");
+
+                        boolean is_error = msgObj.getBoolean("is_error");
+
+                        if(!is_error){
+                            CommonMethods.DisplayToast(getApplicationContext(),"Verification Link send on registered Mobile no.");
+                        }else {
+                            String error_message = msgObj.getString("error_message");
+                            CommonMethods.DisplayToastError(getApplicationContext(),error_message);
+
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    if (myDialog != null && myDialog.isShowing()) {
+                        myDialog.dismiss();
+                    }
+                    CommonMethods.DisplayToastInfo(getApplicationContext(),"Something went wrong. Please try again later.");
+
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> map = new HashMap<String, String>();
+                    map.put("quote_link", QuoteLink.toUpperCase());
+                    map.put("agent_id", StrAgentId);
+                    map.put("proposal_no",proposal_no);
+                    map.put("mobile_no",StrCustomerMobile);
+                    Log.d("Params",""+map);
+                    return map;
+                }
+            };
+
+
+            int socketTimeout = 50000; //30 seconds - change to what you want
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            request.setRetryPolicy(policy);
+            // RequestQueue requestQueue = Volley.newRequestQueue(this, new HurlStack(null, getSocketFactory()));
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(request);
         }else {
-            Iv_UploadedImg.setVisibility(View.GONE);
-        }
-
-
-
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-
-        File destination = new File(Environment.getExternalStorageDirectory(),
-                System.currentTimeMillis() + ".jpg");
-
-        FileOutputStream fo;
-        try {
-            destination.createNewFile();
-            fo = new FileOutputStream(destination);
-            fo.write(bytes.toByteArray());
-            fo.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_EXTERNAL_STORAGE: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length <= 0 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(getApplicationContext(), "Cannot write images to external storage", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
-    }
-
-    public File getAlbumStorageDir(String albumName) {
-        // Get the directory for the user's public pictures directory.
-        File file = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), albumName);
-        if (!file.mkdirs()) {
-            Log.e("SignaturePad", "Directory not created");
-        }
-        return file;
-    }
-
-    public void saveBitmapToJPG(Bitmap bitmap, File photo) throws IOException {
-        Bitmap newBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(newBitmap);
-        canvas.drawColor(Color.WHITE);
-        canvas.drawBitmap(bitmap, 0, 0, null);
-        OutputStream stream = new FileOutputStream(photo);
-        newBitmap.compress(Bitmap.CompressFormat.JPEG, 80, stream);
-        stream.close();
-    }
-
-    public boolean addJpgSignatureToGallery(Bitmap signature) {
-        boolean result = false;
-        try {
-            File photo = new File(getAlbumStorageDir(".SignaturePad"), String.format("Signature_%d.jpg", System.currentTimeMillis()));
-            saveBitmapToJPG(signature, photo);
-
-            scanMediaFile(photo);
-            result = true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    private void scanMediaFile(File photo) {
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        Uri contentUri = Uri.fromFile(photo);
-        Iv_UploadedImg.setImageURI(contentUri);
-        Iv_UploadedImg.setVisibility(View.VISIBLE);
-        mediaScanIntent.setData(contentUri);
-        ProposalPdfActivity.this.sendBroadcast(mediaScanIntent);
-    }
-
-*/
-
-    private void VerifyOTP(String mobileOtp) {
-
-        if(mobileOtp!=null && !mobileOtp.equalsIgnoreCase("")){
-            if(mobileOtp.equalsIgnoreCase(proposal_otp)){
-                CommonMethods.DisplayToastSuccess(getApplicationContext(),"Customer Verified Successfully");
-                isVerifiedCustomerMobile = true;
-                BtnVerify_Buy.setText("BUY NOW");
-                if(DialogVerifyPopup!=null && DialogVerifyPopup.isShowing()){
-                    DialogVerifyPopup.dismiss();
-                }
-            }
-        }
-
-    }
-
-
-    private class DownloadFile extends AsyncTask<String, Void, Void> {
-
-        @Override
-        protected Void doInBackground(String... strings) {
-            String fileUrl = strings[0];   // -> http://maven.apache.org/maven-1.x/maven.pdf
-            String fileName = strings[1];  // -> maven.pdf
-            String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
-            File folder = new File(extStorageDirectory, "ags/proposal");
-            folder.mkdir();
-
-
-            File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), fileName + ".pdf");
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            //Log.e("pathOpen", file.getPath());
-
-            Uri contentUri;
-            contentUri = Uri.fromFile(file);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-
-            if (Build.VERSION.SDK_INT >= 24) {
-
-                Uri apkURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", file);
-                intent.setDataAndType(apkURI, "application/pdf");
-                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
-            } else {
-
-                intent.setDataAndType(contentUri, "application/pdf");
-            }
-
-
-           // FileDownloader.downloadFile(fileUrl, pdfFile);
-            return null;
+            CommonMethods.DisplayToast(getApplicationContext(),"Please check Internet Connection");
         }
     }
 
     private void API_Quote_Forward() {
         myDialog.show();
-        String URL = ROOT_URL2+"quoteForward";
+        String URL = ROOT_URL2+"quoteforward";
         ConnectionDetector cd = new ConnectionDetector(getApplicationContext());
         boolean isInternetPresent = cd.isConnectingToInternet();
         if (isInternetPresent) {
@@ -695,7 +678,7 @@ public class ProposalPdfActivity extends AppCompatActivity {
                     map.put("quote_link", QuoteLink.toUpperCase());
                     map.put("agent_id", StrAgentId);
 
-
+                    Log.d("Params",""+map);
                     return map;
                 }
             };
@@ -721,10 +704,10 @@ public class ProposalPdfActivity extends AppCompatActivity {
         dialog.setContentView(R.layout.pop_up_info_message);
         dialog.getWindow().setBackgroundDrawable(
                 new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        TextView title = (TextView)dialog.findViewById(R.id.title) ;
-        TextView Message_text = (TextView)dialog.findViewById(R.id.Message_text) ;
+        TextView title = dialog.findViewById(R.id.title);
+        TextView Message_text = dialog.findViewById(R.id.Message_text);
 
-        ImageView iv_MessageImg = (ImageView)dialog.findViewById(R.id.iv_MessageImg);
+        ImageView iv_MessageImg = dialog.findViewById(R.id.iv_MessageImg);
         if(status) {
             iv_MessageImg.setImageDrawable(getDrawable(R.drawable.checked_green));
             iv_MessageImg.setVisibility(View.VISIBLE);
@@ -732,7 +715,7 @@ public class ProposalPdfActivity extends AppCompatActivity {
             iv_MessageImg.setImageDrawable(getDrawable(R.drawable.alert_circle));
             iv_MessageImg.setVisibility(View.VISIBLE);
         }
-        TextView tv_ok = (TextView)dialog.findViewById(R.id.tv_ok);
+        TextView tv_ok = dialog.findViewById(R.id.tv_ok);
         tv_ok.setText("OK");
 
         title.setText(R.string.app_name);

@@ -68,7 +68,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
 
     ImageView back_btn;
     ProgressDialog myDialog;
-    String QuotationFor="Bike",StrPucReminder="0";
+    String QuotationFor="",StrPucReminder="0";
     LinearLayout LayoutCar,LayoutBike;
     ImageView iv_bike,iv_car,iv_commercial;
     TextView til_commercial_insurance,til_car_insurance,til_bike_insurance;
@@ -102,7 +102,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
     String SelectedRtoId="",SelectedMakeId="",SelectedModelId="",SelectedVaraintId="",SelectedVehicleId="";
     LinearLayout LinearChangeInOwnership,LayoutODDisount,InvoiceLayout,LinearNewPolicyWanted,IndividualPolicyHolderLayout;
     RadioGroup RG_NewPolicyRequired;
-    RadioButton Rb_1OD5TP,Rb_5OD5TP,Rb_3OD3TP;
+    RadioButton Rb_0OD3TP,Rb_0OD5TP,Rb_1OD3TP,Rb_3OD3TP,Rb_1OD5TP,Rb_5OD5TP;
     TextView til_invoice_price;
 
     Spinner Spn_CPASelection,Spn_ReasonOptingOutCPA;
@@ -147,7 +147,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
     String is_changes_in_ownership="no",is_previous_policy="no",previous_yr_policy_type="",is_claimed="no",
             previous_policy_ncb="0",selected_od_discount="",StrInvoicePrice="",selected_od_year="",have_motor_license="no",
             have_motor_policy="no",have_pa_policy="no",other_pa_policy="no",selected_pa_year="",previous_policy_nil_dep="no",
-            ownership_change="no",product_type="bike",is_cng_lpg_tp="no",commercial_idv="0",no_of_trailer="0",
+            ownership_change="no",product_type="",is_cng_lpg_tp="no",commercial_idv="0",no_of_trailer="0",
             vehicledisplaytype="0",body_type_id="0",frame_type_id="";
 
     String StrSelectedMake="",make_cleaned="",SelectedModel="",model_cleaned="";
@@ -215,18 +215,21 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                                 if(QuotationFor.equalsIgnoreCase("Car")){
                                     JSONObject car_previledgeObj = partner_privilegeObj.getJSONObject("1");
                                     ProductTypeId = car_previledgeObj.getString("product_type_id");
+                                    product_type="privatecar";
                                     String IcList = car_previledgeObj.getString("ic_ids");
                                     UtilitySharedPreferences.setPrefs(getApplicationContext(),"IcList",IcList);
                                     UtilitySharedPreferences.setPrefs(getApplicationContext(),"ProductTypeId",ProductTypeId);
                                     UtilitySharedPreferences.setPrefs(getApplicationContext(),"CarPreviledges",car_previledgeObj.toString());
-
+                                    Log.d("ProductTypeId",""+ProductTypeId);
                                 }else if(QuotationFor.equalsIgnoreCase("Bike")){
                                     JSONObject bike_previledgeObj = partner_privilegeObj.getJSONObject("2");
                                     ProductTypeId = bike_previledgeObj.getString("product_type_id");
+                                    product_type="bike";
                                     String IcList = bike_previledgeObj.getString("ic_ids");
                                     UtilitySharedPreferences.setPrefs(getApplicationContext(),"IcList",IcList);
                                     UtilitySharedPreferences.setPrefs(getApplicationContext(),"ProductTypeId",ProductTypeId);
                                     UtilitySharedPreferences.setPrefs(getApplicationContext(),"BikePreviledges",bike_previledgeObj.toString());
+                                    Log.d("ProductTypeId",""+ProductTypeId);
 
                                 }
 
@@ -293,62 +296,6 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
         til_bike_insurance = (TextView)findViewById(R.id.til_bike_insurance);
         til_commercial_insurance = (TextView)findViewById(R.id.til_commercial_insurance);
 
-
-
-        if(QuotationFor!=null && !QuotationFor.equalsIgnoreCase("")){
-            if(QuotationFor.equalsIgnoreCase("Car")){
-                product_type="privatecar";
-                LayoutBike.setBackground(getDrawable(R.drawable.form_bg_edittext_bg));
-                LayoutCar.setBackground(getDrawable(R.drawable.form_bg_selected));
-
-                Glide.with(QuotationActivity.this).load(R.drawable.bike).into(iv_bike);
-                Glide.with(QuotationActivity.this).load(R.drawable.car).into(iv_car);
-                Glide.with(QuotationActivity.this).load(R.drawable.commercial_new).into(iv_commercial);
-
-                iv_car.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.white), android.graphics.PorterDuff.Mode.SRC_IN);
-                iv_bike.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary), android.graphics.PorterDuff.Mode.SRC_IN);
-                til_car_insurance.setTextColor(getResources().getColor(R.color.white));
-                til_bike_insurance.setTextColor(getResources().getColor(R.color.black));
-
-
-            }
-            else if(QuotationFor.equalsIgnoreCase("Bike")){
-                product_type="bike";
-                LayoutBike.setBackground(getDrawable(R.drawable.form_bg_selected));
-                LayoutCar.setBackground(getDrawable(R.drawable.form_bg_edittext_bg));
-
-                Glide.with(QuotationActivity.this).load(R.drawable.bike).into(iv_bike);
-                Glide.with(QuotationActivity.this).load(R.drawable.car).into(iv_car);
-                Glide.with(QuotationActivity.this).load(R.drawable.commercial_new).into(iv_commercial);
-
-                iv_bike.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.white), android.graphics.PorterDuff.Mode.SRC_IN);
-                iv_car.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary), android.graphics.PorterDuff.Mode.SRC_IN);
-                til_car_insurance.setTextColor(getResources().getColor(R.color.black));
-                til_bike_insurance.setTextColor(getResources().getColor(R.color.white));
-
-            }else if(QuotationFor.equalsIgnoreCase("Commercial")){
-                product_type="commercial";
-                Glide.with(QuotationActivity.this).load(R.drawable.bike).into(iv_bike);
-                Glide.with(QuotationActivity.this).load(R.drawable.car).into(iv_car);
-                Glide.with(QuotationActivity.this).load(R.drawable.commercial_new).into(iv_commercial);
-            }
-
-        }
-
-
-
-
-        iv_commercial.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                QuotationFor = "Commercial";
-                product_type="commercial";
-                Glide.with(QuotationActivity.this).load(R.drawable.bike).into(iv_bike);
-                Glide.with(QuotationActivity.this).load(R.drawable.car).into(iv_car);
-                Glide.with(QuotationActivity.this).load(R.drawable.commercial_new).into(iv_commercial);
-            }
-        });
-
         Scroll_BelowLayout = (ScrollView)findViewById(R.id.Scroll_BelowLayout);
 
         TV_ComprehensivePolicy = (TextView)findViewById(R.id.TV_ComprehensivePolicy);
@@ -365,6 +312,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                 setBackGroundColor("Comprehensive");
                 getManufacturingYear();
                 setChangeInOwnserhipVisibility();
+                setODPackVisisbility();
             }
         });
 
@@ -375,6 +323,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                 RG_PolicyType.setVisibility(View.VISIBLE);
                 getManufacturingYear();
                 setChangeInOwnserhipVisibility();
+                setODPackVisisbility();
 
             }
         });
@@ -385,6 +334,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                 setBackGroundColor("Standalone");
                 getManufacturingYear();
                 setChangeInOwnserhipVisibility();
+                setODPackVisisbility();
             }
         });
         setBackGroundColor("Comprehensive");
@@ -501,55 +451,17 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
             }
         });
 
-
-
-
         LinearChangeInOwnership = (LinearLayout)findViewById(R.id.LinearChangeInOwnership);
         LayoutODDisount = (LinearLayout)findViewById(R.id.LayoutODDisount);
         InvoiceLayout = (LinearLayout)findViewById(R.id.InvoiceLayout);
-        LinearNewPolicyWanted = (LinearLayout)findViewById(R.id.LinearNewPolicyWanted);
+
         RG_NewPolicyRequired= (RadioGroup)findViewById(R.id.RG_NewPolicyRequired);
-        Rb_1OD5TP = (RadioButton)findViewById(R.id.Rb_1OD5TP);
-        Rb_5OD5TP = (RadioButton)findViewById(R.id.Rb_5OD5TP);
-        Rb_3OD3TP = (RadioButton)findViewById(R.id.Rb_3OD3TP);
-
-        if(ProductTypeId.equalsIgnoreCase("2")){
-            Rb_3OD3TP.setVisibility(View.GONE);
-            Rb_5OD5TP.setVisibility(View.VISIBLE);
-        }else if(QuotationFor.equalsIgnoreCase("1")){
-            Rb_3OD3TP.setVisibility(View.VISIBLE);
-            Rb_5OD5TP.setVisibility(View.GONE);
-        }
 
 
-        LayoutBike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                QuotationFor = "Bike";
-                product_type="bike";
-                LayoutBike.setBackground(getDrawable(R.drawable.form_bg_selected));
-                LayoutCar.setBackground(getDrawable(R.drawable.form_bg_edittext_bg));
-
-                Glide.with(QuotationActivity.this).load(R.drawable.bike).into(iv_bike);
-                Glide.with(QuotationActivity.this).load(R.drawable.car).into(iv_car);
-                Glide.with(QuotationActivity.this).load(R.drawable.commercial_new).into(iv_commercial);
-
-                iv_bike.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.white), android.graphics.PorterDuff.Mode.SRC_IN);
-                iv_car.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary), android.graphics.PorterDuff.Mode.SRC_IN);
-                til_car_insurance.setTextColor(getResources().getColor(R.color.black));
-                til_bike_insurance.setTextColor(getResources().getColor(R.color.white));
-                Rb_3OD3TP.setVisibility(View.GONE);
-                Rb_5OD5TP.setVisibility(View.VISIBLE);
-                GetMasterFor();
-            }
-        });
-
-
-        LayoutCar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                QuotationFor = "Car";
+        if(QuotationFor!=null && !QuotationFor.equalsIgnoreCase("")){
+            if(QuotationFor.equalsIgnoreCase("Car")){
                 product_type="privatecar";
+                ProductTypeId = "1";
                 LayoutBike.setBackground(getDrawable(R.drawable.form_bg_edittext_bg));
                 LayoutCar.setBackground(getDrawable(R.drawable.form_bg_selected));
 
@@ -561,8 +473,93 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                 iv_bike.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary), android.graphics.PorterDuff.Mode.SRC_IN);
                 til_car_insurance.setTextColor(getResources().getColor(R.color.white));
                 til_bike_insurance.setTextColor(getResources().getColor(R.color.black));
-                Rb_3OD3TP.setVisibility(View.VISIBLE);
-                Rb_5OD5TP.setVisibility(View.GONE);
+                setODPackVisisbility();
+
+            }
+            else if(QuotationFor.equalsIgnoreCase("Bike")){
+                product_type="bike";
+                ProductTypeId = "2";
+                LayoutBike.setBackground(getDrawable(R.drawable.form_bg_selected));
+                LayoutCar.setBackground(getDrawable(R.drawable.form_bg_edittext_bg));
+
+                Glide.with(QuotationActivity.this).load(R.drawable.bike).into(iv_bike);
+                Glide.with(QuotationActivity.this).load(R.drawable.car).into(iv_car);
+                Glide.with(QuotationActivity.this).load(R.drawable.commercial_new).into(iv_commercial);
+
+                iv_bike.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.white), android.graphics.PorterDuff.Mode.SRC_IN);
+                iv_car.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary), android.graphics.PorterDuff.Mode.SRC_IN);
+                til_car_insurance.setTextColor(getResources().getColor(R.color.black));
+                til_bike_insurance.setTextColor(getResources().getColor(R.color.white));
+                setODPackVisisbility();
+            }else if(QuotationFor.equalsIgnoreCase("Commercial")){
+                product_type="commercial";
+                Glide.with(QuotationActivity.this).load(R.drawable.bike).into(iv_bike);
+                Glide.with(QuotationActivity.this).load(R.drawable.car).into(iv_car);
+                Glide.with(QuotationActivity.this).load(R.drawable.commercial_new).into(iv_commercial);
+            }
+
+        }
+
+
+
+
+        iv_commercial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                QuotationFor = "Commercial";
+                product_type="commercial";
+                Glide.with(QuotationActivity.this).load(R.drawable.bike).into(iv_bike);
+                Glide.with(QuotationActivity.this).load(R.drawable.car).into(iv_car);
+                Glide.with(QuotationActivity.this).load(R.drawable.commercial_new).into(iv_commercial);
+            }
+        });
+        setODPackVisisbility();
+
+
+
+
+        LayoutBike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                QuotationFor = "Bike";
+                product_type="bike";
+                ProductTypeId = "2";
+
+                LayoutBike.setBackground(getDrawable(R.drawable.form_bg_selected));
+                LayoutCar.setBackground(getDrawable(R.drawable.form_bg_edittext_bg));
+
+                Glide.with(QuotationActivity.this).load(R.drawable.bike).into(iv_bike);
+                Glide.with(QuotationActivity.this).load(R.drawable.car).into(iv_car);
+                Glide.with(QuotationActivity.this).load(R.drawable.commercial_new).into(iv_commercial);
+
+                iv_bike.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.white), android.graphics.PorterDuff.Mode.SRC_IN);
+                iv_car.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary), android.graphics.PorterDuff.Mode.SRC_IN);
+                til_car_insurance.setTextColor(getResources().getColor(R.color.black));
+                til_bike_insurance.setTextColor(getResources().getColor(R.color.white));
+
+                GetMasterFor();
+            }
+        });
+
+
+        LayoutCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                QuotationFor = "Car";
+                product_type="privatecar";
+                ProductTypeId = "1";
+                LayoutBike.setBackground(getDrawable(R.drawable.form_bg_edittext_bg));
+                LayoutCar.setBackground(getDrawable(R.drawable.form_bg_selected));
+
+                Glide.with(QuotationActivity.this).load(R.drawable.bike).into(iv_bike);
+                Glide.with(QuotationActivity.this).load(R.drawable.car).into(iv_car);
+                Glide.with(QuotationActivity.this).load(R.drawable.commercial_new).into(iv_commercial);
+
+                iv_car.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.white), android.graphics.PorterDuff.Mode.SRC_IN);
+                iv_bike.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary), android.graphics.PorterDuff.Mode.SRC_IN);
+                til_car_insurance.setTextColor(getResources().getColor(R.color.white));
+                til_bike_insurance.setTextColor(getResources().getColor(R.color.black));
+
                 GetMasterFor();
             }
         });
@@ -614,34 +611,36 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
         RG_NewPolicyRequired.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (Rb_1OD5TP.isChecked()) {
-                    Rb_1OD5TP.setBackgroundColor(getResources().getColor(R.color.primary_green));
-                    Rb_1OD5TP.setTextColor(getResources().getColor(R.color.white));
-                    Rb_1OD5TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.white));
 
-                    Rb_5OD5TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
-                    Rb_5OD5TP.setTextColor(getResources().getColor(R.color.black));
-                    Rb_5OD5TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+                //Comprehensive Car New
+                if (Rb_1OD3TP.isChecked()) {
+
+                    Rb_1OD3TP.setBackgroundColor(getResources().getColor(R.color.primary_green));
+                    Rb_1OD3TP.setTextColor(getResources().getColor(R.color.white));
+                    Rb_1OD3TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.white));
 
                     Rb_3OD3TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
                     Rb_3OD3TP.setTextColor(getResources().getColor(R.color.black));
                     Rb_3OD3TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
-                    selected_od_year = "1";
 
-                }
-                if (Rb_5OD5TP.isChecked()){
-                    Rb_5OD5TP.setBackgroundColor(getResources().getColor(R.color.primary_green));
-                    Rb_5OD5TP.setTextColor(getResources().getColor(R.color.white));
-                    Rb_5OD5TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.white));
 
                     Rb_1OD5TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
                     Rb_1OD5TP.setTextColor(getResources().getColor(R.color.black));
                     Rb_1OD5TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
 
-                    Rb_3OD3TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
-                    Rb_3OD3TP.setTextColor(getResources().getColor(R.color.black));
-                    Rb_3OD3TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
-                    selected_od_year = "5";
+                    Rb_5OD5TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_5OD5TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_5OD5TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+                    Rb_0OD3TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_0OD3TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_0OD3TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+                    Rb_0OD5TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_0OD5TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_0OD5TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+                    selected_od_year = "1";
 
                 }
 
@@ -650,14 +649,152 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                     Rb_3OD3TP.setTextColor(getResources().getColor(R.color.white));
                     Rb_3OD3TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.white));
 
-                    Rb_5OD5TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
-                    Rb_5OD5TP.setTextColor(getResources().getColor(R.color.black));
-                    Rb_5OD5TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+                    Rb_1OD3TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_1OD3TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_1OD3TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
 
                     Rb_1OD5TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
                     Rb_1OD5TP.setTextColor(getResources().getColor(R.color.black));
                     Rb_1OD5TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+                    Rb_5OD5TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_5OD5TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_5OD5TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+                    Rb_0OD3TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_0OD3TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_0OD3TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+                    Rb_0OD5TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_0OD5TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_0OD5TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
                     selected_od_year = "3";
+
+                }
+
+                //Comprehensive Bike New
+                if (Rb_1OD5TP.isChecked()) {
+                    Rb_1OD5TP.setBackgroundColor(getResources().getColor(R.color.primary_green));
+                    Rb_1OD5TP.setTextColor(getResources().getColor(R.color.white));
+                    Rb_1OD5TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.white));
+
+                    Rb_1OD3TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_1OD3TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_1OD3TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+
+                    Rb_3OD3TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_3OD3TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_3OD3TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+                    Rb_5OD5TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_5OD5TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_5OD5TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+                    Rb_0OD3TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_0OD3TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_0OD3TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+                    Rb_0OD5TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_0OD5TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_0OD5TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+                    selected_od_year = "1";
+
+                }
+
+                if (Rb_5OD5TP.isChecked()){
+                    Rb_5OD5TP.setBackgroundColor(getResources().getColor(R.color.primary_green));
+                    Rb_5OD5TP.setTextColor(getResources().getColor(R.color.white));
+                    Rb_5OD5TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.white));
+
+                    Rb_1OD3TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_1OD3TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_1OD3TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+
+                    Rb_3OD3TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_3OD3TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_3OD3TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+                    Rb_1OD5TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_1OD5TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_1OD5TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+                    Rb_0OD3TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_0OD3TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_0OD3TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+                    Rb_0OD5TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_0OD5TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_0OD5TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+                    selected_od_year = "5";
+
+                }
+
+                // Third Party Bike New
+                if (Rb_0OD5TP.isChecked()) {
+
+                    Rb_0OD5TP.setBackgroundColor(getResources().getColor(R.color.primary_green));
+                    Rb_0OD5TP.setTextColor(getResources().getColor(R.color.white));
+                    Rb_0OD5TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.white));
+
+                    Rb_1OD3TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_1OD3TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_1OD3TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+
+                    Rb_3OD3TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_3OD3TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_3OD3TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+                    Rb_1OD5TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_1OD5TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_1OD5TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+                    Rb_0OD3TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_0OD3TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_0OD3TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+                    Rb_5OD5TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_5OD5TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_5OD5TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+                    selected_od_year = "0";
+
+                }
+
+                // Third Party Car New
+                if (Rb_0OD3TP.isChecked()) {
+                    Rb_0OD3TP.setBackgroundColor(getResources().getColor(R.color.primary_green));
+                    Rb_0OD3TP.setTextColor(getResources().getColor(R.color.white));
+                    Rb_0OD3TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.white));
+
+                    Rb_1OD3TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_1OD3TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_1OD3TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+
+                    Rb_3OD3TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_3OD3TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_3OD3TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+                    Rb_1OD5TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_1OD5TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_1OD5TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+                    Rb_0OD5TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_0OD5TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_0OD5TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+                    Rb_5OD5TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+                    Rb_5OD5TP.setTextColor(getResources().getColor(R.color.black));
+                    Rb_5OD5TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+                    selected_od_year = "0";
 
                 }
 
@@ -739,12 +876,30 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                     Rb_NoPreviousPolicy.setTextColor(getResources().getColor(R.color.black));
                     Rb_NoPreviousPolicy.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
 
-                    LinearPreviousPolicyType.setVisibility(View.VISIBLE);
-                    LayoutNilDept.setVisibility(View.GONE);
-                    LinearHaveMadeClaim.setVisibility(View.GONE);
-                    LinearExpiryDate.setVisibility(View.GONE);
-                    LinearNCB_Per.setVisibility(View.GONE);
-                    is_previous_policy = "yes";
+                    if (PolicyType != null && PolicyType.equalsIgnoreCase("Comprehensive")) {
+                        LinearPreviousPolicyType.setVisibility(View.VISIBLE);
+                        LayoutNilDept.setVisibility(View.GONE);
+                        LinearHaveMadeClaim.setVisibility(View.GONE);
+                        LinearExpiryDate.setVisibility(View.GONE);
+                        LinearNCB_Per.setVisibility(View.GONE);
+                        is_previous_policy = "yes";
+                    }else if (PolicyType != null && PolicyType.equalsIgnoreCase("ThirdParty")) {
+                        LayoutNilDept.setVisibility(View.GONE);
+                        LinearHaveMadeClaim.setVisibility(View.GONE);
+                        LinearExpiryDate.setVisibility(View.VISIBLE);
+                        LinearNCB_Per.setVisibility(View.GONE);
+                        is_previous_policy = "yes";
+
+                    } if (PolicyType != null && PolicyType.equalsIgnoreCase("StandaloneOD")) {
+                        LinearPreviousPolicyType.setVisibility(View.VISIBLE);
+                        LayoutNilDept.setVisibility(View.GONE);
+                        LinearHaveMadeClaim.setVisibility(View.GONE);
+                        LinearExpiryDate.setVisibility(View.GONE);
+                        LinearNCB_Per.setVisibility(View.GONE);
+                        is_previous_policy = "yes";
+                    }
+
+
                     scrollDown();
 
                 }
@@ -997,6 +1152,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                     StrPolicyType = "New";
                     getManufacturingYear();
                     setChangeInOwnserhipVisibility();
+                    setODPackVisisbility();
                     /*Rb_5YearPACover.setVisibility(View.VISIBLE);
                     Rb_5YearPACover.setChecked(false);*/
                 }
@@ -1006,6 +1162,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                     StrPolicyType = "Renew";
                     getManufacturingYear();
                     setChangeInOwnserhipVisibility();
+                    setODPackVisisbility();
                    /* Rb_5YearPACover.setVisibility(View.GONE);
                     Rb_5YearPACover.setChecked(false);
 */
@@ -1026,6 +1183,188 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                 }
             }
         });
+
+    }
+
+    private void setODPackVisisbility() {
+        LinearNewPolicyWanted = (LinearLayout)findViewById(R.id.LinearNewPolicyWanted);
+        RG_NewPolicyRequired= (RadioGroup)findViewById(R.id.RG_NewPolicyRequired);
+
+        //For Car TP
+        Rb_0OD3TP= (RadioButton)findViewById(R.id.Rb_0OD3TP);
+        //For Bike TP
+        Rb_0OD5TP= (RadioButton)findViewById(R.id.Rb_0OD5TP);
+
+        //For Car Comprehensive
+        Rb_1OD3TP = (RadioButton)findViewById(R.id.Rb_1OD3TP);
+        Rb_3OD3TP = (RadioButton)findViewById(R.id.Rb_3OD3TP);
+
+        //For Bike Comprehensive
+        Rb_1OD5TP = (RadioButton)findViewById(R.id.Rb_1OD5TP);
+        Rb_5OD5TP = (RadioButton)findViewById(R.id.Rb_5OD5TP);
+
+        Rb_0OD3TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+        Rb_1OD3TP.setTextColor(getResources().getColor(R.color.black));
+        Rb_1OD3TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+        Rb_1OD3TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+        Rb_1OD3TP.setTextColor(getResources().getColor(R.color.black));
+        Rb_1OD3TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+
+        Rb_3OD3TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+        Rb_3OD3TP.setTextColor(getResources().getColor(R.color.black));
+        Rb_3OD3TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+        Rb_0OD5TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+        Rb_0OD5TP.setTextColor(getResources().getColor(R.color.black));
+        Rb_0OD5TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+        Rb_1OD5TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+        Rb_1OD5TP.setTextColor(getResources().getColor(R.color.black));
+        Rb_1OD5TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+        Rb_5OD5TP.setBackground(getResources().getDrawable(R.drawable.form_bg_edittext_bg));
+        Rb_5OD5TP.setTextColor(getResources().getColor(R.color.black));
+        Rb_5OD5TP.setButtonTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+
+        if(ProductTypeId!=null && !ProductTypeId.equalsIgnoreCase("") && ProductTypeId.equalsIgnoreCase("1")) {
+            if (PolicyType != null && PolicyType.equalsIgnoreCase("Comprehensive")) {
+                if (StrPolicyType != null && StrPolicyType.equalsIgnoreCase("New")) {
+
+                    LinearNewPolicyWanted.setVisibility(View.VISIBLE);
+
+                    Rb_0OD5TP.setVisibility(View.GONE);
+                    Rb_0OD3TP.setVisibility(View.GONE);
+                    Rb_1OD3TP.setVisibility(View.VISIBLE);
+                    Rb_1OD5TP.setVisibility(View.GONE);
+                    Rb_5OD5TP.setVisibility(View.GONE);
+                    Rb_3OD3TP.setVisibility(View.VISIBLE);
+
+
+                }
+                else if (StrPolicyType != null && StrPolicyType.equalsIgnoreCase("Renew")) {
+                    LinearNewPolicyWanted.setVisibility(View.GONE);
+
+                    Rb_0OD5TP.setVisibility(View.GONE);
+                    Rb_0OD3TP.setVisibility(View.GONE);
+                    Rb_1OD3TP.setVisibility(View.GONE);
+                    Rb_1OD5TP.setVisibility(View.GONE);
+                    Rb_5OD5TP.setVisibility(View.GONE);
+                    Rb_3OD3TP.setVisibility(View.GONE);
+
+                }
+            }
+            if (PolicyType != null && PolicyType.equalsIgnoreCase("ThirdParty")) {
+
+                if (StrPolicyType != null && StrPolicyType.equalsIgnoreCase("New")) {
+
+                    LinearNewPolicyWanted.setVisibility(View.VISIBLE);
+                    Rb_0OD5TP.setVisibility(View.GONE);
+                    Rb_0OD3TP.setVisibility(View.VISIBLE);
+                    Rb_1OD3TP.setVisibility(View.GONE);
+                    Rb_1OD5TP.setVisibility(View.GONE);
+                    Rb_5OD5TP.setVisibility(View.GONE);
+                    Rb_3OD3TP.setVisibility(View.GONE);
+
+
+                }
+                else if (StrPolicyType != null && StrPolicyType.equalsIgnoreCase("Renew")) {
+                    LinearNewPolicyWanted.setVisibility(View.GONE);
+
+                    Rb_0OD5TP.setVisibility(View.GONE);
+                    Rb_0OD3TP.setVisibility(View.GONE);
+                    Rb_1OD3TP.setVisibility(View.GONE);
+                    Rb_1OD5TP.setVisibility(View.GONE);
+                    Rb_5OD5TP.setVisibility(View.GONE);
+                    Rb_3OD3TP.setVisibility(View.GONE);
+
+                }
+
+
+            } else if (PolicyType != null && PolicyType.equalsIgnoreCase("StandaloneOD")) {
+                if (StrPolicyType != null && StrPolicyType.equalsIgnoreCase("Renew")) {
+
+                        LinearNewPolicyWanted.setVisibility(View.GONE);
+                        Rb_0OD5TP.setVisibility(View.GONE);
+                        Rb_0OD3TP.setVisibility(View.GONE);
+                        Rb_1OD3TP.setVisibility(View.GONE);
+                        Rb_1OD5TP.setVisibility(View.GONE);
+                        Rb_5OD5TP.setVisibility(View.GONE);
+                        Rb_3OD3TP.setVisibility(View.GONE);
+
+                }
+            }
+        }else  if(ProductTypeId!=null && !ProductTypeId.equalsIgnoreCase("") && ProductTypeId.equalsIgnoreCase("2")) {
+            if (PolicyType != null && PolicyType.equalsIgnoreCase("Comprehensive")) {
+                if (StrPolicyType != null && StrPolicyType.equalsIgnoreCase("New")) {
+
+                    LinearNewPolicyWanted.setVisibility(View.VISIBLE);
+
+                    Rb_0OD5TP.setVisibility(View.GONE);
+                    Rb_0OD3TP.setVisibility(View.GONE);
+                    Rb_1OD3TP.setVisibility(View.GONE);
+                    Rb_1OD5TP.setVisibility(View.VISIBLE);
+                    Rb_5OD5TP.setVisibility(View.VISIBLE);
+                    Rb_3OD3TP.setVisibility(View.GONE);
+
+                }
+                else if (StrPolicyType != null && StrPolicyType.equalsIgnoreCase("Renew")) {
+                    LinearNewPolicyWanted.setVisibility(View.GONE);
+
+                    Rb_0OD5TP.setVisibility(View.GONE);
+                    Rb_0OD3TP.setVisibility(View.GONE);
+                    Rb_1OD3TP.setVisibility(View.GONE);
+                    Rb_1OD5TP.setVisibility(View.GONE);
+                    Rb_5OD5TP.setVisibility(View.GONE);
+                    Rb_3OD3TP.setVisibility(View.GONE);
+
+                }
+            }
+            if (PolicyType != null && PolicyType.equalsIgnoreCase("ThirdParty")) {
+
+                if (StrPolicyType != null && StrPolicyType.equalsIgnoreCase("New")) {
+
+                    LinearNewPolicyWanted.setVisibility(View.VISIBLE);
+                    Rb_0OD5TP.setVisibility(View.VISIBLE);
+                    Rb_0OD3TP.setVisibility(View.GONE);
+                    Rb_1OD3TP.setVisibility(View.GONE);
+                    Rb_1OD5TP.setVisibility(View.GONE);
+                    Rb_5OD5TP.setVisibility(View.GONE);
+                    Rb_3OD3TP.setVisibility(View.GONE);
+
+
+                }
+                else if (StrPolicyType != null && StrPolicyType.equalsIgnoreCase("Renew")) {
+                    LinearNewPolicyWanted.setVisibility(View.GONE);
+
+                    Rb_0OD5TP.setVisibility(View.GONE);
+                    Rb_0OD3TP.setVisibility(View.GONE);
+                    Rb_1OD3TP.setVisibility(View.GONE);
+                    Rb_1OD5TP.setVisibility(View.GONE);
+                    Rb_5OD5TP.setVisibility(View.GONE);
+                    Rb_3OD3TP.setVisibility(View.GONE);
+
+                }
+
+
+            } else if (PolicyType != null && PolicyType.equalsIgnoreCase("StandaloneOD")) {
+                if (StrPolicyType != null && StrPolicyType.equalsIgnoreCase("Renew")) {
+
+                    LinearNewPolicyWanted.setVisibility(View.GONE);
+
+                    Rb_0OD5TP.setVisibility(View.GONE);
+                    Rb_0OD3TP.setVisibility(View.GONE);
+                    Rb_1OD3TP.setVisibility(View.GONE);
+                    Rb_1OD5TP.setVisibility(View.GONE);
+                    Rb_5OD5TP.setVisibility(View.GONE);
+                    Rb_3OD3TP.setVisibility(View.GONE);
+
+                }
+            }
+        }
+
+
 
     }
 
@@ -1096,6 +1435,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                             myDialog.dismiss();
                         }
 
+                        setODPackVisisbility();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -1528,11 +1868,14 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
             }
         }else  if(PolicyType!=null && PolicyType.equalsIgnoreCase("ThirdParty")) {
             if (StrPolicyType!=null && StrPolicyType.equalsIgnoreCase("Renew")) {
+                SameOwnerLayout.setVisibility(View.VISIBLE);
+                LayoutNilDept.setVisibility(View.GONE);
                 LinearChangeInOwnership.setVisibility(View.GONE);
                 InvoiceLayout.setVisibility(View.GONE);
                 LayoutODDisount.setVisibility(View.GONE);
                 LinearNewPolicyWanted.setVisibility(View.GONE);
-                SameOwnerLayout.setVisibility(View.GONE);
+                LinearPreviousPolicyType.setVisibility(View.GONE);
+
                 EdtRegistrationDate.setText("");
                 EdtRegistrationDate.setEnabled(true);
                 EdtRegistrationDate.setOnClickListener(new View.OnClickListener() {
@@ -1933,7 +2276,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
             if (StrPolicyType!=null && StrPolicyType.equalsIgnoreCase("Renew")) {
                 policy_package_type= "thirdparty";
                 policy_type_selection = "thirdparty_renewal";
-                selected_od_year = "1";
+                selected_od_year = "0";
                 StrExpiryDate = EdtPreviousPolicyExpiryDate.getText().toString();
             } else if (StrPolicyType!=null &&StrPolicyType.equalsIgnoreCase("New")) {
                 policy_package_type= "thirdparty";
@@ -1944,6 +2287,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                 StrExpiryDate="";
                 is_claimed="no";
                 previous_policy_ncb = "0";
+                selected_od_year = "0";
                 previous_policy_nil_dep = "no";
 
             }
@@ -2247,6 +2591,13 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
             CommonMethods.DisplayToastError(getApplicationContext(),"Select Policy Holder Type");
         }
 
+        if(LinearNewPolicyWanted.getVisibility()==View.VISIBLE) {
+            if (!MyValidator.isValidRadioGroup(RG_NewPolicyRequired)) {
+                result = false;
+                CommonMethods.DisplayToastError(getApplicationContext(), "Select Any One Plan");
+            }
+        }
+
        /* if(LayoutODDisount.getVisibility()==View.VISIBLE) {
             if (!MyValidator.isValidSpinner(Spn_ODDiscount)) {
                 result = false;
@@ -2281,13 +2632,9 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
 
             }
 
-            if(LinearNewPolicyWanted.getVisibility()==View.VISIBLE) {
-                if (!MyValidator.isValidRadioGroup(RG_NewPolicyRequired)) {
-                    result = false;
-                    CommonMethods.DisplayToastError(getApplicationContext(), "Select New Policy Required");
-                }
-            }
-        }else if (StrPolicyType.equalsIgnoreCase("Renew")){
+
+        }
+        else if (StrPolicyType.equalsIgnoreCase("Renew")){
             if(LinearChangeInOwnership.getVisibility()==View.VISIBLE){
                 if(!MyValidator.isValidRadioGroup(RG_ChangeInOwnership)){
                     result = false;

@@ -258,6 +258,11 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -284,178 +289,232 @@
                     android:padding="5dp"/>
             </RelativeLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:padding="5dp"
-                android:text="Make *"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5sp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginEnd="5dp"
-                android:background="@drawable/btn_color_white">
-
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/Spn_Make"
-                    style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:padding="5dp"/>
-            </RelativeLayout>
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:padding="5dp"
-                android:text="Model *"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="5">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5sp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginEnd="5dp"
-                android:background="@drawable/btn_color_white">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5sp"
+                                android:padding="5dp"
+                                android:text="Make *"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/Spn_Model"
-                    style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                            <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5sp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@drawable/btn_color_white">
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/Spn_Make"
+                            style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:padding="5dp"/>
+                    </RelativeLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:padding="5dp"/>
-            </RelativeLayout>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="5">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:padding="5dp"
-                android:text="Variant *"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5sp"
+                        android:padding="5dp"
+                        android:text="Model *"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5sp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginEnd="5dp"
-                android:background="@drawable/btn_color_white">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5sp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@drawable/btn_color_white">
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/Spn_Variant"
-                    style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/Spn_Model"
+                            style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:padding="5dp"/>
+                    </RelativeLayout>
+                </LinearLayout>
+                </LinearLayout>
+
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:padding="5dp"/>
-            </RelativeLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:padding="5dp"
+                    android:text="Variant *"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:padding="5dp"
-                android:text="Manufacturing Year *"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5sp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginEnd="5dp"
-                android:background="@drawable/btn_color_white">
-
-                <Spinner
-                    android:id="@+id/Spn_ManufacturingYear"
-                    style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:padding="5dp"/>
-            </RelativeLayout>
+                    android:layout_height="55dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5sp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/btn_color_white">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:padding="5dp"
-                android:text="Manufacturing Month *"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
+                    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                        android:id="@+id/Spn_Variant"
+                        style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:padding="5dp"/>
+                </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5sp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginEnd="5dp"
-                android:background="@drawable/btn_color_white">
-
-                <Spinner
-                    android:id="@+id/Spn_ManufacturingMonth"
-                    style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:padding="5dp"/>
-            </RelativeLayout>
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="5">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5sp"
+                            android:padding="5dp"
+                            android:text="Manufacturing Year *"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:padding="5dp"
-                android:text="Purchase/Registration Date *"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5sp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:background="@drawable/btn_color_white">
 
-            <EditText
-                android:id="@+id/EdtRegistrationDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="55dp"
-                android:layout_marginTop="10dp"
-                android:hint="Purchase/Registration Date *"
-                android:layout_gravity="center"
-                android:gravity="center|start"
-                android:textColorHint="@color/dark_grey"
-                android:textColor="@color/dark_grey"
-                android:textSize="14sp"
-                android:layout_weight="5"
-                android:background="@drawable/form_bg_edittext_bg"
-                android:maxLength="18"
-                android:inputType="date"
-                android:focusable="false"
-                android:editable="false"
-                android:imeOptions="actionDone"
-                android:importantForAutofill="no"/>
+                            <Spinner
+                                android:id="@+id/Spn_ManufacturingYear"
+                                style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                android:padding="5dp"/>
+                        </RelativeLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="5">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5sp"
+                            android:padding="5dp"
+                            android:text="Manufacturing Month *"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
 
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5sp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:background="@drawable/btn_color_white">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:padding="5dp"
-                android:text="Policy Holder Type *"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
+                            <Spinner
+                                android:id="@+id/Spn_ManufacturingMonth"
+                                style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                android:padding="5dp"/>
+                        </RelativeLayout>
 
-            <RelativeLayout
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="5">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5sp"
+                                android:padding="5dp"
+                                android:text="Purchase/Registration Date *"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <EditText
+                                android:id="@+id/EdtRegistrationDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:minHeight="55dp"
+                                android:layout_marginTop="5dp"
+                                android:hint="Purchase/Registration Date *"
+                                android:layout_gravity="center"
+                                android:gravity="center|start"
+                                android:textColorHint="@color/dark_grey"
+                                android:textColor="@color/dark_grey"
+                                android:textSize="14sp"
+                                android:layout_weight="5"
+                                android:background="@drawable/form_bg_edittext_bg"
+                                android:maxLength="18"
+                                android:inputType="date"
+                                android:focusable="false"
+                                android:editable="false"
+                                android:imeOptions="actionDone"
+                                android:importantForAutofill="no"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="5">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5sp"
+                            android:padding="5dp"
+                            android:text="Policy Holder Type *"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginStart="5dp"
@@ -472,7 +531,10 @@
                     android:entries="@array/spin_item_policy_holder"
                     android:padding="5dp"/>
             </RelativeLayout>
+                    </LinearLayout>
+                </LinearLayout>
 
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/LinearChangeInOwnership"
@@ -932,7 +994,7 @@
                 android:visibility="gone"
                 android:orientation="vertical">
 
-                <TextView
+               <!-- <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5sp"
@@ -943,7 +1005,7 @@
                     android:visibility="gone"
                     android:text="Previous Policy Type *"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="14sp" />-->
 
                 <RadioGroup
                     android:id="@+id/RG_NewPolicyRequired"
@@ -956,6 +1018,66 @@
                     android:weightSum="10">
 
 
+                    <RadioButton
+                        android:id="@+id/Rb_0OD3TP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="0 Yr OD &amp; 3 Yrs TP"
+                        android:textColor="@color/black"
+                        android:background="@drawable/form_bg_edittext_bg"
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:minHeight="30sp"
+                        android:visibility="gone"
+                        android:buttonTint="@color/black"
+                        style="@android:style/Widget.CompoundButton.CheckBox"
+                        android:layout_weight="5"/>
+                    <RadioButton
+                        android:id="@+id/Rb_0OD5TP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="0 Yr OD &amp; 5 Yrs TP"
+                        android:textColor="@color/black"
+                        android:background="@drawable/form_bg_edittext_bg"
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:minHeight="30sp"
+                        android:visibility="gone"
+                        android:buttonTint="@color/black"
+                        style="@android:style/Widget.CompoundButton.CheckBox"
+                        android:layout_weight="5"/>
+
+
+
+                    <RadioButton
+                        android:id="@+id/Rb_1OD3TP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1 Yr OD &amp; 3 Yrs TP"
+                        android:textColor="@color/black"
+                        android:background="@drawable/form_bg_edittext_bg"
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:minHeight="30sp"
+                        android:visibility="gone"
+                        android:buttonTint="@color/black"
+                        style="@android:style/Widget.CompoundButton.CheckBox"
+                        android:layout_weight="5"/>
+
+                    <RadioButton
+                        android:id="@+id/Rb_3OD3TP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="3 Yrs OD &amp; 3 Yrs TP"
+                        android:textColor="@color/black"
+                        android:background="@drawable/form_bg_edittext_bg"
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:buttonTint="@color/black"
+                        style="@android:style/Widget.CompoundButton.CheckBox"
+                        android:minHeight="30sp"
+                        android:visibility="gone"
+                        android:layout_weight="5"/>
 
                     <RadioButton
                         android:id="@+id/Rb_1OD5TP"
@@ -985,20 +1107,7 @@
                         android:minHeight="30sp"
                         android:layout_weight="5"/>
 
-                    <RadioButton
-                        android:id="@+id/Rb_3OD3TP"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="3 Yrs OD &amp; 3 Yrs TP"
-                        android:textColor="@color/black"
-                        android:background="@drawable/form_bg_edittext_bg"
-                        android:layout_margin="5dp"
-                        android:padding="5dp"
-                        android:buttonTint="@color/black"
-                        style="@android:style/Widget.CompoundButton.CheckBox"
-                        android:minHeight="30sp"
-                        android:visibility="gone"
-                        android:layout_weight="5"/>
+
 
                 </RadioGroup>
 

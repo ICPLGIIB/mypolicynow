@@ -102,9 +102,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="You can upload a JPG, PNG &amp; PDF formats only."
+                    android:text="You can upload a image file formats only."
                     android:textColor="@color/colorAccent"
-                    android:layout_marginStart="20sp" />
+                    android:layout_gravity="center"
+                     />
 
                 <ImageView
                     android:id="@+id/Iv_UploadedImg"

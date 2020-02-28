@@ -25,7 +25,7 @@ import java.net.URL;
 public class DownloadTask {
     private static final String TAG = "Download Task";
     private Context context;
-
+    AlertDialog.Builder alertDialogBuilder;
     private String downloadUrl = "", downloadFileName = "";
     private ProgressDialog progressDialog;
 
@@ -54,6 +54,7 @@ public class DownloadTask {
             progressDialog.setMessage("Downloading...");
             progressDialog.setCancelable(false);
             progressDialog.show();
+            //alertDialogBuilder = new AlertDialog.Builder(DownloadingTask.this);
         }
 
         @Override
@@ -62,9 +63,9 @@ public class DownloadTask {
                 if (outputFile != null) {
                     progressDialog.dismiss();
                     ContextThemeWrapper ctw = new ContextThemeWrapper();
-                    final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ctw);
+                    alertDialogBuilder = new AlertDialog.Builder(ctw);
                     alertDialogBuilder.setTitle("Document");
-                    alertDialogBuilder.setMessage("Document Downloaded Successfully ");
+                    alertDialogBuilder.setMessage("Document Downloaded Successfully.");
                     alertDialogBuilder.setCancelable(false);
                     alertDialogBuilder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -74,7 +75,7 @@ public class DownloadTask {
 
                     alertDialogBuilder.setNegativeButton("Open report",new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            File pdfFile = new File(Environment.getExternalStorageDirectory() + "/CodePlayon/" + downloadFileName);  // -> filename = maven.pdf
+                            File pdfFile = new File(Environment.getExternalStorageDirectory() + "/AGS/" + downloadFileName+".pdf");  // -> filename = maven.pdf
                             Uri path = Uri.fromFile(pdfFile);
                             Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
                             pdfIntent.setDataAndType(path, "application/pdf");
@@ -138,7 +139,7 @@ public class DownloadTask {
                 //Get File if SD card is present
                 if (new CheckForSDCard().isSDCardPresent()) {
 
-                    apkStorage = new File(Environment.getExternalStorageDirectory() + "/" + "CodePlayon");
+                    apkStorage = new File(Environment.getExternalStorageDirectory() + "/" + "AGS");
                 } else
                     Toast.makeText(context, "Oops!! There is no SD Card.", Toast.LENGTH_SHORT).show();
 
@@ -148,7 +149,7 @@ public class DownloadTask {
                     Log.e(TAG, "Directory Created.");
                 }
 
-                outputFile = new File(apkStorage, downloadFileName);//Create Output file in Main File
+                outputFile = new File(apkStorage, downloadFileName+".pdf");//Create Output file in Main File
 
                 //Create New File if not present
                 if (!outputFile.exists()) {

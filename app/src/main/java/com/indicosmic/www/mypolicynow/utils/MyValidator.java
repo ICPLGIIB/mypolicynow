@@ -145,7 +145,7 @@ public class MyValidator {
     public static boolean isValidName(EditText editText) {
         String txtValue = editText.getText().toString().trim();
 
-        if (txtValue.length() <= 3) {
+        if (txtValue.length() < 2) {
             editText.setError(REQUIRED_MSG);
             return false;
         }
@@ -176,6 +176,25 @@ public class MyValidator {
 
         editText.setError(null);
         return true;
+    }
+
+    public static boolean isValidAdultAge(EditText editText) {
+       boolean result = false;
+
+        String txtValue = editText.getText().toString().trim();
+        if(txtValue.length() == 0){
+            editText.setError(REQUIRED_MSG);
+            result =   false;
+        }else if(txtValue.length() > 0) {
+
+            if (txtValue != null && !txtValue.equalsIgnoreCase("") && Integer.valueOf(txtValue) < 18) {
+                editText.setError("Age cannot be less than 18 years");
+                result =  false;
+            }else {
+                result = true;
+            }
+        }
+        return  result;
     }
 
     public static boolean isValidSpinner(Spinner spinner) {
