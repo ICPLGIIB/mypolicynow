@@ -55,6 +55,7 @@ public class NomineeDetailsFragment extends Fragment implements BlockingStep,Ada
     Context context;
     StepperLayout.OnNextClickedCallback mCallback;
 
+    ArrayList<String> relationNameList = new ArrayList<String>();
 
     String StrCollegeName;
 
@@ -102,6 +103,10 @@ public class NomineeDetailsFragment extends Fragment implements BlockingStep,Ada
         Spn_AppointeeSalutation = (Spinner)rootView.findViewById(R.id.Spn_AppointeeSalutation);
         Spn_AppointeeRelationship = (Spinner)rootView.findViewById(R.id.Spn_AppointeeRelationship);
 
+        fetchRelationType("Nominee","MR.");
+        fetchRelationType("Appointee","MR.");
+
+
         edt_NomineeFirstName = (EditText)rootView.findViewById(R.id.edt_NomineeFirstName);
         edt_NomineeMiddleName = (EditText)rootView.findViewById(R.id.edt_NomineeMiddleName);
         edt_NomineeLastName = (EditText)rootView.findViewById(R.id.edt_NomineeLastName);
@@ -132,11 +137,15 @@ public class NomineeDetailsFragment extends Fragment implements BlockingStep,Ada
             public void afterTextChanged(Editable editable) {
                 if(editable.toString().length()>=1){
                     String nomineeAge = editable.toString();
-                    Integer nominee_age = Integer.valueOf(nomineeAge);
-                    if(nominee_age < 18){
-                        LayoutAppointeeDetails.setVisibility(View.VISIBLE);
+                    if(nomineeAge.matches("^[0-9]*$")) {
+                        Integer nominee_age = Integer.valueOf(nomineeAge);
+                        if (nominee_age < 18) {
+                            LayoutAppointeeDetails.setVisibility(View.VISIBLE);
+                        } else {
+                            LayoutAppointeeDetails.setVisibility(View.GONE);
+                        }
                     }else {
-                        LayoutAppointeeDetails.setVisibility(View.GONE);
+                        edt_NomineeAge.setError("Please enter valid years");
                     }
 
                 }else if(editable.toString().length()==0) {
@@ -159,14 +168,19 @@ public class NomineeDetailsFragment extends Fragment implements BlockingStep,Ada
 
             @Override
             public void afterTextChanged(Editable editable) {
+
                 if(editable.toString().length()>=1){
                     String appointeeAge = editable.toString();
-                    Integer appointee_age = Integer.valueOf(appointeeAge);
-                    if(appointee_age < 18){
-                        edt_AppointeeAge.setError("Appointee Age cannot be less than 18 years.");
-                    }else {
-                        edt_AppointeeAge.setError(null);
+                    if(appointeeAge.matches("^[0-9]*$")) {
+                        Integer appointee_age = Integer.valueOf(appointeeAge);
+                        if (appointee_age < 18) {
+                            edt_AppointeeAge.setError("Appointee Age cannot be less than 18 years.");
+                        } else {
+                            edt_AppointeeAge.setError(null);
 
+                        }
+                    }else{
+                        edt_AppointeeAge.setError("Please enter valid years");
                     }
 
                 }else if(editable.toString().length()==0) {
@@ -190,6 +204,69 @@ public class NomineeDetailsFragment extends Fragment implements BlockingStep,Ada
 
 
         setDataToFields();
+    }
+
+
+    public String loadJSONFromAssetRelationType() {
+        String json = null;
+        try {
+            InputStream is = context.getAssets().open("relations.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+    }
+
+    private void fetchRelationType(String RelationFor, String Salutation) {
+
+        JSONArray m_jArry = null;
+        //Get state json value from assets folder
+        try {
+            JSONObject obj = new JSONObject(loadJSONFromAssetRelationType());
+
+            if(Salutation!=null && Salutation.equalsIgnoreCase("MR.")){
+                m_jArry  = obj.getJSONArray("MR_RelationList");
+                relationNameList = new ArrayList<>();
+            }else if(Salutation!=null && Salutation.equalsIgnoreCase("MS.")){
+                m_jArry  = obj.getJSONArray("MS_RelationList");
+                relationNameList = new ArrayList<>();
+            }else if(Salutation!=null && Salutation.equalsIgnoreCase("MRS.")){
+                m_jArry  = obj.getJSONArray("MRS_RelationList");
+                relationNameList = new ArrayList<>();
+            }
+
+
+            if (m_jArry != null) {
+                for (int i = 0; i < m_jArry.length(); i++) {
+
+                    JSONObject jo_inside = m_jArry.getJSONObject(i);
+
+                    String relationName = jo_inside.getString("relationName");
+
+                    relationNameList.add(relationName);
+                }
+            }
+
+
+
+            if(RelationFor!=null && RelationFor.equalsIgnoreCase("Nominee")){
+                ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, relationNameList);
+                Spn_NomineeRelationship.setAdapter(countryAdapter);
+            }else if(RelationFor!=null && RelationFor.equalsIgnoreCase("Appointee")) {
+                ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, relationNameList);
+                Spn_AppointeeRelationship.setAdapter(countryAdapter);
+
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -321,15 +398,26 @@ public class NomineeDetailsFragment extends Fragment implements BlockingStep,Ada
 
         int id = adapterView.getId();
         if (id == R.id.Spn_NomineeSalutation) {
-            Str_NomineeSalutation = Spn_NomineeSalutation.getSelectedItem().toString().trim();
+            if(Spn_NomineeSalutation.getSelectedItemPosition()>0) {
+                Str_NomineeSalutation = Spn_NomineeSalutation.getSelectedItem().toString().trim();
+                fetchRelationType("Nominee", Str_NomineeSalutation);
+            }else {
+                Str_NomineeSalutation = "";
+            }
         } else if (id == R.id.Spn_NomineeRelationship) {
             Str_NomineeRelationship = Spn_NomineeRelationship.getSelectedItem().toString().toLowerCase().trim();
         } else if (id == R.id.Spn_AppointeeSalutation) {
-            Str_AppointeeSalutation = Spn_AppointeeSalutation.getSelectedItem().toString().trim();
+            if(Spn_AppointeeSalutation.getSelectedItemPosition()>0) {
+                Str_AppointeeSalutation = Spn_AppointeeSalutation.getSelectedItem().toString().trim();
+                fetchRelationType("Appointee", Str_AppointeeSalutation);
+            }else {
+                Str_AppointeeRelationship = "";
+            }
         } else if (id == R.id.Spn_AppointeeRelationship) {
             Str_AppointeeRelationship = Spn_AppointeeRelationship.getSelectedItem().toString().toLowerCase().trim();
         }
     }
+
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {

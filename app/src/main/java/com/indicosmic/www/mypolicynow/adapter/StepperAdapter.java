@@ -11,7 +11,6 @@ import androidx.fragment.app.FragmentManager;
 import com.indicosmic.www.mypolicynow.customer_info.OwnerDetailFragment;
 import com.indicosmic.www.mypolicynow.customer_info.NomineeDetailsFragment;
 import com.indicosmic.www.mypolicynow.customer_info.ContactDetailsFragment;
-import com.indicosmic.www.mypolicynow.customer_info.ReviewDetailsFragment;
 import com.indicosmic.www.mypolicynow.customer_info.VehicleDetailsFragment;
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.adapter.AbstractFragmentStepAdapter;
@@ -56,12 +55,12 @@ public class StepperAdapter extends AbstractFragmentStepAdapter {
                 step3.setArguments(b3);
                 return step3;
 
-            case 4:
-                final ReviewDetailsFragment step4 = new ReviewDetailsFragment();
+          /*  case 4:
+                final ReviewDetailsActivity step4 = new ReviewDetailsActivity();
                 Bundle b4 = new Bundle();
                 b4.putInt(CURRENT_STEP_POSITION_KEY, position);
                 step4.setArguments(b4);
-                return step4;
+                return step4;*/
 
 
 
@@ -71,7 +70,7 @@ public class StepperAdapter extends AbstractFragmentStepAdapter {
     }
     @Override
     public int getCount() {
-        return 5;
+        return 4;
     }
     @NonNull
     @Override
@@ -105,12 +104,12 @@ public class StepperAdapter extends AbstractFragmentStepAdapter {
                         .setEndButtonLabel("REVIEW DETAILS")
                         .create();
 
-            case 4:
+           /* case 4:
                 return new StepViewModel.Builder(context)
                         .setTitle("REVIEW DETAILS")
                         .setBackButtonLabel("EDIT")
                         .setEndButtonLabel("GENERATE PROPOSAL")
-                        .create();
+                        .create();*/
 
 
 

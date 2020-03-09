@@ -577,7 +577,9 @@ public class IcListingQuoteScreen extends AppCompatActivity {
         });
 
 
-
+        if(ll_parent_portfolio!=null && ll_parent_portfolio.getChildCount()>0){
+            ll_parent_portfolio.removeAllViews();
+        }
         IcList = new String[] {"3","6"};
         for(int k=0; k< IcList.length; k++){
             String ic_id = IcList[k];

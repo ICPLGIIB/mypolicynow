@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/form_background_color"
@@ -9,7 +9,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:layout_above="@+id/layout_footer">
 
         <LinearLayout
             android:orientation="vertical"
@@ -1080,4 +1081,42 @@
 
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="50sp"
+        android:layout_alignParentBottom="true"
+        android:weightSum="10"
+        android:background="@color/form_background_color"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_Edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="EDIT"
+            android:layout_weight="5"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_margin="5dp"
+
+            android:background="@drawable/cw_button_shadow_primary"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/btn_GenerateProposal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GENERATE PROPOSAL"
+            android:layout_weight="5"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:background="@drawable/cw_button_shadow_green"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

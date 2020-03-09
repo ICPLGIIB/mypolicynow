@@ -1,0 +1,30 @@
+{
+  "MR_RelationList":[
+    { "relationName": "Select Relationship *" },
+    { "relationName": "SON" },
+    { "relationName": "BROTHER" },
+    { "relationName": "FATHER" },
+    { "relationName": "FATHER-IN-LAW" },
+    { "relationName": "SPOUSE" },
+    { "relationName": "OTHERS" },
+    { "relationName": "CHILD" },
+    { "relationName": "SIBLING" }
+  ],
+  "MS_RelationList":[
+    { "relationName": "Select Relationship *" },
+    { "relationName": "DAUGHTER" },
+    { "relationName": "OTHERS" },
+    { "relationName": "CHILD" },
+    { "relationName": "SIBLING" }
+  ],
+  "MRS_RelationList":[
+    { "relationName": "Select Relationship *" },
+    { "relationName": "DAUGHTER" },
+    { "relationName": "MOTHER" },
+    { "relationName": "MOTHER-IN-LAW" },
+    { "relationName": "SPOUSE" },
+    { "relationName": "OTHERS" },
+    { "relationName": "CHILD" },
+    { "relationName": "SIBLING" }
+  ]
+}

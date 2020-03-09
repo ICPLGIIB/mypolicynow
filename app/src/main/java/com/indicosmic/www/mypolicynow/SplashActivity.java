@@ -101,10 +101,17 @@ public class SplashActivity extends RuntimePermissions {
         sharedPrefManager = new SharedPrefManager(this);
 
         if (Build.VERSION.SDK_INT >= 21) {
-            SplashActivity.super.requestAppPermissions(new String[]{Manifest.permission.INTERNET, Manifest.permission.READ_PHONE_STATE,
-                    Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION},
+            if (Build.VERSION.SDK_INT >= 29){
+                SplashActivity.super.requestAppPermissions(new String[]{Manifest.permission.INTERNET, Manifest.permission.READ_PHONE_STATE,
+                                Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE,
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.FOREGROUND_SERVICE},
+                        R.string.runtime_permissions_txt, REQUEST_PERMISSIONS);
+            }else {
+                SplashActivity.super.requestAppPermissions(new String[]{Manifest.permission.INTERNET, Manifest.permission.READ_PHONE_STATE,
+                            Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION},
                     R.string.runtime_permissions_txt, REQUEST_PERMISSIONS);
+            }
         } else {
             redirect();
 

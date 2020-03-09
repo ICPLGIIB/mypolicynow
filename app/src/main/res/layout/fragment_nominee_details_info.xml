@@ -140,7 +140,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:padding="5dp"
-                    android:entries="@array/spin_item_nominee_relationship"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentStart="true" />
             </RelativeLayout>
@@ -310,7 +309,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="70dp"
                         android:padding="5dp"
-                        android:entries="@array/spin_item_appointtee_relationship"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentStart="true" />
                 </RelativeLayout>

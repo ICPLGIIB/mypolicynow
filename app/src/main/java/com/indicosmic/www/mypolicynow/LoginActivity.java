@@ -1,12 +1,16 @@
 package com.indicosmic.www.mypolicynow;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -73,37 +78,9 @@ public class LoginActivity extends AppCompatActivity {
         iv_logo = (ImageView) findViewById(R.id.iv_logo);
 
 
-        mTelephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    Activity#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for Activity#requestPermissions for more details.
-                return;
-            }
-        }
-        IMEI = mTelephonyManager.getDeviceId();
-        if (IMEI == null) {
 
+        IMEI = getDeviceID();
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    Activity#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for Activity#requestPermissions for more details.
-                    return;
-                }
-            }
-            IMEI = mTelephonyManager.getSubscriberId();
-        }
 
         SingletonClass.getinstance().imei_no = IMEI;
 
@@ -131,7 +108,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(isValidFields()){
                     InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(EdtPassword.getWindowToken(), 0);
+                    if (imm != null) {
+                        imm.hideSoftInputFromWindow(EdtPassword.getWindowToken(), 0);
+                    }
                     StrEmail_Mobile = EdtEmail_Mobile.getText().toString();
                     StrPassword = EdtPassword.getText().toString();
 
@@ -142,6 +121,97 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("HardwareIds")
+    public String getDeviceID() {
+        String m_szUniqueID ="";
+        /*String Return_DeviceID = USERNAME_and_PASSWORD.getString(DeviceID_key,"Guest");
+        return Return_DeviceID;*/
+        TelephonyManager telMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        int simState = telMgr != null ? telMgr.getSimState() : 0;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            int simCount = telMgr != null ? telMgr.getPhoneCount() : 0;
+            if (simCount == 2) {
+                if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    Activity#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for Activity#requestPermissions for more details.
+                    return null;
+                }
+
+
+
+                TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+
+
+                if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+
+                    if  (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            IMEI = telephonyManager != null ? telephonyManager.getImei(0) : "";
+                        }
+
+
+                    } else {
+                        IMEI = Settings.Secure.getString(getContentResolver(),
+                                Settings.Secure.ANDROID_ID);
+                    }
+                }
+
+
+            }else {
+                IMEI = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+            }
+            // 2 compute DEVICE ID
+
+            if(IMEI!=null && !IMEI.equalsIgnoreCase("") && !IMEI.equalsIgnoreCase("null")){
+                m_szUniqueID = IMEI;
+            }else {
+
+                String m_szDevIDShort = "35"
+                        + // we make this look like a valid IMEI
+                        Build.BOARD.length() % 10 + Build.BRAND.length() % 10
+                        + Build.CPU_ABI.length() % 10 + Build.DEVICE.length() % 10
+                        + Build.DISPLAY.length() % 10 + Build.HOST.length() % 10
+                        + Build.ID.length() % 10 + Build.MANUFACTURER.length() % 10
+                        + Build.MODEL.length() % 10 + Build.PRODUCT.length() % 10
+                        + Build.TAGS.length() % 10 + Build.TYPE.length() % 10
+                        + Build.USER.length() % 10; // 13 digits
+
+                WifiManager wm = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                @SuppressLint("HardwareIds") String m_szWLANMAC = wm != null ? wm.getConnectionInfo().getMacAddress() : "";
+                // 5 Bluetooth MAC address android.permission.BLUETOOTH required
+                BluetoothAdapter m_BluetoothAdapter = null; // Local Bluetooth adapter
+                m_BluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+                @SuppressLint("HardwareIds") String m_szBTMAC = m_BluetoothAdapter.getAddress();
+                System.out.println("m_szBTMAC "+m_szBTMAC);
+
+                if(m_szWLANMAC!=null && !m_szWLANMAC.equalsIgnoreCase("") && !m_szWLANMAC.equalsIgnoreCase("null")){
+                    m_szUniqueID = m_szWLANMAC;
+                }else if(m_szBTMAC!=null && !m_szBTMAC.equalsIgnoreCase("") && !m_szBTMAC.equalsIgnoreCase("null")){
+                    m_szUniqueID = m_szBTMAC;
+                }
+
+            }
+        }else {
+            if (telMgr != null) {
+                IMEI = telMgr.getDeviceId();
+                m_szUniqueID = IMEI;
+            }
+
+        }
+
+
+
+        Log.i("--DeviceID--", m_szUniqueID);
+        Log.d("DeviceIdCheck", "DeviceId that generated MPreferenceActivity:"+m_szUniqueID);
+
+        return m_szUniqueID;
+
+    }
 
 
     private boolean isValidFields() {

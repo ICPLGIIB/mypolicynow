@@ -460,7 +460,7 @@ public class MyValidator {
     public static boolean isValidEngine_ChassisNumber(EditText edt_engineNo) {
 
         String engine_no = edt_engineNo.getText().toString().trim();
-        if (engine_no != null && (engine_no.length() > 5 && engine_no.length() <= 22 )){
+        if (engine_no != null && (engine_no.length() > 4 && engine_no.length() <= 22 )){
             edt_engineNo.setError(null);
             return true;
         }

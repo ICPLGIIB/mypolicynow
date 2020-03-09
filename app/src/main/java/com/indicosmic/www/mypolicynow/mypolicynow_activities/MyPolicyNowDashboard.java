@@ -181,8 +181,8 @@ public class MyPolicyNowDashboard extends AppCompatActivity implements Navigatio
             public void onClick(View view) {
                 UtilitySharedPreferences.setPrefs(getApplicationContext(),"QuotationFor","Bike");
                 if(POS_TOKEN!=null && !POS_TOKEN.equalsIgnoreCase("")){
-                    Intent i = new Intent(getApplicationContext(), QuotationActivity.class);
-                    i.putExtra("pos_token", POS_TOKEN);
+                    Intent i = new Intent(getApplicationContext(), ProposalPdfActivity.class);
+                    //i.putExtra("pos_token", POS_TOKEN);
                     startActivity(i);
                     overridePendingTransition(R.animator.move_left,R.animator.move_right);
                     finish();

@@ -212,6 +212,7 @@
             android:padding="5dp"
             android:layout_weight="5"
             android:maxLength="22"
+
             android:textColor="@color/black"
             android:textColorHint="@color/grey"
             android:textSize="17sp" />
@@ -396,8 +397,8 @@
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/btn_color_form_background"
                 android:hint="Previous Policy No. *"
-                android:imeOptions="actionNext"
-                android:inputType="text"
+                android:imeOptions="actionDone"
+                android:inputType="textCapCharacters"
                 android:padding="5dp"
                 android:layout_weight="5"
 

@@ -13,6 +13,7 @@
         android:id="@+id/webViewProposalPdf"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:background="@color/form_background_color"
         android:layout_above="@+id/LayoutBottomNav"/>
 
@@ -62,15 +63,48 @@
 
 
         <Button
-            android:id="@+id/BtnVerify_Buy"
+            android:id="@+id/BtnVerify"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/cw_button_shadow_green"
             android:textColor="@color/white"
             android:text="VERIFY"
+            android:visibility="gone"
             android:layout_margin="5dp"
             android:layout_weight="3"/>
 
+        <Button
+            android:id="@+id/BtnUploadPACover"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cw_button_shadow_blue"
+            android:textColor="@color/white"
+            android:text="UPLOAD PA COVER"
+            android:visibility="gone"
+            android:layout_margin="5dp"
+            android:layout_weight="3"/>
+
+        <Button
+            android:id="@+id/BtnUploadPreviousPolicy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cw_button_shadow_blue"
+            android:textColor="@color/white"
+            android:text="UPLOAD POLICY"
+            android:visibility="gone"
+            android:layout_margin="5dp"
+            android:layout_weight="3"/>
+
+        <Button
+            android:id="@+id/BtnBuyPolicy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cw_button_shadow_green"
+            android:textColor="@color/white"
+            android:text="BUY POLICY"
+            android:visibility="visible"
+            android:layout_margin="5dp"
+            android:layout_weight="3"/>
 
 
 

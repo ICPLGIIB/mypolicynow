@@ -149,7 +149,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
             have_motor_policy="no",have_pa_policy="no",other_pa_policy="no",selected_pa_year="",previous_policy_nil_dep="no",
             ownership_change="no",product_type="",is_cng_lpg_tp="no",commercial_idv="0",no_of_trailer="0",
             vehicledisplaytype="0",body_type_id="0",frame_type_id="";
-
+    JSONObject user_action_data_obj;
     String StrSelectedMake="",make_cleaned="",SelectedModel="",model_cleaned="";
 
 
@@ -174,7 +174,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
 
     private void getPreveledgesFromToken() {
         if (StrPosToken != null && !StrPosToken.equalsIgnoreCase("")) {
-
+            user_action_data_obj = new JSONObject();
             String URL = RestClient.ROOT_URL2+"tokenverify";
             ConnectionDetector cd = new ConnectionDetector(getApplicationContext());
             boolean isInternetPresent = cd.isConnectingToInternet();
@@ -221,6 +221,8 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                                     UtilitySharedPreferences.setPrefs(getApplicationContext(),"ProductTypeId",ProductTypeId);
                                     UtilitySharedPreferences.setPrefs(getApplicationContext(),"CarPreviledges",car_previledgeObj.toString());
                                     Log.d("ProductTypeId",""+ProductTypeId);
+
+
                                 }else if(QuotationFor.equalsIgnoreCase("Bike")){
                                     JSONObject bike_previledgeObj = partner_privilegeObj.getJSONObject("2");
                                     ProductTypeId = bike_previledgeObj.getString("product_type_id");
@@ -1454,7 +1456,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                 protected Map<String, String> getParams() {
                     Map<String, String> map = new HashMap<String, String>();
                     map.put("agent_id", StrAgentId);
-                    //map.put("business_id","");
+                    //map.put("user_action_data",user_action_data_obj.toString());
 
                     Log.d("MasterQuoteData",""+map);
 

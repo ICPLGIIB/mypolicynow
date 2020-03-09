@@ -26,7 +26,7 @@ import java.util.Locale;
 public class AppUtill {
 
     // directory name to store captured images and videos
-    private static final String IMAGE_DIRECTORY_NAME = "ClaimPic";
+    public static final String IMAGE_DIRECTORY_NAME = "AGS";
     private static final String VIDEO_DIRECTORY_NAME = "ClaimVideo";
     static File mediaFile;
 
