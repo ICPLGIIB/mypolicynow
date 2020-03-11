@@ -369,7 +369,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
 
 
         Spn_ManufacturingMonth= (Spinner)findViewById(R.id.Spn_ManufacturingMonth);
-       /* ArrayAdapter<String> monthAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, Constant.Month);
+       /* ArrayAdapter<String> monthAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, Constant.Month);
         Spn_ManufacturingMonth.setAdapter(monthAdapter);*/
         Spn_ManufacturingMonth.setOnItemSelectedListener(this);
 
@@ -1417,7 +1417,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                             makeDisplayValue.add(make_name.toUpperCase());
                         }
 
-                        ArrayAdapter<String> makeAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, makeDisplayValue);
+                        ArrayAdapter<String> makeAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, makeDisplayValue);
                         Spn_Make.setAdapter(makeAdapter);
 
 
@@ -1430,7 +1430,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                             rtoDisplayValue.add(rto_name.toUpperCase());
                         }
 
-                        ArrayAdapter<String> rtoAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, rtoDisplayValue);
+                        ArrayAdapter<String> rtoAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, rtoDisplayValue);
                         Spn_RTO.setAdapter(rtoAdapter);
 
                         if (myDialog != null && myDialog.isShowing()) {
@@ -1522,7 +1522,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                             modelDisplayValue.add(model_name.toUpperCase());
                         }
 
-                        ArrayAdapter<String> modelAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, modelDisplayValue);
+                        ArrayAdapter<String> modelAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, modelDisplayValue);
                         Spn_Model.setAdapter(modelAdapter);
 
 
@@ -1611,7 +1611,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                             variantDisplayValue.add(variant_name.toUpperCase() + " ("+ seating_capacity + "SEATER) ("+fuel_cleaned.toUpperCase()+") ("+cc+" CC)");
                         }
 
-                        ArrayAdapter<String> variantAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, variantDisplayValue);
+                        ArrayAdapter<String> variantAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, variantDisplayValue);
                         Spn_Variant.setAdapter(variantAdapter);
 
 
@@ -1748,7 +1748,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                     manufacturingYear.add(String.valueOf(new_year));
                 }
                 Log.d("ManufacturingYear", "" + manufacturingYear);
-                ArrayAdapter<String> yearAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, manufacturingYear);
+                ArrayAdapter<String> yearAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, manufacturingYear);
                 Spn_ManufacturingYear.setAdapter(yearAdapter);
 
 
@@ -1760,7 +1760,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                     manufacturingYear.add(String.valueOf(new_year));
                 }
                 Log.d("ManufacturingYear", "" + manufacturingYear);
-                ArrayAdapter<String> yearAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, manufacturingYear);
+                ArrayAdapter<String> yearAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, manufacturingYear);
                 Spn_ManufacturingYear.setAdapter(yearAdapter);
 
             }
@@ -1773,7 +1773,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                     manufacturingYear.add(String.valueOf(new_year));
                 }
                 Log.d("ManufacturingYear", "" + manufacturingYear);
-                ArrayAdapter<String> yearAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, manufacturingYear);
+                ArrayAdapter<String> yearAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, manufacturingYear);
                 Spn_ManufacturingYear.setAdapter(yearAdapter);
 
 
@@ -1785,7 +1785,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                     manufacturingYear.add(String.valueOf(new_year));
                 }
                 Log.d("ManufacturingYear", "" + manufacturingYear);
-                ArrayAdapter<String> yearAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, manufacturingYear);
+                ArrayAdapter<String> yearAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, manufacturingYear);
                 Spn_ManufacturingYear.setAdapter(yearAdapter);
 
             }
@@ -1798,7 +1798,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                     manufacturingYear.add(String.valueOf(new_year));
                 }
                 Log.d("ManufacturingYear", "" + manufacturingYear);
-                ArrayAdapter<String> yearAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, manufacturingYear);
+                ArrayAdapter<String> yearAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, manufacturingYear);
                 Spn_ManufacturingYear.setAdapter(yearAdapter);
 
 
@@ -1944,7 +1944,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
             }
         }
 
-        ArrayAdapter<String> cpaAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, cpaDisplayValue);
+        ArrayAdapter<String> cpaAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, cpaDisplayValue);
         Spn_CPASelection.setAdapter(cpaAdapter);
 
     }
@@ -2125,7 +2125,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                             manufacturingMonthDisplayValue.add(month_name);
                         }
 
-                        ArrayAdapter<String> monthAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, manufacturingMonthDisplayValue);
+                        ArrayAdapter<String> monthAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, manufacturingMonthDisplayValue);
                         Spn_ManufacturingMonth.setAdapter(monthAdapter);
 
 
@@ -2206,7 +2206,7 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                             ncbDisplayValue.add(ncb_name);
                         }
 
-                        ArrayAdapter<String> ncbAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, ncbDisplayValue);
+                        ArrayAdapter<String> ncbAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, ncbDisplayValue);
                         Spn_NCB_Percent.setAdapter(ncbAdapter);
 
 

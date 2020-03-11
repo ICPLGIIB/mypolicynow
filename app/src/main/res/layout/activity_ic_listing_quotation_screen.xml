@@ -783,6 +783,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:padding="5dp"
+                android:visibility="gone"
                 android:textColor="@color/red"
                 />
 
@@ -832,7 +833,7 @@
                             android:id="@+id/iv_idv"
                             android:layout_width="30sp"
                             android:layout_height="30sp"
-                            android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                            android:src="@drawable/ic_arrow_drop_down"
                             android:layout_gravity="center"
 
                             />
@@ -1058,7 +1059,7 @@
                         android:id="@+id/iv_accessories_covers"
                         android:layout_width="30sp"
                         android:layout_height="30sp"
-                        android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:src="@drawable/ic_arrow_drop_down"
                         android:layout_gravity="center"
 
                         />

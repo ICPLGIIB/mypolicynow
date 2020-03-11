@@ -5,7 +5,10 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -32,6 +35,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.CompoundButtonCompat;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -443,7 +447,7 @@ public class IcListingQuoteScreen extends AppCompatActivity {
 
                 }else {
                     LayoutExtendAccessories_Covers.setVisibility(View.GONE);
-                    iv_accessories_covers.setImageDrawable(getDrawable(R.drawable.ic_arrow_drop_down_black_24dp));
+                    iv_accessories_covers.setImageDrawable(getDrawable(R.drawable.ic_arrow_drop_down));
                 }
             }
         });
@@ -462,7 +466,7 @@ public class IcListingQuoteScreen extends AppCompatActivity {
 
                 }else {
                     LayoutExtendIdv.setVisibility(View.GONE);
-                    iv_idv.setImageDrawable(getDrawable(R.drawable.ic_arrow_drop_down_black_24dp));
+                    iv_idv.setImageDrawable(getDrawable(R.drawable.ic_arrow_drop_down));
                 }
             }
         });
@@ -1347,8 +1351,11 @@ public class IcListingQuoteScreen extends AppCompatActivity {
                         String addon_description = addObj.getString("addon_description");
 
                         CB_AddONs = new CheckBox(getApplicationContext());
+
                         CB_AddONs.setText(addon_description);
+                        CB_AddONs.setTextColor(getResources().getColor(R.color.black));
                         CB_AddONs.setHint(addObj.toString());
+                        CB_AddONs.setButtonTintList(ColorStateList.valueOf(Color.BLACK));
                         CB_AddONs.setId(k);
 
                         try {
