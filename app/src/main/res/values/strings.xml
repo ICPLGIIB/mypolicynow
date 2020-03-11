@@ -97,7 +97,7 @@
     <string-array name="spin_item_children">
         <item>Children ?</item>
         <item>No</item>
-        <item>Ok, if not staying together</item>
+        <item>OK, if not staying together</item>
     </string-array>
 
     <string-array name="spin_item_annual_salary">

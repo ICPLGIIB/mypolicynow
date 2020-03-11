@@ -221,7 +221,7 @@ public class IcListingQuoteScreen extends AppCompatActivity {
                 Str_pa_cover_tenure = user_action_dataObj.getString("selected_pa_year");
             }
 
-            if(Str_policy_type.equalsIgnoreCase("renew")) {
+            if(Str_policy_type!=null && Str_policy_type.equalsIgnoreCase("renew")) {
                 Str_claimed_in_past_year = user_action_dataObj.getString("is_claimed");
                 Str_previous_policy_type = user_action_dataObj.getString("previous_yr_policy_type");
                 Str_previous_policy_expiry_date = user_action_dataObj.getString("previous_policy_expiry_date");
@@ -232,30 +232,30 @@ public class IcListingQuoteScreen extends AppCompatActivity {
 
             }
 
+            if(Str_product_type_id!=null) {
+                if (Str_product_type_id.equalsIgnoreCase("2")) {
+                    StrImageUrl = ROOT_URL2 + "assets/images/car/bike.jpg";
+                } else if (Str_product_type_id.equalsIgnoreCase("1")) {
+                    StrImageUrl = ROOT_URL2 + "assets/images/car/hondacity-img.jpg";
+                } else if (Str_product_type_id.equalsIgnoreCase("3")) {
+                    StrImageUrl = ROOT_URL2 + "assets/images/car/taxi.jpg";
+                } else if ((Str_product_type_id.equalsIgnoreCase("4")) || Str_product_type_id.equalsIgnoreCase("5")) {
+                    StrImageUrl = ROOT_URL2 + "assets/images/car/truck.jpg";
+                } else if (Str_product_type_id.equalsIgnoreCase("6")) {
+                    StrImageUrl = ROOT_URL2 + "assets/images/car/bus.jpg";
+                } else if (Str_product_type_id.equalsIgnoreCase("7") || Str_product_type_id.equalsIgnoreCase("8") ||
+                        Str_product_type_id.equalsIgnoreCase("9") || Str_product_type_id.equalsIgnoreCase("10") ||
+                        Str_product_type_id.equalsIgnoreCase("11") || Str_product_type_id.equalsIgnoreCase("12") ||
+                        Str_product_type_id.equalsIgnoreCase("13")) {
+                    StrImageUrl = ROOT_URL2 + "assets/images/car/auto.jpg";
+                } else if (Str_product_type_id.equalsIgnoreCase("15")) {
+                    StrImageUrl = ROOT_URL2 + "assets/images/car/miscd.jpg";
+                } else if (Str_product_type_id.equalsIgnoreCase("16") || Str_product_type_id.equalsIgnoreCase("17")) {
+                    StrImageUrl = ROOT_URL2 + "assets/images/car/trailer.jpg";
+                }
 
-            if(Str_product_type_id.equalsIgnoreCase("2")){
-                StrImageUrl = ROOT_URL2+"assets/images/car/bike.jpg";
-            } else if (Str_product_type_id.equalsIgnoreCase("1")) {
-                StrImageUrl = ROOT_URL2+"assets/images/car/hondacity-img.jpg";
-            } else if (Str_product_type_id.equalsIgnoreCase("3")) {
-                StrImageUrl = ROOT_URL2+"assets/images/car/taxi.jpg";
-            } else if ((Str_product_type_id.equalsIgnoreCase("4")) || Str_product_type_id.equalsIgnoreCase("5")) {
-                StrImageUrl = ROOT_URL2+"assets/images/car/truck.jpg";
-            } else if (Str_product_type_id.equalsIgnoreCase("6")) {
-                StrImageUrl = ROOT_URL2+"assets/images/car/bus.jpg";
-            } else if (Str_product_type_id.equalsIgnoreCase("7") || Str_product_type_id.equalsIgnoreCase("8") ||
-                    Str_product_type_id.equalsIgnoreCase("9")|| Str_product_type_id.equalsIgnoreCase("10")||
-                    Str_product_type_id.equalsIgnoreCase("11") || Str_product_type_id.equalsIgnoreCase("12") ||
-                    Str_product_type_id.equalsIgnoreCase("13")) {
-                StrImageUrl = ROOT_URL2+"assets/images/car/auto.jpg";
-            } else if (Str_product_type_id.equalsIgnoreCase("15")) {
-                StrImageUrl = ROOT_URL2+"assets/images/car/miscd.jpg";
-            } else if (Str_product_type_id.equalsIgnoreCase("16") || Str_product_type_id.equalsIgnoreCase("17")) {
-                StrImageUrl = ROOT_URL2+"assets/images/car/trailer.jpg";
+                Glide.with(IcListingQuoteScreen.this).load(StrImageUrl).into(iv_vehicle_type);
             }
-
-            Glide.with(IcListingQuoteScreen.this).load(StrImageUrl).into(iv_vehicle_type);
-
 
 
             selected_od_year = user_action_dataObj.getString("selected_od_year");
@@ -369,15 +369,14 @@ public class IcListingQuoteScreen extends AppCompatActivity {
             Str_vehicle_max_idv = mpn_dataObj.getString("vehicle_max_idv");
             Str_total_vehicle_idv = mpn_dataObj.getString("total_vehicle_idv");
 
-            if(Str_product_type_id.equalsIgnoreCase("2")){
-
-                BreakInTxt.setVisibility(View.GONE);
-            }else if(Str_product_type_id.equalsIgnoreCase("1")){
+             if(Str_product_type_id!=null && Str_product_type_id.equalsIgnoreCase("1")){
                 if(is_breakin){
                     BreakInTxt.setVisibility(View.VISIBLE);
                 }else {
                     BreakInTxt.setVisibility(View.GONE);
                 }
+            }else {
+                 BreakInTxt.setVisibility(View.GONE);
             }
 
         } catch (JSONException e) {
