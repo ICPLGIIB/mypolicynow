@@ -37,6 +37,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.CompoundButtonCompat;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -73,7 +74,11 @@ import java.util.Map;
 
 import static com.indicosmic.www.mypolicynow.utils.CommonMethods.ucFirst;
 import static com.indicosmic.www.mypolicynow.utils.CommonMethods.ucFirst;
+import static com.indicosmic.www.mypolicynow.webservices.RestClient.Basic_auth;
 import static com.indicosmic.www.mypolicynow.webservices.RestClient.ROOT_URL2;
+import static com.indicosmic.www.mypolicynow.webservices.RestClient.api_password;
+import static com.indicosmic.www.mypolicynow.webservices.RestClient.api_user_name;
+import static com.indicosmic.www.mypolicynow.webservices.RestClient.x_api_key;
 
 public class IcListingQuoteScreen extends AppCompatActivity {
 
@@ -1700,6 +1705,17 @@ public class IcListingQuoteScreen extends AppCompatActivity {
                     Log.d("BuyPolicyData",""+params);
                     return params;
                 }
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    //  Authorization: Basic $auth
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    //headers.put("Content-Type", "application/x-www-form-urlencoded");
+                    //headers.put("Content-Type", "application/json; charset=utf-8");
+                    headers.put("x-api-key",x_api_key);
+                    headers.put("Authorization", "Basic "+CommonMethods.Base64_Encode(api_user_name + ":" + api_password));
+                    return headers;
+                }
             };
 
 
@@ -1813,6 +1829,8 @@ public class IcListingQuoteScreen extends AppCompatActivity {
                         row_ic_name.setText(ic_id_name);
 
                         TextView row_net_premium_amt = (TextView)rowView.findViewById(R.id.row_net_premium_amt);
+                            TextView net_premium_amt = (TextView)rowView.findViewById(R.id.net_premium_amt);
+
                         TextView row_addon_txt = (TextView)rowView.findViewById(R.id.row_addon_txt);
                         if(addon_apiObject!=null &&  !addon_apiObject.toString().equalsIgnoreCase("")) {
                             row_addon_txt.setText(addon_apiObject.toString());
@@ -1847,7 +1865,7 @@ public class IcListingQuoteScreen extends AppCompatActivity {
                             Linear_row_Premium.setVisibility(View.VISIBLE);
 
                             row_net_premium_amt.setText("\u20B9 "+gross_premium);
-
+                            net_premium_amt.setText(gross_premium);
                             TextView tv_idv_in_rupees = (TextView) rowView.findViewById(R.id.tv_idv_in_rupees);
                             tv_idv_in_rupees.setText("\u20B9 "+vehicle_idv);
 
@@ -1939,6 +1957,7 @@ public class IcListingQuoteScreen extends AppCompatActivity {
                         btn_buy_policy.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
+                                UtilitySharedPreferences.setPrefs(getApplicationContext(),"total_premium_payable",net_premium_amt.getText().toString());
                                 API_BUY_POLICY(row_ic_id.getText().toString());
                             }
                         });
@@ -1971,6 +1990,17 @@ public class IcListingQuoteScreen extends AppCompatActivity {
                     map.put("ic_id",ic_id);
                     Log.d("MapLoadIcList",""+map);
                     return map;
+                }
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    //  Authorization: Basic $auth
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    //headers.put("Content-Type", "application/x-www-form-urlencoded");
+                    //headers.put("Content-Type", "application/json; charset=utf-8");
+                    headers.put("x-api-key",x_api_key);
+                    headers.put("Authorization", "Basic "+CommonMethods.Base64_Encode(api_user_name + ":" + api_password));
+                    return headers;
                 }
             };
 
@@ -2049,6 +2079,17 @@ public class IcListingQuoteScreen extends AppCompatActivity {
                     map.put("ic_id",ic_id);
                     Log.d("BuyPolicyData",""+map);
                     return map;
+                }
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    //  Authorization: Basic $auth
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    //headers.put("Content-Type", "application/x-www-form-urlencoded");
+                    //headers.put("Content-Type", "application/json; charset=utf-8");
+                    headers.put("x-api-key",x_api_key);
+                    headers.put("Authorization", "Basic "+CommonMethods.Base64_Encode(api_user_name + ":" + api_password));
+                    return headers;
                 }
             };
 
@@ -2283,6 +2324,8 @@ public class IcListingQuoteScreen extends AppCompatActivity {
                     tv_total_premium_l.setText(l_total_tp_premium_with_gst);
                     tv_total_premium_with_gst_18_m.setText(m_total_tp_premium_with_gst);
                     tv_total_total_premium_payable_n.setText(total_premium_payable);
+
+
 
                     // OD BreakUp
                     JSONObject basic_od_htmlObj = breakup_html.getJSONObject("basic_od");

@@ -22,8 +22,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
@@ -951,7 +953,41 @@ public class CommonMethods
 			return  year;
 		}
 
+		public static String SanitizeString(String input_string){
 
+			String outputString = input_string;
+
+			outputString = input_string.replaceAll("[^a-zA-Z0-9]", " ");
+
+
+			return outputString;
+
+		}
+
+		public static String Base64_Encode(String input_string){
+
+			String encoded_string = "";
+
+			byte[] data = null;
+			try {
+				data = input_string.getBytes("UTF-8");
+			} catch (UnsupportedEncodingException e1) {
+				e1.printStackTrace();
+			}
+			encoded_string = Base64.encodeToString(data, Base64.DEFAULT);
+
+			Log.d("encoded_string",""+encoded_string);
+			return encoded_string;
+		}
+
+		public static String Base64_Decode(String base64){
+
+			String decoded_string = "";
+			byte[] data = Base64.decode(base64, Base64.DEFAULT);
+			decoded_string = new String(data, StandardCharsets.UTF_8);
+			return decoded_string;
+
+		}
 
         public static void clearForm(ViewGroup group) {
             for (int i = 0, count = group.getChildCount(); i < count; ++i) {

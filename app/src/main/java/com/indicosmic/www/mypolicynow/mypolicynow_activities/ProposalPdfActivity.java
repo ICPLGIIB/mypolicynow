@@ -56,6 +56,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.content.FileProvider;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -76,6 +77,8 @@ import com.indicosmic.www.mypolicynow.utils.FilePath;
 import com.indicosmic.www.mypolicynow.utils.UtilitySharedPreferences;
 import com.indicosmic.www.mypolicynow.webservices.Common;
 import com.indicosmic.www.mypolicynow.webservices.RestClient;
+import com.interfaces.ClsPAXInf;
+import com.interfaces.OnPaxPOSTransactionListerner;
 
 import net.gotev.uploadservice.MultipartUploadRequest;
 import net.gotev.uploadservice.ServerResponse;
@@ -107,11 +110,15 @@ import java.util.Objects;
 import java.util.TreeSet;
 import java.util.UUID;
 
+import static com.indicosmic.www.mypolicynow.webservices.RestClient.Basic_auth;
 import static com.indicosmic.www.mypolicynow.webservices.RestClient.ROOT_URL2;
+import static com.indicosmic.www.mypolicynow.webservices.RestClient.api_password;
+import static com.indicosmic.www.mypolicynow.webservices.RestClient.api_user_name;
 import static com.indicosmic.www.mypolicynow.webservices.RestClient.get;
+import static com.indicosmic.www.mypolicynow.webservices.RestClient.x_api_key;
 import static io.fabric.sdk.android.Fabric.TAG;
 
-public class ProposalPdfActivity extends AppCompatActivity {
+public class ProposalPdfActivity extends AppCompatActivity implements OnPaxPOSTransactionListerner {
 
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
 
@@ -149,7 +156,7 @@ public class ProposalPdfActivity extends AppCompatActivity {
     File myFileToUpload = null;
     String PreviousPolicyFileName;
     byte[] bbytesFile;
-
+    String merchant_id="",terminal_id="",total_premium_payable="1";
     String file_base;
     String filePath,picturePath,b64,filename,file_extension;
     String Quote_Link="";
@@ -423,6 +430,16 @@ public class ProposalPdfActivity extends AppCompatActivity {
                     Log.d("Params",""+map);
                     return map;
                 }
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    //  Authorization: Basic $auth
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    //headers.put("Content-Type", "application/x-www-form-urlencoded");
+                    //headers.put("Content-Type", "application/json; charset=utf-8");
+                    headers.put("x-api-key",x_api_key);
+                    headers.put("Authorization", "Basic "+CommonMethods.Base64_Encode(api_user_name + ":" + api_password));
+                    return headers;
+                }
             };
 
 
@@ -558,6 +575,17 @@ public class ProposalPdfActivity extends AppCompatActivity {
                     map.put("mobile_no",StrCustomerMobile);
                     Log.d("Params",""+map);
                     return map;
+                }
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    //  Authorization: Basic $auth
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    //headers.put("Content-Type", "application/x-www-form-urlencoded");
+                    //headers.put("Content-Type", "application/json; charset=utf-8");
+                    headers.put("x-api-key",x_api_key);
+                    headers.put("Authorization", "Basic "+CommonMethods.Base64_Encode(api_user_name + ":" + api_password));
+                    return headers;
                 }
             };
 
@@ -718,7 +746,7 @@ public class ProposalPdfActivity extends AppCompatActivity {
                 outputFileUri = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".fileprovider", imageFile);
                 if (imageFile != null) {
                     cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-                    cameraIntent.putExtra("android.intent.extras.CAMERA_FACING", 0);
+                    cameraIntent.putExtra("take_type", 1);
                     startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
                 }
             } catch (Exception ex) {
@@ -751,8 +779,7 @@ public class ProposalPdfActivity extends AppCompatActivity {
                 btnPreviousPolicyUpload.setVisibility(View.VISIBLE);
             }
 
-           /*
-*/
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -775,7 +802,8 @@ public class ProposalPdfActivity extends AppCompatActivity {
 
                         .addFileToUpload(imageFile.getAbsolutePath(), "other_document") //
                         // Adding file
-
+                        .addHeader("x-api-key",x_api_key)
+                        .addHeader("Authorization","Basic "+CommonMethods.Base64_Encode(api_user_name + ":" + api_password))
                         .addParameter("document_name", document_type)
                         .addParameter("quote_forward_link", Quote_Link)
 
@@ -915,6 +943,16 @@ public class ProposalPdfActivity extends AppCompatActivity {
 
                     Log.d("Params",""+map);
                     return map;
+                }
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    //  Authorization: Basic $auth
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    //headers.put("Content-Type", "application/x-www-form-urlencoded");
+                    //headers.put("Content-Type", "application/json; charset=utf-8");
+                    headers.put("x-api-key",x_api_key);
+                    headers.put("Authorization", "Basic "+CommonMethods.Base64_Encode(api_user_name + ":" + api_password));
+                    return headers;
                 }
             };
 
@@ -1090,14 +1128,34 @@ public class ProposalPdfActivity extends AppCompatActivity {
 
     private void BUY_POLICY() {
 
-        CommonMethods.DisplayToastInfo(getApplicationContext(),"Redirected to Payment Gateway.");
-        myDialog.show();
-        PostPaymentAPI();
+         merchant_id =  UtilitySharedPreferences.getPrefs(getApplicationContext(),"MerchantId");
+         terminal_id =  UtilitySharedPreferences.getPrefs(getApplicationContext(),"TerminalId");
 
+        total_premium_payable =  UtilitySharedPreferences.getPrefs(getApplicationContext(),"total_premium_payable");
+
+        Log.d("total_premium_payable",""+total_premium_payable);
+        Log.d("terminal_id",""+terminal_id);
+        Log.d("merchant_id",""+merchant_id);
+
+        ClsPAXInf objClsPAXInf=new ClsPAXInf(this);
+        objClsPAXInf.sale(total_premium_payable,"Tip","Extra_field", terminal_id,merchant_id, "AddPrivateDataprint");
 
     }
 
-    private void PostPaymentAPI() {
+    private void PostPaymentAPI(String ResponseResult) {
+        String WS_P_ID,TID,PGID,Premium,Response = "";
+
+
+        String FinalPaymentResponse = ResponseResult;
+
+
+        String[] separated = FinalPaymentResponse.split("|");
+        if(separated.length==1){
+            Response = separated[0];
+        }else if(separated.length==8 || separated.length==9){
+            Response = separated[8];
+
+        }
 
         JSONObject responseObj = new JSONObject();
 
@@ -1106,7 +1164,7 @@ public class ProposalPdfActivity extends AppCompatActivity {
             responseObj.put("TID","123251572592696");
             responseObj.put("PGID","9291344799");
             responseObj.put("Premium","16083.00");
-            responseObj.put("Response","Success");
+            responseObj.put("Response",Response);
             responseObj.put("return_url","https://www.mypolicynow.com/future/privatecar/transaction_status");
 
         } catch (JSONException e) {
@@ -1164,6 +1222,17 @@ public class ProposalPdfActivity extends AppCompatActivity {
                     Log.d("Params",""+map);
                     return map;
                 }
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    //  Authorization: Basic $auth
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    //headers.put("Content-Type", "application/x-www-form-urlencoded");
+                    //headers.put("Content-Type", "application/json; charset=utf-8");
+                    headers.put("x-api-key",x_api_key);
+                    headers.put("Authorization", "Basic "+CommonMethods.Base64_Encode(api_user_name + ":" + api_password));
+                    return headers;
+                }
             };
 
 
@@ -1186,5 +1255,25 @@ public class ProposalPdfActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.animator.left_right,R.animator.right_left);
+    }
+
+
+    @Override
+    public void OnError(String s) {
+        String StrPaymentResponse_failure = "Result";
+        StrPaymentResponse_failure = s;
+
+        Log.d("failure-payment-string",s);
+        //PostPaymentAPI(StrPaymentResponse_failure);
+    }
+
+    @Override
+    public void OnSuccess(String s) {
+
+        String StrPaymentResponse_success = "Masked_Pan|Card_Holder_Name|Card_Type|Auth_Code|RRN|Stan|Batch_Number|Result|IS_SUCCESS|IS_PIN_ENTERED";
+        StrPaymentResponse_success = s;
+
+        Log.d("success-payment-string",s);
+       // PostPaymentAPI(StrPaymentResponse_success);
     }
 }

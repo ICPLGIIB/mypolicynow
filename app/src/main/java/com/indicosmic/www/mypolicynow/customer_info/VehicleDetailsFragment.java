@@ -21,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -50,7 +51,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static com.indicosmic.www.mypolicynow.webservices.RestClient.Basic_auth;
 import static com.indicosmic.www.mypolicynow.webservices.RestClient.ROOT_URL2;
+import static com.indicosmic.www.mypolicynow.webservices.RestClient.api_password;
+import static com.indicosmic.www.mypolicynow.webservices.RestClient.api_user_name;
+import static com.indicosmic.www.mypolicynow.webservices.RestClient.x_api_key;
 
 public class VehicleDetailsFragment extends Fragment implements BlockingStep, AdapterView.OnItemSelectedListener {
 
@@ -247,6 +252,17 @@ public class VehicleDetailsFragment extends Fragment implements BlockingStep, Ad
                         Log.d("strChassisNoParam",""+map);
                         return map;
                     }
+
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        //  Authorization: Basic $auth
+                        HashMap<String, String> headers = new HashMap<String, String>();
+                        //headers.put("Content-Type", "application/x-www-form-urlencoded");
+                        //headers.put("Content-Type", "application/json; charset=utf-8");
+                        headers.put("x-api-key",x_api_key);
+                        headers.put("Authorization", "Basic "+CommonMethods.Base64_Encode(api_user_name + ":" + api_password));
+                        return headers;
+                    }
                 };
 
                 int socketTimeout = 50000;//30 seconds - change to what you want
@@ -398,6 +414,17 @@ public class VehicleDetailsFragment extends Fragment implements BlockingStep, Ad
                         map.put("agent_id", StrAgentId);
                         Log.d("MapLoadIcList",""+map);
                         return map;
+                    }
+
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        //  Authorization: Basic $auth
+                        HashMap<String, String> headers = new HashMap<String, String>();
+                        //headers.put("Content-Type", "application/x-www-form-urlencoded");
+                        //headers.put("Content-Type", "application/json; charset=utf-8");
+                        headers.put("x-api-key",x_api_key);
+                        headers.put("Authorization", "Basic "+CommonMethods.Base64_Encode(api_user_name + ":" + api_password));
+                        return headers;
                     }
                 };
 
@@ -691,21 +718,21 @@ public class VehicleDetailsFragment extends Fragment implements BlockingStep, Ad
                     imm.hideSoftInputFromWindow(Edt_ChassisNo.getWindowToken(), 0);
                 }
 
-                StrRtoStateCode = Edt_RtoStateCode.getText().toString().toLowerCase();
-                StrRtoCityCode = Edt_RtoCityCode.getText().toString().toLowerCase();
-                StrRtoZoneCode = Edt_RtoZoneCode.getText().toString();
-                StrVehicleNo = Edt_RtoVehicleNo.getText().toString();
-                StrEngineNo = Edt_EngineNo.getText().toString();
-                StrChassisNo = Edt_ChassisNo.getText().toString();
-                StrVehicleColor = Spn_VehicleColor.getSelectedItem().toString();
+                StrRtoStateCode = CommonMethods.SanitizeString(Edt_RtoStateCode.getText().toString().toLowerCase());
+                StrRtoCityCode = CommonMethods.SanitizeString(Edt_RtoCityCode.getText().toString().toLowerCase());
+                StrRtoZoneCode = CommonMethods.SanitizeString(Edt_RtoZoneCode.getText().toString());
+                StrVehicleNo = CommonMethods.SanitizeString(Edt_RtoVehicleNo.getText().toString());
+                StrEngineNo = CommonMethods.SanitizeString(Edt_EngineNo.getText().toString());
+                StrChassisNo = CommonMethods.SanitizeString(Edt_ChassisNo.getText().toString());
+                StrVehicleColor = CommonMethods.SanitizeString(Spn_VehicleColor.getSelectedItem().toString());
                 //StrAgreement = Spn_Agreement.getSelectedItem().toString().toLowerCase();
-                StrBankName = Spn_Bank.getSelectedItem().toString();
+                StrBankName = CommonMethods.SanitizeString(Spn_Bank.getSelectedItem().toString());
                 int pos_bank = Spn_Bank.getSelectedItemPosition();
                 StrBankId = bankValue.get(pos_bank);
 
                 if (StrPolicyType.equalsIgnoreCase("renew")) {
-                    StrPreviousPolicyNo = Edt_PreviousPolicyNo.getText().toString();
-                    String IcName = Spn_Ic.getSelectedItem().toString();
+                    StrPreviousPolicyNo = CommonMethods.SanitizeString(Edt_PreviousPolicyNo.getText().toString());
+                    String IcName = CommonMethods.SanitizeString(Spn_Ic.getSelectedItem().toString());
                     int pos_ic = Spn_Ic.getSelectedItemPosition();
                     String Ic_Id = icValue.get(pos_ic);
                     StrPreviousPolicyIC = Ic_Id + "," + IcName;

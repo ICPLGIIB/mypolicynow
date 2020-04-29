@@ -16,7 +16,7 @@
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
+        <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-feature android:name="android.hardware.camera" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
@@ -112,6 +112,10 @@
             android:windowSoftInputMode="stateHidden"
             />
 
+        <activity android:name="com.interfaces.InitiatePaymentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
 
 
         <activity

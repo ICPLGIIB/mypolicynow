@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -41,10 +43,15 @@ import com.indicosmic.www.mypolicynow.webservices.RestClient;
 
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.indicosmic.www.mypolicynow.utils.CommonMethods.md5;
+import static com.indicosmic.www.mypolicynow.webservices.RestClient.Basic_auth;
+import static com.indicosmic.www.mypolicynow.webservices.RestClient.api_password;
+import static com.indicosmic.www.mypolicynow.webservices.RestClient.api_user_name;
+import static com.indicosmic.www.mypolicynow.webservices.RestClient.x_api_key;
 
 public class MyPolicyNowDashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -172,6 +179,12 @@ public class MyPolicyNowDashboard extends AppCompatActivity implements Navigatio
                     startActivity(i);
                     overridePendingTransition(R.animator.move_left,R.animator.move_right);
                     finish();
+                    /*Intent sendIntent =   getPackageManager().getLaunchIntentForPackage("com.indicosmic.www.mypolicynow_ags");
+                    sendIntent.putExtra("pos_token", POS_TOKEN);
+                    overridePendingTransition(R.animator.move_left,R.animator.move_right);
+                    startActivity(sendIntent);
+                    finish()*/;
+
                 }
             }
         });
@@ -181,11 +194,16 @@ public class MyPolicyNowDashboard extends AppCompatActivity implements Navigatio
             public void onClick(View view) {
                 UtilitySharedPreferences.setPrefs(getApplicationContext(),"QuotationFor","Bike");
                 if(POS_TOKEN!=null && !POS_TOKEN.equalsIgnoreCase("")){
-                    Intent i = new Intent(getApplicationContext(), QuotationActivity.class);
+                     Intent i = new Intent(getApplicationContext(), QuotationActivity.class);
                     i.putExtra("pos_token", POS_TOKEN);
                     startActivity(i);
                     overridePendingTransition(R.animator.move_left,R.animator.move_right);
                     finish();
+                   /* Intent sendIntent =   getPackageManager().getLaunchIntentForPackage("com.indicosmic.www.mypolicynow_ags");
+                    sendIntent.putExtra("pos_token", POS_TOKEN);
+                    overridePendingTransition(R.animator.move_left,R.animator.move_right);
+                    startActivity(sendIntent);
+                    finish();*/
                 }
             }
         });
@@ -196,11 +214,16 @@ public class MyPolicyNowDashboard extends AppCompatActivity implements Navigatio
             public void onClick(View view) {
                 UtilitySharedPreferences.setPrefs(getApplicationContext(),"QuotationFor","Commercial");
                 if(POS_TOKEN!=null && !POS_TOKEN.equalsIgnoreCase("")){
-                    Intent i = new Intent(getApplicationContext(), QuotationActivity.class);
+                   Intent i = new Intent(getApplicationContext(), QuotationActivity.class);
                     i.putExtra("pos_token", POS_TOKEN);
                     startActivity(i);
                     overridePendingTransition(R.animator.move_left,R.animator.move_right);
                     finish();
+                    /*Intent sendIntent =   getPackageManager().getLaunchIntentForPackage("com.indicosmic.www.mypolicynow_ags");
+                    sendIntent.putExtra("pos_token", POS_TOKEN);
+                    overridePendingTransition(R.animator.move_left,R.animator.move_right);
+                    startActivity(sendIntent);
+                    finish();*/
                 }
             }
         });
@@ -210,6 +233,10 @@ public class MyPolicyNowDashboard extends AppCompatActivity implements Navigatio
 
 
         private void getPasswordForMPN() {
+
+            String terminal_id="PX918512";
+            String merchant_id = "PX9400000000012";
+
 
                 myDialog.show();
 
@@ -233,7 +260,8 @@ public class MyPolicyNowDashboard extends AppCompatActivity implements Navigatio
                                 JSONObject data_obj = jsonresponse.getJSONObject("data");
 
                                  POS_TOKEN  = data_obj.getString("token");
-
+                                 UtilitySharedPreferences.setPrefs(getApplicationContext(),"MerchantId",merchant_id);
+                                UtilitySharedPreferences.setPrefs(getApplicationContext(),"TerminalId",terminal_id);
 
 
                             } catch (Exception e) {
@@ -254,15 +282,32 @@ public class MyPolicyNowDashboard extends AppCompatActivity implements Navigatio
                         @Override
                         protected Map<String, String> getParams() {
                             Map<String, String> map = new HashMap<String, String>();
-                            map.put("mobile_number", StrMobile);
+                            /*map.put("mobile_number", StrMobile);
                             map.put("email_id", StrEmail);
                             if(StrMobile!=null && !StrMobile.equalsIgnoreCase("")){
                                 map.put("access_key", md5(StrMobile));
                             }else if(StrEmail!=null && !StrEmail.equalsIgnoreCase("")){
                                 map.put("access_key", md5(StrEmail));
-                            }
+                            }*/
+                            map.put("merchant_id", merchant_id);
+                            map.put("terminal_id", terminal_id);
+                            map.put("access_key", md5(terminal_id));
+
                             Log.d("GetPasswordToken",""+map);
                             return map;
+                        }
+
+                        @Override
+                        public Map<String, String> getHeaders() throws AuthFailureError {
+                            //  Authorization: Basic $auth
+                            HashMap<String, String> headers = new HashMap<String, String>();
+                            //headers.put("Content-Type", "application/x-www-form-urlencoded");
+                            //headers.put("Content-Type", "application/json; charset=utf-8");
+                            headers.put("x-api-key",x_api_key);
+                            headers.put("Authorization", "Basic "+CommonMethods.Base64_Encode(api_user_name + ":" + api_password));
+
+                            Log.d("Headers",""+headers);
+                            return headers;
                         }
                     };
 

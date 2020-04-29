@@ -28,6 +28,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -63,6 +64,11 @@ import java.util.Locale;
 import java.util.Map;
 
 import io.grpc.ProxyDetector;
+
+import static com.indicosmic.www.mypolicynow.webservices.RestClient.Basic_auth;
+import static com.indicosmic.www.mypolicynow.webservices.RestClient.api_password;
+import static com.indicosmic.www.mypolicynow.webservices.RestClient.api_user_name;
+import static com.indicosmic.www.mypolicynow.webservices.RestClient.x_api_key;
 
 public class QuotationActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -260,6 +266,17 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                         map.put("token_number", StrPosToken);
                         Log.d("Token_verify",""+map);
                         return map;
+                    }
+
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        //  Authorization: Basic $auth
+                        HashMap<String, String> headers = new HashMap<String, String>();
+                        //headers.put("Content-Type", "application/x-www-form-urlencoded");
+                        //headers.put("Content-Type", "application/json; charset=utf-8");
+                        headers.put("x-api-key",x_api_key);
+                        headers.put("Authorization", "Basic "+CommonMethods.Base64_Encode(api_user_name + ":" + api_password));
+                        return headers;
                     }
                 };
 
@@ -1462,6 +1479,17 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
 
                     return map;
                 }
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    //  Authorization: Basic $auth
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    //headers.put("Content-Type", "application/x-www-form-urlencoded");
+                    //headers.put("Content-Type", "application/json; charset=utf-8");
+                    headers.put("x-api-key",x_api_key);
+                    headers.put("Authorization", "Basic "+CommonMethods.Base64_Encode(api_user_name + ":" + api_password));
+                    return headers;
+                }
             };
 
 
@@ -1552,6 +1580,19 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                     Log.d("ModelData",""+map);
                     return map;
                 }
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    //  Authorization: Basic $auth
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    //headers.put("Content-Type", "application/x-www-form-urlencoded");
+                    //headers.put("Content-Type", "application/json; charset=utf-8");
+                    headers.put("x-api-key",x_api_key);
+                    headers.put("Authorization", "Basic "+CommonMethods.Base64_Encode(api_user_name + ":" + api_password));
+                    return headers;
+                }
+
+
             };
 
 
@@ -1641,6 +1682,17 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
 
                     return map;
                 }
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    //  Authorization: Basic $auth
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    //headers.put("Content-Type", "application/x-www-form-urlencoded");
+                    //headers.put("Content-Type", "application/json; charset=utf-8");
+                    headers.put("x-api-key",x_api_key);
+                    headers.put("Authorization", "Basic "+CommonMethods.Base64_Encode(api_user_name + ":" + api_password));
+                    return headers;
+                }
             };
 
 
@@ -1667,71 +1719,6 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
         }
     }
 
-    private void setRegistrationDate(int Year, int Month, int Day) {
-
-        Log.d("DispRegistrationDate", Year +" - "+ Month +" - "+ Day);
-
-
-        registrationDatePickerDialog = new DatePickerDialog(QuotationActivity.this,
-                android.R.style.Theme_Holo_Light_Dialog,new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year,
-                                  int monthOfYear, int dayOfMonth) {
-                mYear = year;
-                mMonth = monthOfYear;
-                mDay = dayOfMonth;
-
-                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-                SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
-
-                RegistrationDate =year +"-"+ (monthOfYear + 1) + "-" + dayOfMonth ;
-                Date date = null;
-                try {
-                    date = inputFormat.parse(RegistrationDate);
-                    StrRegistrationDate = outputFormat.format(date);
-
-                    EdtRegistrationDate.setText(StrRegistrationDate);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-
-
-            }
-        }, Year, Month-1, Day);
-        long timeInMilliseconds = 0;
-        long currentDatetimeInMilliseconds = 0;
-        String givenDateString = Year + "-"+(Month)+"-"+Day;
-        //String today_date = CommonMethods.DisplayCurrentDate();
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-       // SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
-        try {
-            Date mDate = sdf.parse(givenDateString);
-             timeInMilliseconds = mDate.getTime();
-
-            /*Date mCurrentDate = sdf1.parse(today_date);
-            currentDatetimeInMilliseconds = mCurrentDate.getTime();*/
-            System.out.println("Date in milli :: " + timeInMilliseconds);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        registrationDatePickerDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-
-        if(System.currentTimeMillis() > timeInMilliseconds) {
-            registrationDatePickerDialog.getDatePicker().setMinDate(timeInMilliseconds);
-            registrationDatePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
-
-        }else {
-            registrationDatePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
-            registrationDatePickerDialog.getDatePicker().setMaxDate(timeInMilliseconds);
-        }
-        //((ViewGroup) datePickerDialog.getDatePicker()).findViewById(Resources.getSystem().getIdentifier("day", "id", "android")).setVisibility(View.GONE);
-
-        registrationDatePickerDialog.show();
-    }
 
     private void getManufacturingYear() {
         int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -2072,6 +2059,16 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
 
                     return map;
                 }
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    //  Authorization: Basic $auth
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    //headers.put("Content-Type", "application/x-www-form-urlencoded");
+                    //headers.put("Content-Type", "application/json; charset=utf-8");
+                    headers.put("x-api-key",x_api_key);
+                    headers.put("Authorization", "Basic "+CommonMethods.Base64_Encode(api_user_name + ":" + api_password));
+                    return headers;
+                }
             };
 
 
@@ -2086,6 +2083,72 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
         }
 
 
+    }
+
+    private void setRegistrationDate(int Year, int Month, int Day) {
+
+        Log.d("DispRegistrationDate", Year +" - "+ Month +" - "+ Day);
+
+
+        registrationDatePickerDialog = new DatePickerDialog(QuotationActivity.this,
+                android.R.style.Theme_Holo_Light_Dialog,new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year,
+                                  int monthOfYear, int dayOfMonth) {
+                mYear = year;
+                mMonth = monthOfYear;
+                mDay = dayOfMonth;
+
+                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+                SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+
+                RegistrationDate =year +"-"+ (monthOfYear + 1) + "-" + dayOfMonth ;
+                Date date = null;
+                try {
+                    date = inputFormat.parse(RegistrationDate);
+                    StrRegistrationDate = outputFormat.format(date);
+
+                    EdtRegistrationDate.setText(StrRegistrationDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+
+            }
+        }, Year, Month-1, Day);
+        long timeInMilliseconds = 0;
+        long currentDatetimeInMilliseconds = 0;
+        String givenDateString = Year + "-"+(Month)+"-"+Day;
+        //String today_date = CommonMethods.DisplayCurrentDate();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        // SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            Date mDate = sdf.parse(givenDateString);
+            timeInMilliseconds = mDate.getTime();
+
+            /*Date mCurrentDate = sdf1.parse(today_date);
+            currentDatetimeInMilliseconds = mCurrentDate.getTime();*/
+            System.out.println("Date in milli :: " + timeInMilliseconds);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        registrationDatePickerDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        if(System.currentTimeMillis() > timeInMilliseconds) {
+            registrationDatePickerDialog.getDatePicker().setMinDate(timeInMilliseconds);
+            registrationDatePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+
+        }else {
+            registrationDatePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+            registrationDatePickerDialog.getDatePicker().setMaxDate(timeInMilliseconds);
+        }
+        //((ViewGroup) datePickerDialog.getDatePicker()).findViewById(Resources.getSystem().getIdentifier("day", "id", "android")).setVisibility(View.GONE);
+
+        registrationDatePickerDialog.show();
     }
 
     private void ManufacturingMonthApi(){
@@ -2156,6 +2219,17 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                     Log.d("policy_param",""+map);
 
                     return map;
+                }
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    //  Authorization: Basic $auth
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    //headers.put("Content-Type", "application/x-www-form-urlencoded");
+                    //headers.put("Content-Type", "application/json; charset=utf-8");
+                    headers.put("x-api-key",x_api_key);
+                    headers.put("Authorization", "Basic "+CommonMethods.Base64_Encode(api_user_name + ":" + api_password));
+                    return headers;
                 }
             };
 
@@ -2234,6 +2308,17 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
 
 
                     return map;
+                }
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    //  Authorization: Basic $auth
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    //headers.put("Content-Type", "application/x-www-form-urlencoded");
+                    //headers.put("Content-Type", "application/json; charset=utf-8");
+                    headers.put("x-api-key",x_api_key);
+                    headers.put("Authorization", "Basic "+CommonMethods.Base64_Encode(api_user_name + ":" + api_password));
+                    return headers;
                 }
             };
 
@@ -2533,6 +2618,19 @@ public class QuotationActivity extends AppCompatActivity implements AdapterView.
                     Log.d("QuotationData",""+map);
                     return map;
                 }
+
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    //  Authorization: Basic $auth
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    //headers.put("Content-Type", "application/x-www-form-urlencoded");
+                    //headers.put("Content-Type", "application/json; charset=utf-8");
+                    headers.put("x-api-key",x_api_key);
+                    headers.put("Authorization", "Basic "+CommonMethods.Base64_Encode(api_user_name + ":" + api_password));
+                    return headers;
+                }
+
             };
 
 

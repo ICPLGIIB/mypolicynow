@@ -99,7 +99,7 @@ public class MyValidator {
             editText.setError(REQUIRED_MSG);
             return false;
         }else {
-             //$specialCharacters = "-@%\\\\[\\\\}+'!/#$^?:;,\\\\(\\\"\\\\)~`.*=&\\\\{>\\\\]<_";
+            //$specialCharacters = "-@%\\\\[\\\\}+'!/#$^?:;,\\\\(\\\"\\\\)~`.*=&\\\\{>\\\\]<_";
             Pattern pattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@%!/#$^?*=&])(?=\\S+$).{6,20}$");
 
             Matcher matcher = pattern.matcher(pass);
@@ -154,7 +154,7 @@ public class MyValidator {
     }
 
     public static boolean isValidAge(EditText editText) {
-       Integer retValue=0;
+        Integer retValue=0;
 
         String txtValue = editText.getText().toString().trim();
         if(txtValue.length() == 0){
@@ -179,7 +179,7 @@ public class MyValidator {
     }
 
     public static boolean isValidAdultAge(EditText editText) {
-       boolean result = false;
+        boolean result = false;
 
         String txtValue = editText.getText().toString().trim();
         if(txtValue.length() == 0){
@@ -204,7 +204,7 @@ public class MyValidator {
             //textView.setError("None selected");
             return false;
         }
-        
+
         return true;
     }
 
@@ -282,18 +282,18 @@ public class MyValidator {
 
             }else {
                 //      ([CPHFATBLJG])
-                    String char_4 = pan.substring(3,4);
-                    Log.d("Char 4",char_4);
-                    Pattern pat = Pattern.compile("[CPHFATBLJG]");
-                    Matcher mat = pat.matcher(char_4);
-                    if(!mat.matches()){
-                        editText.setError("Invalid PAN. Enter Valid PAN Number");
-                        return false;
+                String char_4 = pan.substring(3,4);
+                Log.d("Char 4",char_4);
+                Pattern pat = Pattern.compile("[CPHFATBLJG]");
+                Matcher mat = pat.matcher(char_4);
+                if(!mat.matches()){
+                    editText.setError("Invalid PAN. Enter Valid PAN Number");
+                    return false;
 
-                    }else {
-                        editText.setError(null);
-                        return true;
-                    }
+                }else {
+                    editText.setError(null);
+                    return true;
+                }
             }
 
         }else {

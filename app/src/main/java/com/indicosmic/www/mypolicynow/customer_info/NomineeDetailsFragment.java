@@ -522,19 +522,19 @@ public class NomineeDetailsFragment extends Fragment implements BlockingStep,Ada
             }
 
             Str_NomineeSalutation = Spn_NomineeSalutation.getSelectedItem().toString();
-            Str_NomineeFirstName = edt_NomineeFirstName.getText().toString();
-            Str_NomineeMiddleName = edt_NomineeMiddleName.getText().toString();
-            Str_NomineeLastName = edt_NomineeLastName.getText().toString();
-            Str_NomineeRelationship = Spn_NomineeRelationship.getSelectedItem().toString();
-            Str_NomineeAge = edt_NomineeAge.getText().toString();
+            Str_NomineeFirstName = CommonMethods.SanitizeString(edt_NomineeFirstName.getText().toString());
+            Str_NomineeMiddleName = CommonMethods.SanitizeString(edt_NomineeMiddleName.getText().toString());
+            Str_NomineeLastName = CommonMethods.SanitizeString(edt_NomineeLastName.getText().toString());
+            Str_NomineeRelationship = CommonMethods.SanitizeString(Spn_NomineeRelationship.getSelectedItem().toString());
+            Str_NomineeAge = CommonMethods.SanitizeString(edt_NomineeAge.getText().toString());
 
             if (LayoutAppointeeDetails != null && LayoutAppointeeDetails.getVisibility() == View.VISIBLE) {
                 Str_AppointeeSalutation = Spn_AppointeeSalutation.getSelectedItem().toString();
-                Str_AppointeeFirstName = edt_AppointeeFirstName.getText().toString();
-                Str_AppointeeMiddleName = edt_AppointeeMiddleName.getText().toString();
-                Str_AppointeeLastName = edt_AppointeeLastName.getText().toString();
-                Str_AppointeeRelationship = Spn_AppointeeRelationship.getSelectedItem().toString();
-                Str_AppointeeAge = edt_AppointeeAge.getText().toString();
+                Str_AppointeeFirstName = CommonMethods.SanitizeString(edt_AppointeeFirstName.getText().toString());
+                Str_AppointeeMiddleName = CommonMethods.SanitizeString(edt_AppointeeMiddleName.getText().toString());
+                Str_AppointeeLastName = CommonMethods.SanitizeString(edt_AppointeeLastName.getText().toString());
+                Str_AppointeeRelationship = CommonMethods.SanitizeString(Spn_AppointeeRelationship.getSelectedItem().toString());
+                Str_AppointeeAge = CommonMethods.SanitizeString(edt_AppointeeAge.getText().toString());
             } else {
                 Str_AppointeeSalutation = "";
                 Str_AppointeeFirstName = "";

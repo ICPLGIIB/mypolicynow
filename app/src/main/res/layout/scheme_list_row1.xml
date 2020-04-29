@@ -97,6 +97,20 @@
                     <TextView
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
+                        android:id="@+id/net_premium_amt"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:textColorHint="@color/grey"
+                        android:enabled="false"
+                        android:visibility="gone"
+                        android:layout_gravity="center|start"
+                        android:fontFamily="@font/calibri_regular"
+                        android:gravity="center|start"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
                         android:id="@+id/row_addon_txt"
                         android:textSize="22sp"
                         android:textStyle="bold"

@@ -65,7 +65,6 @@ dependencies {
     implementation 'com.ernestoyaquello.stepperform:vertical-stepper-form:0.9.9'
     implementation 'de.hdodenhof:circleimageview:3.0.1'
 
-
     //video Library
     implementation 'net.gotev:uploadservice:3.0.3'
 
@@ -87,6 +86,7 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
 
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation project(path: ':ONGOMPOS')
 }
 
 apply plugin: 'com.google.gms.google-services'

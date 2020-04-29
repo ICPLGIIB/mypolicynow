@@ -88,7 +88,11 @@ import static android.app.Activity.RESULT_OK;
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO;
 import static com.indicosmic.www.mypolicynow.utils.AppUtill.IMAGE_DIRECTORY_NAME;
 import static com.indicosmic.www.mypolicynow.utils.CommonMethods.ucFirst;
+import static com.indicosmic.www.mypolicynow.webservices.RestClient.Basic_auth;
 import static com.indicosmic.www.mypolicynow.webservices.RestClient.ROOT_URL2;
+import static com.indicosmic.www.mypolicynow.webservices.RestClient.api_password;
+import static com.indicosmic.www.mypolicynow.webservices.RestClient.api_user_name;
+import static com.indicosmic.www.mypolicynow.webservices.RestClient.x_api_key;
 import static io.fabric.sdk.android.Fabric.TAG;
 
 public class ReviewDetailsActivity extends AppCompatActivity {
@@ -551,8 +555,7 @@ public class ReviewDetailsActivity extends AppCompatActivity {
                 outputFileUri = FileProvider.getUriForFile(this, this.getPackageName() + ".fileprovider", imageFile);
                 if (imageFile != null) {
                     cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-                    cameraIntent.putExtra("android.intent.extras.CAMERA_FACING", 0);
-
+                    cameraIntent.putExtra("take_type", 1);
                     startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
                 }
             } catch (Exception ex) {
@@ -612,9 +615,11 @@ public class ReviewDetailsActivity extends AppCompatActivity {
 
                     .addFileToUpload(imageFile.getAbsolutePath(), "other_document") //
                     //Adding file
+                    .addHeader("x-api-key",x_api_key)
+                    .addHeader("Authorization","Basic "+CommonMethods.Base64_Encode(api_user_name + ":" + api_password))
                     .addParameter("document_name", "previous_policy_doc")
                     .addParameter("quote_forward_link", Quote_Link)
-                    //.setNotificationConfig(new UploadNotificationConfig())
+
                     .setMaxRetries(2)
                     .setDelegate(new UploadStatusDelegate() {
                         @Override
@@ -770,6 +775,16 @@ public class ReviewDetailsActivity extends AppCompatActivity {
                         Log.d("BuyPolicyData",""+params.toString());
 
                         return params;
+                    }
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        //  Authorization: Basic $auth
+                        HashMap<String, String> headers = new HashMap<String, String>();
+                        //headers.put("Content-Type", "application/x-www-form-urlencoded");
+                        //headers.put("Content-Type", "application/json; charset=utf-8");
+                        headers.put("x-api-key",x_api_key);
+                        headers.put("Authorization", "Basic "+CommonMethods.Base64_Encode(api_user_name + ":" + api_password));
+                        return headers;
                     }
 
 

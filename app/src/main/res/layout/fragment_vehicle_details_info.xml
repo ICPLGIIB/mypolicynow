@@ -124,14 +124,14 @@
 
                 <EditText
                     android:id="@+id/Edt_RtoZoneCode"
-                    android:layout_width="match_parent"
+                    android:layout_width="196dp"
                     android:layout_height="55dp"
                     android:layout_margin="5dp"
+                    android:layout_weight="5"
                     android:background="@drawable/btn_color_form_background"
                     android:hint="Eg- ABC *"
                     android:imeOptions="actionNext"
-                    android:inputType="textCapWords"
-                    android:layout_weight="5"
+                    android:inputType="textCapCharacters"
                     android:maxLength="3"
                     android:padding="5dp"
                     android:textColor="@color/black"

@@ -270,14 +270,14 @@ public class OwnerDetailFragment extends Fragment implements BlockingStep, View.
             StrEmailAddress = edt_Email_Addresss.getText().toString();
             StrMobileNo = edt_Mobile_Number.getText().toString();
             StrSelectedSalutation = Spn_Salutation.getSelectedItem().toString();
-            StrFirstName = edt_First_Name.getText().toString();
-            StrMiddleName = edt_Middle_Name.getText().toString();
-            StrLastName = edt_Last_Name.getText().toString();
+            StrFirstName = CommonMethods.SanitizeString(edt_First_Name.getText().toString());
+            StrMiddleName = CommonMethods.SanitizeString(edt_Middle_Name.getText().toString());
+            StrLastName = CommonMethods.SanitizeString(edt_Last_Name.getText().toString());
             Date_of_born = edt_Dob.getText().toString();
-            StrSelectedGender = Spn_Gender.getSelectedItem().toString();
-            StrPan = edt_Pan_Card.getText().toString();
-            StrAadharCard = edt_Aadhar_Card.getText().toString();
-            StrSelectedMaritalStatus = Spn_MaritalStatus.getSelectedItem().toString();
+            StrSelectedGender = CommonMethods.SanitizeString(Spn_Gender.getSelectedItem().toString());
+            StrPan = CommonMethods.SanitizeString(edt_Pan_Card.getText().toString());
+            StrAadharCard = CommonMethods.SanitizeString(edt_Aadhar_Card.getText().toString());
+            StrSelectedMaritalStatus = CommonMethods.SanitizeString(Spn_MaritalStatus.getSelectedItem().toString());
 
             if(Edt_GstInNumber.getText().toString().length()!=0) {
                 StrGstInNumber = Edt_GstInNumber.getText().toString();
