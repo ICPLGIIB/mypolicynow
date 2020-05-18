@@ -5,13 +5,13 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
@@ -21,6 +21,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 
 /**
  * Created by SIR.WilliamRamsay on 03-Dec-15.
@@ -34,12 +35,49 @@ public class MyValidator {
     Bitmap bitmap=null;
 
 
+    public static  boolean isValidEmail_Mobile(EditText Email_Mobile){
+        String StrEmail_Mobile = Email_Mobile.getText().toString();
+        boolean result = false;
+        if(StrEmail_Mobile!=null && !StrEmail_Mobile.equalsIgnoreCase("")) {
+            if (isEmailValid(StrEmail_Mobile)) {
+                result =  true;
+            } else if (isValidPhone(StrEmail_Mobile)){
+                result =  true;
+            }else if (StrEmail_Mobile != null && StrEmail_Mobile.length()!=10) {
+                //CommonMethods.DisplayToastError(context,"Invalid Mobile No. Enter 10 digits");
+
+                result =  false;
+            }else {
+                Pattern pattern = Pattern.compile("(([6-9]{1})([0-9]{9}))");
+
+                Matcher matcher = pattern .matcher(StrEmail_Mobile);
+
+                if (!matcher.matches()) {
+                    //CommonMethods.DisplayToastError(context,"Invalid Mobile No. Enter Valid Mobile Number");
+                    result =  false;
+                }else{
+
+                    result =   true;
+                }
+            }
+        }
+        return result;
+    }
+
+
+
+
+
+    public static boolean isEmailValid(String email) {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
 
     public static boolean isValidPhone(CharSequence phone) {
         if (TextUtils.isEmpty(phone)) {
             return false;
         } else {
-            return android.util.Patterns.PHONE.matcher(phone).matches();
+            return Patterns.PHONE.matcher(phone).matches();
         }
     }
 

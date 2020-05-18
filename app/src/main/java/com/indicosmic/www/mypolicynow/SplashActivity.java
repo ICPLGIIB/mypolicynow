@@ -1,7 +1,6 @@
 package com.indicosmic.www.mypolicynow;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -38,16 +37,12 @@ import com.indicosmic.www.mypolicynow.utils.CommonMethods;
 import com.indicosmic.www.mypolicynow.utils.ConnectionDetector;
 import com.indicosmic.www.mypolicynow.utils.RuntimePermissions;
 import com.indicosmic.www.mypolicynow.utils.SharedPrefManager;
-import com.indicosmic.www.mypolicynow.utils.SingletonClass;
 import com.indicosmic.www.mypolicynow.utils.UtilitySharedPreferences;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -91,12 +86,11 @@ public class SplashActivity extends RuntimePermissions {
         startTimeMillis = System.currentTimeMillis();
         iv_logo = (ImageView)findViewById(R.id.iv_logo);
 
-        /*Glide.with(this)
+        Glide.with(this)
                 .load("https://www.mypolicynow.com/assets/images/logo_spinner.gif")
                 .placeholder(R.drawable.logo_spinner)
-                .into(iv_logo);*/
+                .into(iv_logo);
 
-        SingletonClass.initinstance();
         questionlist = new ArrayList<String>();
         sharedPrefManager = new SharedPrefManager(this);
 
@@ -327,17 +321,9 @@ public class SplashActivity extends RuntimePermissions {
             @Override
             public void run() {
 
-                if (SharedPrefManager.getInstance(getApplicationContext()).isLoggedIn()){
-
-                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                    overridePendingTransition(R.animator.move_left,R.animator.move_right);
-                    finish();
-                }else {
-                    Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-                    startActivity(i);
-                    overridePendingTransition(R.animator.move_left,R.animator.move_right);
-                    finish();
-                }
+                startActivity(new Intent(getApplicationContext(),com.indicosmic.mypolicynow_app.activities.MainActivity_1.class));
+                overridePendingTransition(R.animator.move_left,R.animator.move_right);
+                finish();
 
             }
         }, SPLASH_TIME_OUT);
@@ -392,13 +378,13 @@ public class SplashActivity extends RuntimePermissions {
 
                                         if (is_active!=null && is_active.equalsIgnoreCase("1")){
                                             //portal
-                                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                            startActivity(new Intent(getApplicationContext(),com.indicosmic.mypolicynow_app.activities.MainActivity_1.class));
                                             overridePendingTransition(R.animator.move_left,R.animator.move_right);
                                             finish();
 
                                         }else {
                                             CommonMethods.DisplayToastWarning(getApplicationContext(),"Account Is no more Active. Please contact System Administrator.");
-                                            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                                            startActivity(new Intent(getApplicationContext(),com.indicosmic.mypolicynow_app.activities.MainActivity_1.class));
                                             overridePendingTransition(R.animator.move_left,R.animator.move_right);
                                             finish();
                                         }
@@ -417,7 +403,7 @@ public class SplashActivity extends RuntimePermissions {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                        startActivity(new Intent(getApplicationContext(),com.indicosmic.mypolicynow_app.activities.MainActivity_1.class));
                         overridePendingTransition(R.animator.move_left,R.animator.move_right);
                         finish();
                         VolleyLog.d("volley", "Error: " + error.getMessage());

@@ -15,9 +15,7 @@ public class Common {
 
     //public static String BASE_URL = "http://103.87.174.12/uat/mypolicynow.com/Api/";
     //public static String BASE_URL = "https://www.mypolicynow.com/Api/";
-    //public static String BASE_URL = "http://uat.mypolicynow.com/Api/";
-    public static String BASE_URL = "http://uathib.mypolicynow.com/Api/";
-
+    public static String BASE_URL = "http://uat.mypolicynow.com/Api/";
     /*http://203.112.144.126/mypolicynow.com/
     http://123.108.50.50/mypolicynow.com/
     https://www.mypolicynow.com/prelive/

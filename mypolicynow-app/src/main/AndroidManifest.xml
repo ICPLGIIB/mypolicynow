@@ -1,14 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.indicosmic.www.mypolicynow"
+    package="com.indicosmic.mypolicynow_app"
     android:installLocation="auto">
-
-    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -16,15 +13,14 @@
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-        <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-feature android:name="android.hardware.camera" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-
     <uses-permission android:name="android.permission.CAPTURE_VIDEO_OUTPUT"
         tools:ignore="ProtectedPermissions" />
 
+
+
     <application
-        android:name=".application.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -35,16 +31,14 @@
         android:largeHeap="true"
         android:screenOrientation="portrait"
         android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme.NoActionBar"
-        android:windowSoftInputMode="stateAlwaysHidden"
+        android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute"
-        tools:replace="android:theme"
+        tools:overrideLibrary="com.steelkiwi.library"
         >
-
-
         <activity
-            android:name=".SplashActivity"
-            android:theme="@style/Theme.Transparent"
+            android:name=".activities.MainActivity_1"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/app_name"
             android:screenOrientation="portrait"
 
             android:windowSoftInputMode="stateAlwaysHidden">
@@ -55,34 +49,25 @@
             </intent-filter>
         </activity>
 
-        <!--MYPOLICYNOW ACTIVITIES-->
-
-
         <activity
-            android:name="com.indicosmic.mypolicynow_app.activities.MainActivity_1"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-
-        <activity
-            android:name="com.indicosmic.mypolicynow_app.activities.QuotationActivity_2"
+            android:name=".activities.QuotationActivity_2"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name="com.indicosmic.mypolicynow_app.activities.IcListingQuoteScreen_3"
+            android:name=".activities.IcListingQuoteScreen_3"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name="com.indicosmic.mypolicynow_app.activities.CustomerPage_4"
+            android:name=".activities.CustomerPage_4"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden"
             />
 
         <activity
-            android:name="com.indicosmic.mypolicynow_app.activities.ReviewDetailsActivity_5"
+            android:name=".activities.ReviewDetailsActivity_5"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden"
@@ -92,7 +77,7 @@
         <!--Breakin Screens-->
 
         <activity
-            android:name="com.indicosmic.mypolicynow_app.breakin_app_files.InspectionCheckpoint"
+            android:name=".breakin_app_files.InspectionCheckpoint"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden"
@@ -100,7 +85,7 @@
 
 
         <activity
-            android:name="com.indicosmic.mypolicynow_app.breakin_app_files.ActivityInspectionImages"
+            android:name=".breakin_app_files.ActivityInspectionImages"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden"
@@ -108,22 +93,14 @@
 
 
         <activity
-            android:name="com.indicosmic.mypolicynow_app.activities.ProposalPdfActivity_6"
+            android:name=".activities.ProposalPdfActivity_6"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden"
             />
 
         <activity
-            android:name="com.indicosmic.mypolicynow_app.activities.SoldPoliciesActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden"
-            />
-
-
-        <activity
-            android:name="com.indicosmic.mypolicynow_app.activities.PdfViewer"
+            android:name=".activities.SoldPoliciesActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden"
@@ -131,7 +108,7 @@
 
 
         <activity
-            android:name="com.indicosmic.mypolicynow_app.activities.SavedProposalActivity"
+            android:name=".activities.PdfViewer"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden"
@@ -139,19 +116,27 @@
 
 
         <activity
-            android:name="com.indicosmic.mypolicynow_app.activities.AboutUsActivity"
+            android:name=".activities.SavedProposalActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden"
+            />
+
+
+        <activity
+            android:name=".activities.AboutUsActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
 
             android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
-            android:name="com.indicosmic.mypolicynow_app.activities.ContactUsActivity"
+            android:name=".activities.ContactUsActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"/>
 
         <activity
-            android:name="com.indicosmic.mypolicynow_app.activities.LoginActivity"
+            android:name=".activities.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden"/>
@@ -159,7 +144,15 @@
 
 
 
-
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"></meta-data>
+        </provider>
 
         <uses-library android:name="org.apache.http.legacy"
             android:required="false"/>

@@ -8,23 +8,12 @@
     android:orientation="vertical"
     tools:context=".SplashActivity"
     android:background="@color/white"
-
     android:layout_gravity="center"
     android:gravity="center"
     >
 
 
-    <!--<ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/splash_new"
-        android:scaleType="center"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:visibility="visible"
-        android:layout_gravity="center"
-        />
--->
+
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -44,7 +33,7 @@
             android:layout_width="150sp"
             android:layout_height="100sp"
             android:visibility="visible"
-            android:src="@drawable/ags_logo"
+            android:src="@drawable/logo_small"
             android:layout_marginStart="10sp"
             android:layout_marginEnd="10sp"
             android:layout_gravity="center"

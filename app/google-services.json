@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "928690846881",
-    "firebase_url": "https://mypolicynow-4101b.firebaseio.com",
-    "project_id": "mypolicynow-4101b",
-    "storage_bucket": "mypolicynow-4101b.appspot.com"
+    "project_number": "42941031069",
+    "firebase_url": "https://my-policy-now.firebaseio.com",
+    "project_id": "my-policy-now",
+    "storage_bucket": "my-policy-now.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:928690846881:android:be710c98352653ad5344e0",
+        "mobilesdk_app_id": "1:42941031069:android:58ebcd6fd8293babbb6a74",
         "android_client_info": {
           "package_name": "com.indicosmic.www.mypolicynow"
         }
       },
       "oauth_client": [
         {
-          "client_id": "928690846881-bv5n09en4sdpjgifkhpphv37cf5jq54o.apps.googleusercontent.com",
+          "client_id": "42941031069-5gb6dps6ca6e9ti17o8vg4aecbl8ec63.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBBvYNevSyiRcNoGkTH-iFYH4K6fTo5bhc"
+          "current_key": "AIzaSyAFD-3q-p1Y2C-EmRy_TRnFcGJlzxzn5ho"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "928690846881-bv5n09en4sdpjgifkhpphv37cf5jq54o.apps.googleusercontent.com",
+              "client_id": "42941031069-5gb6dps6ca6e9ti17o8vg4aecbl8ec63.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

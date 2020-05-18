@@ -1,1 +1,1 @@
-include ':app', ':idcardcamera', ':ONGOMPOS'
+include ':app', ':idcardcamera', ':mypolicynow-app'

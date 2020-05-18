@@ -1,0 +1,179 @@
+<resources>
+    <string name="app_name">MY POLICY NOW</string>
+    <string name="runtime_permissions_txt">Please enable ALL permissions from app settings.</string>
+    <string name="permission_rationale">Please grant location permission to start the service</string>
+    <string name="tag_line">Get Quick, Hassle Free Insurance Quote Now !</string>
+    <string name="company_name">Global-India Insurance Brokers Pvt. Ltd.</string>
+    <string name="title_alert_no_intenet">No internet</string>
+    <string name="msg_alert_no_internet">Please make sure that you have active internet connection.</string>
+    <string name="btn_label_refresh">Refresh</string>
+    <string name="permission_denied_explanation">You have not granted location permission. So the service cannot be started.</string>
+    <string name="settings">Settings</string>
+    <string name="termscondition">I agree to Terms &amp; Conditions and Privacy Policy</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_home">Home</string>
+    <string name="about_giib">Global India Insurance Brokers (GIIB) welcomes and opens furry of opportunities to our partners and customers with its flexible, transparent and technology led environment and approach. At GIIB we believe in long term association with the clients not only in words but through our actions as well. Your quest ends here at GIIB if you are looking towards joining hands with a trust worthy, young yet mature and ethical organization. GIIB holds its distinction among several players in market through its commitment towards gifting the industry a unique approach of doing business with no compromise on regulatory compliance, support to its partners and services to end customers.\n\nLicensed in October 2015, GIIB has been given opportunity to be able to provide services in all segments of insurance business. Team of GIIB is all but novice in terms of handling multiple lines of business be it retail or corporate. To its credit, GIIB has rich industry interface and close associations with all insurers present in country.</string>
+    <string name="the_company">GIIB has been founded by a group of stalwarts of the insurance industry and people with acumen of technology and operations. We believe in `Staying Ahead` of Competition/ with oursheer hunger for infusing innovation in business and creating a niche among masses...</string>
+    <string name="company_address">518, 5th Floor, Summit-Business Bay, Behind Gurunanak Petrol Pump, Off Andheri Kurla Road, Beside Magic Bricks WEH metro stn., Andheri (E), Mumbai-400093, Maharashtra (India)</string>
+    <string name="company_email">info@giib.co.in</string>
+    <string name="company_contact_no">+91 22 26820489</string>
+    <string name="footer_text">Developed By <a href="https://www.indicosmic.com" rel="nofollow">Indicosmic Capitals Pvt. Ltd.</a></string>
+    <string name="title_settings_dialog">Permissions Required</string>
+    <string name="about_us">ABOUT US</string>
+    <string name="principal_officer">Dr. Chandrra Kant Khatri</string>
+
+    <string name="disclaimer_policy">Disclaimer / Policy</string>
+    <string name="contact_us">CONTACT US</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="action">Action: </string>
+    <string name="english">English</string>
+    <string name="irda_info">Licence No.:538 \nIRDAI Direct Broker Code:IRDAI/DB 596/14 \nValid Till: 04-10-2021 \nCIN No.: U66000MH2014PTC318309 \nGST No.: 27AAFCG7680Q1ZQ</string>
+    <string name="facebook_page"><a href="https://www.facebook.com/mypolicynow" rel="nofollow">https://www.facebook.com/mypolicynow</a></string>
+    <string name="twitter_page"><a href="https://twitter.com/mypolicynow" rel="nofollow">https://twitter.com/mypolicynow</a></string>
+    <string name="google_plus_page"><a href="https://plus.google.com/111702592615739555674" rel="nofollow">https://plus.google.com/111702592615739555674</a></string>
+    <string name="youtube_page"><a href="https://www.youtube.com/channel/UC-A1U-wcz9rbVujn-5Cg2jg" rel="nofollow">https://www.youtube.com/channel/UC-A1U-wcz9rbVujn-5Cg2jg</a></string>
+    <string name="linked_in_page"><a href="https://www.linkedin.com/company/global-india-insurance-brokers-pvt-ltd/" rel="nofollow">https://www.linkedin.com/company/global-india-insurance-brokers-pvt-ltd</a></string>
+
+
+    <string-array name="spin_item_policy_holder">
+        <item>Select Policy Holder Type</item>
+        <item>INDIVIDUAL</item>
+        <item>CORPORATE</item>
+    </string-array>
+
+    <string-array name="spin_item_ncb_per">
+        <item>Select NCB</item>
+        <item>0%</item>
+        <item>20%</item>
+        <item>25%</item>
+        <item>35%</item>
+        <item>45%</item>
+        <item>50%</item>
+    </string-array>
+
+    <string-array name="spin_item_od_discount">
+        <item>MAX DISCOUNT</item>
+        <item>0%</item>
+        <item>5%</item>
+        <item>10%</item>
+        <item>15%</item>
+        <item>20%</item>
+        <item>25%</item>
+        <item>30%</item>
+        <item>35%</item>
+        <item>40%</item>
+        <item>45%</item>
+        <item>50%</item>
+        <item>55%</item>
+        <item>60%</item>
+        <item>65%</item>
+        <item>70%</item>
+        <item>75%</item>
+    </string-array>
+
+    <string-array name="spin_item_marital_status">
+        <item>Select Marital Status *</item>
+        <item>Single</item>
+        <item>Married</item>
+
+    </string-array>
+
+    <string-array name="spin_item_nominee_relationship">
+        <item>Select Relationship *</item>
+        <item>Son</item>
+        <item>Daughter</item>
+        <item>Brother</item>
+        <item>Father</item>
+        <item>Mother</item>
+        <item>Spouse</item>
+        <item>Father-in-law</item>
+    </string-array>
+
+    <string-array name="spin_item_appointtee_relationship">
+        <item>Select Relationship *</item>
+        <item>Son</item>
+        <item>Daughter</item>
+        <item>Brother</item>
+        <item>Father</item>
+        <item>Mother</item>
+        <item>Spouse</item>
+        <item>Father-in-law</item>
+        <item>Mother-in-law</item>
+        <item>OTHERS</item>
+        <item>Child</item>
+        <item>Sibling</item>
+    </string-array>
+
+
+    <string-array name="spin_item_agreement">
+        <item>Select Agreement Type</item>
+        <item>Hypothecation</item>
+        <item>Hire Purchase</item>
+        <item>Lease Agreement</item>
+    </string-array>
+
+    <string-array name="spin_item_salutation">
+        <item>Select Salutation *</item>
+        <item>MR.</item>
+        <item>MS.</item>
+        <item>MRS.</item>
+    </string-array>
+
+
+    <string-array name="spin_item_gender">
+        <item>Select Gender *</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="spin_item_spouse_gender">
+        <item>Select Spouse Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="spin_item_geographical_extension_countries">
+
+        <item>Select Select Country</item>
+        <item>Bangladesh</item>
+        <item>Bhutan</item>
+        <item>Pakistan</item>
+        <item>Maldives</item>
+        <item>Nepal</item>
+        <item>Sri Lanka</item>
+
+    </string-array>
+
+    <string-array name="reason_opting_out_cpa">
+        <item>Do not have valid license</item>
+        <item>Have another Motor Insurance Policy with 15 lakhs PA owner cover</item>
+        <item>Have PA Policy of 15 lakhs and above</item>
+        <item>Have Other PA Policy</item>
+    </string-array>
+
+    <string-array name="spin_item_pa_sum_assured">
+
+        <item>Select Sum Insured(Rs)</item>
+        <item>200000</item>
+        <item>100000</item>
+        <item>90000</item>
+        <item>80000</item>
+        <item>70000</item>
+        <item>60000</item>
+        <item>50000</item>
+        <item>40000</item>
+        <item>30000</item>
+        <item>20000</item>
+        <item>10000</item>
+    </string-array>
+
+    <string name="break_in_text">NOTE: Current policy has resulted in BREAK IN CASE. Inspection of your vehicle will be required before you can buy the policy.</string>
+    <string name="saved_proposal">SAVED PROPOSALS</string>
+    <string name="sold_policies">SOLD POLICIES</string>
+
+</resources>
