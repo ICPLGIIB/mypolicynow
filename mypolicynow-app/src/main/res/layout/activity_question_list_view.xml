@@ -1,0 +1,63 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/snackbar">
+
+    <LinearLayout
+        android:id="@+id/tool_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <include layout="@layout/toolback_with_back"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_img_not_mandatory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="IMAGES ARE NOT MANDATORY"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/white"
+        android:padding="10dp"
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:layout_below="@+id/tool_lay"
+        android:layout_centerHorizontal="true"
+        />
+
+    <ListView
+        android:layout_below="@+id/tv_img_not_mandatory"
+        android:layout_above="@+id/layoutchild"
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <LinearLayout
+        android:id="@+id/layoutchild"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:background="@color/colorPrimary"
+            android:text="Submit"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:textSize="12sp" />
+
+
+    </LinearLayout>
+</RelativeLayout>

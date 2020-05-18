@@ -1,0 +1,784 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView android:id="@+id/CardSchemeName"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white"
+    android:layout_margin="7dp"
+    app:cardUseCompatPadding="true"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="14sp"
+                android:layout_margin="5dp"
+                android:textColorHint="@color/grey"
+                android:enabled="false"
+                android:layout_weight="5"
+                android:text="POLICY NUMBER"
+                android:layout_gravity="center|start"
+                android:gravity="center|start"
+                android:textColor="@color/iron_grey"/>
+
+
+            <TextView
+                android:id="@+id/row_tv_policy_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_green"
+                android:textStyle="bold"
+                android:layout_gravity="center|end"
+                android:gravity="center|end"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:layout_weight="5"
+                android:textSize="16sp"
+                />
+
+
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20sp"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="14sp"
+                android:layout_margin="5dp"
+                android:textColorHint="@color/grey"
+                android:enabled="false"
+                android:layout_weight="5"
+                android:text="POLICY HOLDER NAME"
+                android:layout_gravity="center|start"
+                android:gravity="center|start"
+                android:textColor="@color/iron_grey"/>
+
+
+            <TextView
+                android:id="@+id/row_policy_issuer_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_gravity="center|end"
+                android:gravity="center|end"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:layout_weight="5"
+                />
+
+
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="14sp"
+                android:layout_margin="5dp"
+                android:textColorHint="@color/grey"
+                android:enabled="false"
+                android:layout_weight="5"
+                android:text="MOBILE"
+                android:layout_gravity="center|start"
+                android:gravity="center|start"
+                android:textColor="@color/iron_grey"/>
+
+
+            <TextView
+                android:id="@+id/row_tv_mobile_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_gravity="center|end"
+                android:gravity="center|end"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:layout_weight="5"
+                />
+
+
+
+
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="14sp"
+                android:layout_margin="5dp"
+                android:textColorHint="@color/grey"
+                android:enabled="false"
+                android:layout_weight="5"
+                android:text="INS COMPANY"
+                android:layout_gravity="center|start"
+                android:gravity="center|start"
+                android:textColor="@color/iron_grey"/>
+
+
+            <TextView
+                android:id="@+id/row_tv_ins_company"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+
+                android:layout_gravity="center|end"
+                android:gravity="center|end"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:layout_weight="5"
+                android:textSize="11sp"
+                />
+
+
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="14sp"
+                android:layout_margin="5dp"
+                android:textColorHint="@color/grey"
+                android:enabled="false"
+                android:layout_weight="5"
+                android:text="ISSUE DATE"
+                android:layout_gravity="center|start"
+                android:gravity="center|start"
+                android:textColor="@color/iron_grey"/>
+
+
+            <TextView
+                android:id="@+id/row_tv_issue_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+
+                android:layout_gravity="center|end"
+                android:gravity="center|end"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:layout_weight="5"
+                android:textSize="11sp"
+                />
+
+
+
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="14sp"
+                android:layout_margin="5dp"
+                android:textColorHint="@color/grey"
+                android:enabled="false"
+                android:layout_weight="5"
+                android:text="VEHICLE TYPE"
+                android:layout_gravity="center|start"
+                android:gravity="center|start"
+                android:textColor="@color/iron_grey"/>
+
+
+            <TextView
+                android:id="@+id/row_tv_vehicle_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_gravity="center|end"
+                android:gravity="center|end"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:layout_weight="5"
+                />
+
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="14sp"
+                android:layout_margin="5dp"
+                android:textColorHint="@color/grey"
+                android:enabled="false"
+                android:layout_weight="5"
+                android:text="REG NO"
+                android:layout_gravity="center|start"
+                android:gravity="center|start"
+                android:textColor="@color/iron_grey"/>
+
+
+            <TextView
+                android:id="@+id/row_tv_reg_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_gravity="center|end"
+                android:gravity="center|end"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:layout_weight="5"
+                android:textSize="11sp"
+                />
+
+
+
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="14sp"
+                android:layout_margin="5dp"
+                android:textColorHint="@color/grey"
+                android:enabled="false"
+                android:layout_weight="5"
+                android:text="OD PREMIUM"
+                android:layout_gravity="center|start"
+                android:gravity="center|start"
+                android:textColor="@color/iron_grey"/>
+
+
+            <TextView
+                android:id="@+id/row_tv_od_premium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|end"
+                android:gravity="center|end"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:layout_weight="5"
+                />
+
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="14sp"
+                android:layout_margin="5dp"
+                android:textColorHint="@color/grey"
+                android:enabled="false"
+                android:layout_weight="5"
+                android:text="ADD ON PREMIUM"
+                android:layout_gravity="center|start"
+                android:gravity="center|start"
+                android:textColor="@color/iron_grey"/>
+
+
+            <TextView
+                android:id="@+id/row_tv_add_on_premium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_gravity="center|end"
+                android:gravity="center|end"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:layout_weight="5"
+                android:textSize="11sp"
+                />
+
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/third_party_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:weightSum="10">
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textSize="14sp"
+            android:layout_margin="5dp"
+            android:textColorHint="@color/grey"
+            android:enabled="false"
+            android:layout_weight="5"
+            android:text="THIRD PARTY"
+            android:layout_gravity="center|start"
+            android:gravity="center|start"
+            android:textColor="@color/iron_grey"/>
+
+
+        <TextView
+            android:id="@+id/row_tv_third_party"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center|end"
+            android:gravity="center|end"
+            android:layout_marginEnd="5dp"
+            android:padding="5dp"
+            android:layout_weight="5"
+            />
+
+
+
+
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="14sp"
+                android:layout_margin="5dp"
+                android:textColorHint="@color/grey"
+                android:enabled="false"
+                android:layout_weight="5"
+                android:text="PA OD"
+                android:layout_gravity="center|start"
+                android:gravity="center|start"
+                android:textColor="@color/iron_grey"/>
+
+
+            <TextView
+                android:id="@+id/row_tv_pa_od"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_gravity="center|end"
+                android:gravity="center|end"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:layout_weight="5"
+                android:textSize="11sp"
+                />
+
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="14sp"
+                android:layout_margin="5dp"
+                android:textColorHint="@color/grey"
+                android:enabled="false"
+                android:layout_weight="5"
+                android:text="LL PD"
+                android:layout_gravity="center|start"
+                android:gravity="center|start"
+                android:textColor="@color/iron_grey"/>
+
+
+            <TextView
+                android:id="@+id/row_tv_ll_pd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_gravity="center|end"
+                android:gravity="center|end"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:layout_weight="5"
+                android:textSize="11sp"
+                />
+
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="14sp"
+                android:layout_margin="5dp"
+                android:textColorHint="@color/grey"
+                android:enabled="false"
+                android:layout_weight="5"
+                android:text="TOTAL GROSS PREMIUM"
+                android:layout_gravity="center|start"
+                android:gravity="center|start"
+                android:textColor="@color/iron_grey"/>
+
+
+            <TextView
+                android:id="@+id/row_tv_total_gross_premium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_gravity="center|end"
+                android:gravity="center|end"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:layout_weight="5"
+                android:textSize="11sp"
+                />
+
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="14sp"
+                android:layout_margin="5dp"
+                android:textColorHint="@color/grey"
+                android:enabled="false"
+                android:layout_weight="5"
+                android:text="GST"
+                android:layout_gravity="center|start"
+                android:gravity="center|start"
+                android:textColor="@color/iron_grey"/>
+
+
+            <TextView
+                android:id="@+id/row_tv_gst"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_gravity="center|end"
+                android:gravity="center|end"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:layout_weight="5"
+                android:textSize="11sp"
+                />
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10sp"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="14sp"
+                android:layout_margin="5dp"
+                android:textColorHint="@color/grey"
+                android:enabled="false"
+                android:layout_weight="5"
+                android:text="TOTAL PREMIUM"
+                android:layout_gravity="center|start"
+                android:gravity="center|start"
+                android:textColor="@color/iron_grey"/>
+
+
+            <TextView
+                android:id="@+id/row_tv_net_premium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_gravity="center|end"
+                android:gravity="center|end"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:layout_weight="5"
+                android:textSize="14sp"
+                />
+
+
+            <TextView
+                android:id="@+id/row_tv_quote_link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_gravity="center|end"
+                android:gravity="center|end"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:visibility="gone"
+                android:layout_weight="5"
+                android:textSize="11sp"
+                />
+
+            <TextView
+                android:id="@+id/row_tv_proposal_url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_gravity="center|end"
+                android:gravity="center|end"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:visibility="gone"
+                android:layout_weight="5"
+                android:textSize="11sp"
+                />
+
+
+            <TextView
+                android:id="@+id/row_tv_policy_url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_gravity="center|end"
+                android:gravity="center|end"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:visibility="gone"
+                android:layout_weight="5"
+                android:textSize="11sp"
+                />
+
+            <TextView
+                android:id="@+id/row_tv_policy_lite_url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_gravity="center|end"
+                android:gravity="center|end"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:visibility="gone"
+                android:layout_weight="5"
+                android:textSize="11sp"
+                />
+
+            <TextView
+                android:id="@+id/row_tv_policy_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_gravity="center|end"
+                android:gravity="center|end"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:visibility="gone"
+                android:layout_weight="5"
+                android:textSize="11sp"
+                />
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="10"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="10sp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:background="@color/red"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:layout_weight="5"
+                android:visibility="gone"
+                android:textColor="@color/white"/>
+
+            <Button
+                android:id="@+id/btnProposal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Proposal"
+                android:background="@color/quantum_yellow"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:layout_weight="5"
+                android:textColor="@color/black"/>
+
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="10"
+            android:layout_marginBottom="5dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/btnPolicy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="POLICY"
+                android:background="@color/blue"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:layout_weight="5"
+                android:textColor="@color/white"/>
+
+            <Button
+                android:id="@+id/btnPolicyPdfLite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Policy Lite Version"
+                android:background="@color/primary_green"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:layout_weight="5"
+                android:textColor="@color/white"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

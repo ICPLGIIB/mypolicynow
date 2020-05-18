@@ -1,0 +1,1266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/form_bg_quotation">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        android:id="@+id/toolbar">
+
+        <include layout="@layout/toolback_with_back" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/RelInsuranceFor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_below="@+id/toolbar"
+        android:orientation="horizontal"
+        android:weightSum="15">
+        <LinearLayout
+            android:id="@+id/LayoutCar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:background="@drawable/form_bg_edittext_bg"
+
+            android:layout_weight="5"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/iv_car"
+                android:layout_width="80sp"
+                android:layout_height="80sp"
+                android:tint="@color/colorPrimary"
+                android:src="@drawable/car"/>
+            <TextView
+                android:id="@+id/til_car_insurance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Car \nInsurance"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/colorAccent"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/LayoutBike"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:layout_weight="5"
+            android:background="@drawable/form_bg_edittext_bg"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_bike"
+                android:layout_width="80sp"
+                android:layout_height="80sp"
+                android:layout_gravity="center"
+                android:tint="@color/colorPrimary"
+                android:src="@drawable/bike"/>
+
+            <TextView
+                android:id="@+id/til_bike_insurance"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bike \nInsurance"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/colorAccent"
+                />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:visibility="invisible"
+            android:padding="5dp"
+            android:layout_weight="5"
+            android:background="@drawable/form_bg_edittext_bg"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/iv_commercial"
+                android:layout_width="80sp"
+                android:layout_height="80sp"
+                android:src="@drawable/commercial_new"/>
+            <TextView
+                android:id="@+id/til_commercial_insurance"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Commercial \nInsurance"
+                android:layout_gravity="center"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/Scroll_BelowLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:layout_below="@+id/RelInsuranceFor"
+        android:layout_marginBottom="60sp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="beforeDescendants"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+
+
+
+            <LinearLayout
+                android:id="@+id/LayoutInsurance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10sp"
+                android:layout_marginEnd="5sp"
+                android:layout_marginStart="5sp"
+                android:layout_marginTop="10sp"
+                android:orientation="vertical"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/form_bg_edittext_bg"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:layout_margin="5dp"
+
+                        android:text="POLICY TYPE *"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="9"
+                        android:orientation="horizontal">
+
+
+
+                        <TextView
+                            android:id="@+id/TV_ComprehensivePolicy"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:minHeight="50sp"
+                            android:textColor="@color/black"
+                            android:background="@color/grey_bg_color"
+
+                            android:layout_weight="3"
+                            android:textSize="10sp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="COMPREHENSIVE \nPOLICY"/>
+
+                        <TextView
+                            android:id="@+id/TV_TPPolicy"
+                            android:minHeight="50sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="3"
+                            android:textSize="10sp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:background="@color/grey_bg_color"
+                            android:text="THIRD PARTY \nPOLICY"/>
+
+                        <TextView
+                            android:id="@+id/TV_StandaloneOd"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:minHeight="50sp"
+                            android:textColor="@color/black"
+                            android:background="@color/grey_bg_color"
+                            android:layout_weight="3"
+                            android:textSize="10sp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="STANDALONE OD"/>
+
+
+
+
+
+                    </LinearLayout>
+
+
+
+
+                    <RadioGroup
+                        android:id="@+id/RG_PolicyType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:weightSum="10">
+
+
+
+                        <RadioButton
+                            android:id="@+id/Rb_NewPolicy"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="NEW"
+                            android:textColor="@color/white"
+                            android:background="@color/primary_green"
+                            android:layout_margin="5dp"
+                            android:padding="5dp"
+                            android:checked="true"
+                            android:minHeight="30sp"
+                            android:visibility="gone"
+
+                            android:buttonTint="@color/white"
+                            style="@android:style/Widget.CompoundButton.CheckBox"
+                            android:layout_weight="5"/>
+
+                        <RadioButton
+                            android:id="@+id/Rb_ReNewPolicy"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="RENEW"
+                            android:textColor="@color/white"
+                            android:background="@color/colorPrimary"
+                            android:layout_margin="5dp"
+                            android:padding="5dp"
+                            android:buttonTint="@color/white"
+                            style="@android:style/Widget.CompoundButton.CheckBox"
+                            android:minHeight="30sp"
+
+                            android:layout_weight="5"/>
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5sp"
+                        android:padding="5dp"
+                        android:text="RTO (EX. MH-02) *"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5sp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@drawable/btn_color_white">
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/Spn_RTO"
+                            android:layout_width="match_parent"
+                            style="@style/Widget.AppCompat.DropDownItem.Spinner"
+
+                            android:layout_height="70dp"
+                            android:padding="5dp"/>
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="5">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5sp"
+                                android:padding="5dp"
+                                android:text="Make *"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="55dp"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="5sp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:background="@drawable/btn_color_white">
+
+                                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                                    android:id="@+id/Spn_Make"
+                                    style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="70dp"
+                                    android:padding="5dp"/>
+                            </RelativeLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="5">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5sp"
+                                android:padding="5dp"
+                                android:text="Model *"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="55dp"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="5sp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:background="@drawable/btn_color_white">
+
+                                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                                    android:id="@+id/Spn_Model"
+                                    style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="70dp"
+                                    android:padding="5dp"/>
+                            </RelativeLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5sp"
+                        android:padding="5dp"
+                        android:text="Variant *"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5sp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@drawable/btn_color_white">
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/Spn_Variant"
+                            style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:padding="5dp"/>
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="5">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5sp"
+                                android:padding="5dp"
+                                android:text="Manufacturing Year *"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="55dp"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="5sp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:background="@drawable/btn_color_white">
+
+                                <Spinner
+                                    android:id="@+id/Spn_ManufacturingYear"
+                                    style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="70dp"
+                                    android:padding="5dp"/>
+                            </RelativeLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="5">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5sp"
+                                android:padding="5dp"
+                                android:text="Manufacturing Month *"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="55dp"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="5sp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:background="@drawable/btn_color_white">
+
+                                <Spinner
+                                    android:id="@+id/Spn_ManufacturingMonth"
+                                    style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="70dp"
+                                    android:padding="5dp"/>
+                            </RelativeLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="5">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5sp"
+                                android:padding="5dp"
+                                android:text="Purchase/Reg Date *"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <EditText
+                                android:id="@+id/EdtRegistrationDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:minHeight="55dp"
+                                android:layout_marginTop="5dp"
+                                android:hint="Purchase/Reg Date *"
+                                android:layout_gravity="center"
+                                android:gravity="center|start"
+                                android:textColorHint="@color/dark_grey"
+                                android:textColor="@color/dark_grey"
+                                android:textSize="14sp"
+                                android:layout_weight="5"
+                                android:background="@drawable/form_bg_edittext_bg"
+                                android:maxLength="18"
+                                android:inputType="date"
+                                android:focusable="false"
+                                android:editable="false"
+                                android:imeOptions="actionDone"
+                                android:importantForAutofill="no"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="5">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5sp"
+                                android:padding="5dp"
+                                android:text="Policy Holder Type *"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="55dp"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="5sp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:background="@drawable/btn_color_white">
+
+                                <Spinner
+                                    android:id="@+id/Spn_PolicyHolder"
+                                    style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="70dp"
+                                    android:entries="@array/spin_item_policy_holder"
+                                    android:padding="5dp"/>
+                            </RelativeLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/LinearChangeInOwnership"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="10"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5sp"
+                        android:padding="5dp"
+                        android:layout_weight="5"
+                        android:layout_gravity="center|start"
+                        android:gravity="center|start"
+                        android:text="Is there a change in ownership in last one year? *"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <RadioGroup
+                        android:id="@+id/RG_ChangeInOwnership"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="5"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:weightSum="10">
+
+
+
+                        <RadioButton
+                            android:id="@+id/Rb_NoChangeInOwnership"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No"
+                            android:textColor="@color/black"
+                            android:background="@drawable/form_bg_edittext_bg"
+                            android:layout_margin="5dp"
+                            android:padding="5dp"
+                            android:minHeight="30sp"
+                            android:buttonTint="@color/black"
+                            style="@android:style/Widget.CompoundButton.CheckBox"
+                            android:layout_weight="5"/>
+
+                        <RadioButton
+                            android:id="@+id/Rb_YesChangeInOwnership"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Yes"
+                            android:textColor="@color/black"
+                            android:background="@drawable/form_bg_edittext_bg"
+                            android:layout_margin="5dp"
+                            android:padding="5dp"
+                            android:buttonTint="@color/black"
+                            style="@android:style/Widget.CompoundButton.CheckBox"
+                            android:minHeight="30sp"
+
+                            android:layout_weight="5"/>
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/SameOwnerLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="10"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5sp"
+                            android:padding="5dp"
+                            android:layout_weight="5"
+                            android:layout_gravity="center|start"
+                            android:gravity="center|start"
+                            android:text="Do you have previous policy? *"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <RadioGroup
+                            android:id="@+id/RG_PreviousPolicy"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_weight="5"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:weightSum="10">
+
+
+
+                            <RadioButton
+                                android:id="@+id/Rb_NoPreviousPolicy"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:background="@drawable/form_bg_edittext_bg"
+                                android:layout_margin="5dp"
+                                android:padding="5dp"
+                                android:minHeight="30sp"
+                                android:buttonTint="@color/black"
+                                style="@android:style/Widget.CompoundButton.CheckBox"
+                                android:layout_weight="5"/>
+
+                            <RadioButton
+                                android:id="@+id/Rb_YesPreviousPolicy"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:background="@drawable/form_bg_edittext_bg"
+                                android:layout_margin="5dp"
+                                android:padding="5dp"
+                                android:buttonTint="@color/black"
+                                style="@android:style/Widget.CompoundButton.CheckBox"
+                                android:minHeight="30sp"
+
+                                android:layout_weight="5"/>
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/LinearPreviousPolicyType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="10"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5sp"
+                            android:padding="5dp"
+                            android:layout_weight="5"
+                            android:layout_gravity="center|start"
+                            android:gravity="center|start"
+                            android:text="Previous Policy Type *"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <RadioGroup
+                            android:id="@+id/RG_PreviousPolicyType"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_weight="5"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:weightSum="10">
+
+
+
+                            <RadioButton
+                                android:id="@+id/Rb_ComprehensivePrePolicy"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Comprehensive"
+                                android:textColor="@color/black"
+                                android:background="@drawable/form_bg_edittext_bg"
+                                android:layout_margin="5dp"
+                                android:padding="5dp"
+                                android:minHeight="30sp"
+                                android:buttonTint="@color/black"
+                                style="@android:style/Widget.CompoundButton.CheckBox"
+                                android:layout_weight="5"/>
+
+                            <RadioButton
+                                android:id="@+id/Rb_ThirdPartyPrePolicy"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Third-Party"
+                                android:textColor="@color/black"
+                                android:background="@drawable/form_bg_edittext_bg"
+                                android:layout_margin="5dp"
+                                android:padding="5dp"
+                                android:buttonTint="@color/black"
+                                style="@android:style/Widget.CompoundButton.CheckBox"
+                                android:minHeight="30sp"
+                                android:layout_weight="5"/>
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/LinearExpiryDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5sp"
+                            android:padding="5dp"
+                            android:text="Previous Policy Expiry Date *"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/EdtPreviousPolicyExpiryDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="55dp"
+                            android:layout_marginTop="10dp"
+                            android:hint="Previous Policy Expiry Date *"
+                            android:layout_gravity="center"
+                            android:gravity="center|start"
+                            android:textColorHint="@color/dark_grey"
+                            android:textColor="@color/dark_grey"
+                            android:textSize="14sp"
+                            android:layout_weight="5"
+                            android:background="@drawable/form_bg_edittext_bg"
+                            android:maxLength="18"
+                            android:inputType="date"
+                            android:focusable="false"
+                            android:editable="false"
+                            android:imeOptions="actionDone"
+                            android:importantForAutofill="no"/>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/LinearHaveMadeClaim"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="10"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5sp"
+                            android:padding="5dp"
+                            android:layout_weight="5"
+                            android:layout_gravity="center|start"
+                            android:gravity="center|start"
+                            android:text="Have you made a claim? *"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <RadioGroup
+                            android:id="@+id/RG_HaveMadeClaim"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_weight="5"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:weightSum="10">
+
+
+
+                            <RadioButton
+                                android:id="@+id/Rb_NotMadeClaim"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:background="@drawable/form_bg_edittext_bg"
+                                android:layout_margin="5dp"
+                                android:padding="5dp"
+                                android:minHeight="30sp"
+                                android:buttonTint="@color/black"
+                                style="@android:style/Widget.CompoundButton.CheckBox"
+                                android:layout_weight="5"/>
+
+                            <RadioButton
+                                android:id="@+id/Rb_YesMadeClaim"
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:background="@drawable/form_bg_edittext_bg"
+                                android:layout_margin="5dp"
+                                android:padding="5dp"
+                                android:buttonTint="@color/black"
+                                style="@android:style/Widget.CompoundButton.CheckBox"
+                                android:minHeight="30sp"
+
+                                android:layout_weight="5"/>
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/LinearNCB_Per"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="10"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5sp"
+                            android:padding="5dp"
+                            android:layout_weight="5"
+                            android:layout_gravity="center|start"
+                            android:gravity="center|start"
+                            android:text="Select Previous Year NCB% *"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5sp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:background="@drawable/btn_color_white">
+
+                            <Spinner
+                                android:id="@+id/Spn_NCB_Percent"
+                                style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                android:padding="5dp"/>
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/LayoutODDisount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="10"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5sp"
+                        android:padding="5dp"
+                        android:layout_weight="5"
+                        android:layout_gravity="center|start"
+                        android:gravity="center|start"
+                        android:text="OD Discount"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5sp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@drawable/btn_color_white">
+
+                        <Spinner
+                            android:id="@+id/Spn_ODDiscount"
+                            style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:entries="@array/spin_item_od_discount"
+                            android:padding="5dp"/>
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/InvoiceLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="10"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/til_invoice_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5sp"
+                        android:padding="5dp"
+                        android:layout_weight="5"
+                        android:layout_gravity="center|start"
+                        android:gravity="center|start"
+                        android:text="Invoice Price"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/EdtInvoicePrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="55dp"
+                        android:layout_marginTop="10dp"
+                        android:hint="Invoice Price"
+                        android:layout_gravity="center"
+                        android:gravity="center|start"
+                        android:textColorHint="@color/dark_grey"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="14sp"
+                        android:layout_weight="5"
+                        android:background="@drawable/form_bg_edittext_bg"
+                        android:maxLength="8"
+                        android:inputType="number"
+                        android:focusableInTouchMode="true"
+                        android:editable="true"
+                        android:imeOptions="actionDone"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/LinearNewPolicyWanted"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="10"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+
+                    <!-- <TextView
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_margin="5sp"
+                         android:padding="5dp"
+                         android:layout_weight="5"
+                         android:layout_gravity="center|start"
+                         android:gravity="center|start"
+                         android:visibility="gone"
+                         android:text="Previous Policy Type *"
+                         android:textColor="@color/black"
+                         android:textSize="14sp" />-->
+
+                    <RadioGroup
+                        android:id="@+id/RG_NewPolicyRequired"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="5"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:weightSum="10">
+
+
+                        <RadioButton
+                            android:id="@+id/Rb_0OD3TP"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0 Yr OD &amp; 3 Yrs TP"
+                            android:textColor="@color/black"
+                            android:background="@drawable/form_bg_edittext_bg"
+                            android:layout_margin="5dp"
+                            android:padding="5dp"
+                            android:minHeight="30sp"
+                            android:textSize="12sp"
+                            android:visibility="gone"
+                            android:buttonTint="@color/black"
+                            style="@android:style/Widget.CompoundButton.CheckBox"
+                            android:layout_weight="5"/>
+                        <RadioButton
+                            android:id="@+id/Rb_0OD5TP"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0 Yr OD &amp; 5 Yrs TP"
+                            android:textColor="@color/black"
+                            android:background="@drawable/form_bg_edittext_bg"
+                            android:layout_margin="5dp"
+                            android:padding="5dp"
+                            android:minHeight="30sp"
+                            android:textSize="12sp"
+
+                            android:visibility="gone"
+                            android:buttonTint="@color/black"
+                            style="@android:style/Widget.CompoundButton.CheckBox"
+                            android:layout_weight="5"/>
+
+
+
+                        <RadioButton
+                            android:id="@+id/Rb_1OD3TP"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="1 Yr OD &amp; 3 Yrs TP"
+                            android:textColor="@color/black"
+                            android:background="@drawable/form_bg_edittext_bg"
+                            android:layout_margin="5dp"
+                            android:padding="5dp"
+                            android:minHeight="30sp"
+                            android:textSize="12sp"
+
+                            android:visibility="gone"
+                            android:buttonTint="@color/black"
+                            style="@android:style/Widget.CompoundButton.CheckBox"
+                            android:layout_weight="5"/>
+
+                        <RadioButton
+                            android:id="@+id/Rb_3OD3TP"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="3 Yrs OD &amp; 3 Yrs TP"
+                            android:textColor="@color/black"
+                            android:background="@drawable/form_bg_edittext_bg"
+                            android:layout_margin="5dp"
+                            android:padding="5dp"
+                            android:buttonTint="@color/black"
+                            style="@android:style/Widget.CompoundButton.CheckBox"
+                            android:minHeight="30sp"
+                            android:textSize="12sp"
+
+                            android:visibility="gone"
+                            android:layout_weight="5"/>
+
+                        <RadioButton
+                            android:id="@+id/Rb_1OD5TP"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="1 Yr OD &amp; 5 Yrs TP"
+                            android:textColor="@color/black"
+                            android:background="@drawable/form_bg_edittext_bg"
+                            android:layout_margin="5dp"
+                            android:padding="5dp"
+                            android:minHeight="30sp"
+                            android:textSize="12sp"
+
+                            android:buttonTint="@color/black"
+                            android:visibility="gone"
+
+                            style="@android:style/Widget.CompoundButton.CheckBox"
+                            android:layout_weight="5"/>
+
+                        <RadioButton
+                            android:id="@+id/Rb_5OD5TP"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="5 Yrs OD &amp; 5 Yrs TP"
+                            android:textColor="@color/black"
+                            android:background="@drawable/form_bg_edittext_bg"
+                            android:layout_margin="5dp"
+                            android:padding="5dp"
+                            android:visibility="gone"
+
+                            android:buttonTint="@color/black"
+                            style="@android:style/Widget.CompoundButton.CheckBox"
+                            android:minHeight="30sp"
+                            android:textSize="12sp"
+
+                            android:layout_weight="5"/>
+
+
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/LayoutNilDept"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <CheckBox
+                        android:id="@+id/ChkNilDept"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Previous Policy Nil Dep"
+                        android:textColor="@color/black"
+                        android:backgroundTint="@color/black"
+
+                        android:buttonTint="@color/black"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/IndividualPolicyHolderLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5sp"
+                        android:padding="5dp"
+                        android:text="CPA TERM SELECTION *"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5sp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@drawable/btn_color_white">
+
+                        <Spinner
+                            android:id="@+id/Spn_CPASelection"
+                            style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:padding="5dp"/>
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        android:id="@+id/LayoutReasonOptingOutCpa">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5sp"
+                            android:padding="5dp"
+                            android:text="Reason for opting out CPA"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5sp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:background="@drawable/btn_color_white">
+
+                            <Spinner
+                                android:id="@+id/Spn_ReasonOptingOutCPA"
+                                style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                android:entries="@array/reason_opting_out_cpa"
+                                android:padding="5dp"/>
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/BtnGetQuote"
+        android:layout_width="match_parent"
+        android:layout_height="60sp"
+        android:text="Get Quote For Policy"
+        android:minHeight="60sp"
+        android:drawablePadding="10sp"
+        android:drawableTint="@color/white"
+        android:drawableEnd="@drawable/ic_forward"
+        android:background="@drawable/cw_button_shadow"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_weight="5"
+        android:layout_gravity="center"/>
+
+</RelativeLayout>
